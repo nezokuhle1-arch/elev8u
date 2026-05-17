@@ -18,7 +18,7 @@ export default function Home() {
             Join as Freelancer
           </Link>
           <Link
-            href="/client/home"
+            href="/signup"
             className="inline-flex items-center justify-center rounded-lg border-2 border-[#1D9E75] px-6 py-3 text-sm font-medium text-[#1D9E75] transition-colors hover:bg-[#1D9E75]/5"
           >
             Find a Pro

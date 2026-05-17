@@ -49,22 +49,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  if (user && (pathname === "/login" || pathname === "/signup")) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", user.id)
-      .single();
-
-    const url = request.nextUrl.clone();
-    url.pathname =
-      profile?.role === "freelancer"
-        ? "/freelancer/dashboard"
-        : "/client/home";
-    url.search = "";
-    return NextResponse.redirect(url);
-  }
-
   return supabaseResponse;
 }
 

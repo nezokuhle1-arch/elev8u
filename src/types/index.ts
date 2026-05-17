@@ -17,6 +17,12 @@ export type FreelancerProfile = {
   rating: number;
 };
 
+export type FreelancerSkill = {
+  id: string;
+  freelancer_id: string;
+  skill: string;
+};
+
 export type ServiceTier = {
   id: string;
   freelancer_id: string;

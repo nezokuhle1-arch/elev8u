@@ -228,7 +228,7 @@ export function ProfileSetupWizard() {
       return;
     }
 
-    const bioWithSkills = `${form.bio.trim()}\n\nSkills: ${form.skills.join(", ")}`;
+    const bio = form.bio.trim();
 
     const { error: profileError } = await supabase
       .from("profiles")
@@ -256,7 +256,7 @@ export function ProfileSetupWizard() {
       const { error: updateError } = await supabase
         .from("freelancer_profiles")
         .update({
-          bio: bioWithSkills,
+          bio,
           category: form.category,
           location: form.location.trim(),
         })
@@ -272,12 +272,17 @@ export function ProfileSetupWizard() {
         .from("service_tiers")
         .delete()
         .eq("freelancer_id", freelancerId);
+
+      await supabase
+        .from("freelancer_skills")
+        .delete()
+        .eq("freelancer_id", freelancerId);
     } else {
       const { data: newFreelancer, error: insertError } = await supabase
         .from("freelancer_profiles")
         .insert({
           user_id: user.id,
-          bio: bioWithSkills,
+          bio,
           category: form.category,
           location: form.location.trim(),
         })
@@ -291,6 +296,19 @@ export function ProfileSetupWizard() {
       }
 
       freelancerId = newFreelancer.id;
+    }
+
+    const { error: skillsError } = await supabase.from("freelancer_skills").insert(
+      form.skills.map((skill) => ({
+        freelancer_id: freelancerId,
+        skill,
+      }))
+    );
+
+    if (skillsError) {
+      setError(skillsError.message);
+      setSubmitting(false);
+      return;
     }
 
     const { error: tiersError } = await supabase.from("service_tiers").insert([
