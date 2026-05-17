@@ -12,7 +12,7 @@ export default function ProfileSetupPage() {
         <Input placeholder="Category (e.g. Plumbing)" required />
         <Input placeholder="Location (e.g. Johannesburg)" required />
         <textarea
-          className="w-full rounded-lg border border-zinc-300 px-4 py-2.5 text-sm outline-none focus:border-(--color-primary)"
+          className="w-full rounded-lg border border-gray-200 p-3 text-sm outline-none focus:border-[#1D9E75] focus:ring-2 focus:ring-[#1D9E75]/20"
           placeholder="Bio"
           rows={4}
         />

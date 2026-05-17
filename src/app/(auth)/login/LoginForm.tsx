@@ -1,21 +1,18 @@
 "use client";
 
 import { createClient } from "@/lib/supabase/client";
-import { Briefcase, Eye, EyeOff, Search } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
-
-type Role = "freelancer" | "client";
 
 const inputClassName =
   "w-full rounded-lg border border-gray-200 p-3 text-sm outline-none focus:border-[#1D9E75] focus:ring-2 focus:ring-[#1D9E75]/20";
 
-export default function SignupPage() {
+export function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const [role, setRole] = useState<Role>("freelancer");
-  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -28,37 +25,39 @@ export default function SignupPage() {
     setLoading(true);
 
     const supabase = createClient();
-    const { data, error: signUpError } = await supabase.auth.signUp({
+    const { data, error: signInError } = await supabase.auth.signInWithPassword({
       email,
       password,
-      options: {
-        data: {
-          full_name: fullName,
-          role,
-        },
-      },
     });
+
+    if (signInError) {
+      setLoading(false);
+      setError(signInError.message);
+      return;
+    }
+
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", data.user.id)
+      .single();
 
     setLoading(false);
 
-    if (signUpError) {
-      setError(signUpError.message);
+    if (profileError) {
+      setError(profileError.message);
       return;
     }
 
-    if (data.session) {
-      router.push(
-        role === "freelancer"
-          ? "/freelancer/profile/setup"
-          : "/client/home"
-      );
-      router.refresh();
-      return;
+    const redirectTo = searchParams.get("redirectTo");
+    if (redirectTo) {
+      router.push(redirectTo);
+    } else if (profile.role === "freelancer") {
+      router.push("/freelancer/dashboard");
+    } else {
+      router.push("/client/home");
     }
-
-    setError(
-      "Account created. Check your email to confirm your address, then sign in."
-    );
+    router.refresh();
   }
 
   return (
@@ -66,62 +65,10 @@ export default function SignupPage() {
       <div className="w-full max-w-[400px]">
         <p className="text-center text-2xl font-bold text-[#1D9E75]">Elev8U</p>
         <h1 className="mt-6 text-center text-2xl font-bold text-zinc-900">
-          Create your account
+          Welcome back
         </h1>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <button
-              type="button"
-              onClick={() => setRole("freelancer")}
-              className={`rounded-lg border-2 p-4 text-left transition-colors ${
-                role === "freelancer"
-                  ? "border-[#1D9E75] bg-[#E1F5EE]"
-                  : "border-gray-200 bg-white hover:border-gray-300"
-              }`}
-            >
-              <Briefcase className="h-6 w-6 text-[#1D9E75]" />
-              <p className="mt-2 font-semibold text-zinc-900">
-                I&apos;m a Freelancer
-              </p>
-              <p className="mt-1 text-xs text-zinc-600">
-                Get discovered, earn predictably
-              </p>
-            </button>
-            <button
-              type="button"
-              onClick={() => setRole("client")}
-              className={`rounded-lg border-2 p-4 text-left transition-colors ${
-                role === "client"
-                  ? "border-[#1D9E75] bg-[#E1F5EE]"
-                  : "border-gray-200 bg-white hover:border-gray-300"
-              }`}
-            >
-              <Search className="h-6 w-6 text-[#1D9E75]" />
-              <p className="mt-2 font-semibold text-zinc-900">
-                I&apos;m looking for a Pro
-              </p>
-              <p className="mt-1 text-xs text-zinc-600">
-                Find trusted local professionals
-              </p>
-            </button>
-          </div>
-
-          <div>
-            <label htmlFor="fullName" className="sr-only">
-              Full name
-            </label>
-            <input
-              id="fullName"
-              type="text"
-              placeholder="Full name"
-              required
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              className={inputClassName}
-            />
-          </div>
-
           <div>
             <label htmlFor="email" className="sr-only">
               Email
@@ -146,7 +93,6 @@ export default function SignupPage() {
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               required
-              minLength={6}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className={inputClassName}
@@ -176,14 +122,14 @@ export default function SignupPage() {
             disabled={loading}
             className="w-full rounded-lg bg-[#1D9E75] p-3 font-medium text-white hover:bg-[#0F6E56] disabled:opacity-60"
           >
-            {loading ? "Creating account…" : "Create account"}
+            {loading ? "Signing in…" : "Sign in"}
           </button>
         </form>
 
         <p className="mt-6 text-center text-sm text-zinc-600">
-          Already have an account?{" "}
-          <Link href="/login" className="font-medium text-[#1D9E75]">
-            Sign in
+          Don&apos;t have an account?{" "}
+          <Link href="/signup" className="font-medium text-[#1D9E75]">
+            Sign up
           </Link>
         </p>
       </div>
