@@ -15,7 +15,7 @@ export function ProfileCard({ profile }: ProfileCardProps) {
           <p className="text-sm text-zinc-600">{profile.location}</p>
           <p className="mt-2 text-sm text-zinc-700">{profile.bio}</p>
           {profile.is_vetted && (
-            <span className="mt-2 inline-block rounded-full bg-[var(--color-primary)]/10 px-2 py-0.5 text-xs font-medium text-[var(--color-primary)]">
+            <span className="mt-2 inline-block rounded-full bg-(--color-primary)/10 px-2 py-0.5 text-xs font-medium text-(--color-primary)">
               Vetted
             </span>
           )}

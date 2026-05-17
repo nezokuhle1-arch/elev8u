@@ -20,7 +20,7 @@ export default function SignupPage() {
         </form>
         <p className="text-center text-sm text-zinc-600">
           Already have an account?{" "}
-          <Link href="/login" className="font-medium text-[var(--color-primary)]">
+          <Link href="/login" className="font-medium text-(--color-primary)">
             Sign in
           </Link>
         </p>
