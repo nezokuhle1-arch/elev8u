@@ -1,5 +1,13 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment variables
+
+1. Copy `.env.example` to `.env.local`
+2. Add your Supabase URL and anon key from the [Supabase dashboard](https://supabase.com/dashboard)
+3. Never commit `.env.local` — it is listed in `.gitignore`
+
+If credentials were ever committed, rotate your Supabase anon key in the dashboard and remove the file from git history.
+
 ## Getting Started
 
 First, run the development server:
