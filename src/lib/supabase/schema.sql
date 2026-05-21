@@ -106,17 +106,32 @@ create policy "Freelancers can manage their own service tiers"
 -- Leads: client and freelancer can see their own leads
 create policy "Users can view their own leads"
   on public.leads for select using (
-    auth.uid() = client_id or
-    auth.uid() = (select id from public.profiles where id = freelancer_id)
+    auth.uid() = client_id
+    or auth.uid() in (
+      select user_id from public.freelancer_profiles
+      where id = freelancer_id
+    )
   );
 
 create policy "Clients can create leads"
   on public.leads for insert with check (auth.uid() = client_id);
 
+create policy "Freelancers can update their own leads"
+  on public.leads for update using (
+    auth.uid() in (
+      select user_id from public.freelancer_profiles
+      where id = freelancer_id
+    )
+  );
+
 -- Bookings: both parties can view
 create policy "Users can view their own bookings"
   on public.bookings for select using (
-    auth.uid() = client_id or auth.uid() = freelancer_id
+    auth.uid() = client_id
+    or auth.uid() in (
+      select user_id from public.freelancer_profiles
+      where id = freelancer_id
+    )
   );
 
 -- Auto-create profile when a new user signs up

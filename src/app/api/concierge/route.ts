@@ -116,6 +116,7 @@ function mapFreelancers(
     const profile = Array.isArray(row.profiles) ? row.profiles[0] : row.profiles;
     const prices = (row.service_tiers ?? []).map((t) => Number(t.price));
 
+    // row.id is freelancer_profiles.id — used as leads.freelancer_id on enquiry insert
     return {
       id: row.id,
       name: profile?.full_name ?? "Professional",

@@ -9,6 +9,8 @@ import { createClient } from "@/lib/supabase/server";
 import { Bell } from "lucide-react";
 import { redirect } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export default async function FreelancerDashboardPage() {
   const supabase = await createClient();
 
@@ -41,7 +43,7 @@ export default async function FreelancerDashboardPage() {
   const [
     { count: pendingLeadsCount },
     { count: upcomingBookingsCount },
-    { data: leadsData },
+    { data: leadsData, error: leadsError },
     { data: bookingsData },
   ] = await Promise.all([
     supabase
@@ -89,6 +91,10 @@ export default async function FreelancerDashboardPage() {
       .order("scheduled_at", { ascending: true })
       .limit(2),
   ]);
+
+  if (leadsError) {
+    console.error("[dashboard] leads fetch error:", leadsError.message);
+  }
 
   const leads: DashboardLead[] = (leadsData ?? []).map((lead) => {
     const client = lead.client as { full_name: string } | { full_name: string }[] | null;
@@ -167,9 +173,14 @@ export default async function FreelancerDashboardPage() {
               Profile live
             </span>
           ) : (
-            <span className="inline-flex rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-800">
-              Pending review
-            </span>
+            <div>
+              <span className="inline-flex rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-800">
+                Pending review
+              </span>
+              <p className="mt-2 text-xs text-[#0F6E56]/80">
+                Your profile is under review. Leads are still visible to you.
+              </p>
+            </div>
           )}
 
           <h1 className="mt-3 text-2xl font-bold text-[#085041]">{fullName}</h1>

@@ -273,6 +273,7 @@ export function ConciergeChat() {
 
     const { budget_min, budget_max } = parseBudgetRange(matchData.budget);
 
+    // freelancer.id is freelancer_profiles.id (not profiles.id / auth uid)
     const { error } = await supabase.from("leads").insert({
       client_id: user.id,
       freelancer_id: freelancer.id,
