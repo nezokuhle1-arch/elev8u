@@ -1,10 +1,16 @@
 import { ConciergeChat } from "@/components/client/ConciergeChat";
+import { Suspense } from "react";
 
 export default function ConciergePage() {
   return (
-    <div className="mx-auto max-w-2xl px-4 py-10">
-      <h1 className="mb-6 text-2xl font-bold text-zinc-900">AI Concierge</h1>
+    <Suspense
+      fallback={
+        <div className="flex h-dvh items-center justify-center bg-white">
+          <p className="text-zinc-600">Loading assistant…</p>
+        </div>
+      }
+    >
       <ConciergeChat />
-    </div>
+    </Suspense>
   );
 }
