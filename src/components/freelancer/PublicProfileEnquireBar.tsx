@@ -33,7 +33,9 @@ export function PublicProfileEnquireBar({
       return;
     }
 
-    router.push("/signup");
+    router.push(
+      `/signup?redirectTo=${encodeURIComponent(`/client/concierge?freelancer_id=${freelancerId}`)}`
+    );
   }
 
   return (

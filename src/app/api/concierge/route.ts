@@ -38,6 +38,61 @@ Rules:
 - Never discuss anything outside of finding a service professional
 - If asked off-topic questions, gently redirect to their service need`;
 
+type FreelancerRow = {
+  id: string;
+  category: string;
+  location: string;
+  rating: number;
+  profiles: { full_name: string } | { full_name: string }[] | null;
+  service_tiers: { price: number }[] | null;
+};
+
+function mapFreelancers(rows: FreelancerRow[]): MatchedFreelancer[] {
+  return rows.map((row) => {
+    const profile = Array.isArray(row.profiles) ? row.profiles[0] : row.profiles;
+    const prices = (row.service_tiers ?? []).map((t) => Number(t.price));
+
+    return {
+      id: row.id,
+      name: profile?.full_name ?? "Professional",
+      category: row.category,
+      location: row.location,
+      rating: Number(row.rating ?? 0),
+      priceMin: prices.length ? Math.min(...prices) : null,
+      priceMax: prices.length ? Math.max(...prices) : null,
+    };
+  });
+}
+
+async function fetchFreelancerById(
+  freelancerId: string
+): Promise<MatchedFreelancer | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("freelancer_profiles")
+    .select(
+      `
+      id,
+      category,
+      location,
+      rating,
+      profiles!freelancer_profiles_user_id_fkey(full_name),
+      service_tiers(price)
+    `
+    )
+    .eq("id", freelancerId)
+    .maybeSingle();
+
+  if (error) {
+    console.error("[concierge] fetchFreelancerById error:", error.message);
+    return null;
+  }
+
+  if (!data) return null;
+
+  return mapFreelancers([data as FreelancerRow])[0] ?? null;
+}
+
 async function fetchMatchedFreelancers(
   matchData: ReturnType<typeof parseMatchReady>,
   categoryHint: string
@@ -57,7 +112,6 @@ async function fetchMatchedFreelancers(
       category,
       location,
       rating,
-      user_id,
       profiles!freelancer_profiles_user_id_fkey(full_name),
       service_tiers(price)
     `
@@ -96,37 +150,10 @@ async function fetchMatchedFreelancers(
 
     if (!fallback) return [];
 
-    return mapFreelancers(fallback);
+    return mapFreelancers(fallback as FreelancerRow[]);
   }
 
-  return mapFreelancers(data);
-}
-
-function mapFreelancers(
-  rows: {
-    id: string;
-    category: string;
-    location: string;
-    rating: number;
-    profiles: { full_name: string } | { full_name: string }[] | null;
-    service_tiers: { price: number }[] | null;
-  }[]
-): MatchedFreelancer[] {
-  return rows.map((row) => {
-    const profile = Array.isArray(row.profiles) ? row.profiles[0] : row.profiles;
-    const prices = (row.service_tiers ?? []).map((t) => Number(t.price));
-
-    // row.id is freelancer_profiles.id — used as leads.freelancer_id on enquiry insert
-    return {
-      id: row.id,
-      name: profile?.full_name ?? "Professional",
-      category: row.category,
-      location: row.location,
-      rating: Number(row.rating ?? 0),
-      priceMin: prices.length ? Math.min(...prices) : null,
-      priceMax: prices.length ? Math.max(...prices) : null,
-    };
-  });
+  return mapFreelancers(data as FreelancerRow[]);
 }
 
 export async function POST(request: Request) {
@@ -135,6 +162,7 @@ export async function POST(request: Request) {
     const messages = (body.messages ?? []) as ConciergeMessage[];
     const userLocation = (body.userLocation ?? "") as string;
     const category = (body.category ?? "") as string;
+    const freelancerId = (body.freelancerId ?? "") as string;
 
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
@@ -146,10 +174,16 @@ export async function POST(request: Request) {
 
     const anthropic = new Anthropic({ apiKey });
 
-    const contextNote =
-      userLocation || category
-        ? `\n\nContext: ${category ? `Category interest: ${category}. ` : ""}${userLocation ? `User location: ${userLocation}.` : ""}`
-        : "";
+    let contextNote = "";
+    if (freelancerId) {
+      const pinned = await fetchFreelancerById(freelancerId);
+      if (pinned) {
+        contextNote += `\n\nThe client is enquiring about a specific professional: ${pinned.name} (${pinned.category}, ${pinned.location}). Help them describe their job needs for this professional.`;
+      }
+    }
+    if (userLocation || category) {
+      contextNote += `\n\nContext: ${category ? `Category interest: ${category}. ` : ""}${userLocation ? `User location: ${userLocation}.` : ""}`;
+    }
 
     const response = await anthropic.messages.create({
       model: "claude-sonnet-4-6",
@@ -168,12 +202,32 @@ export async function POST(request: Request) {
     const matchData = parseMatchReady(rawText);
 
     if (matchData) {
-      const freelancers = await fetchMatchedFreelancers(matchData, category);
+      let freelancers: MatchedFreelancer[] = [];
+
+      if (freelancerId) {
+        const pinned = await fetchFreelancerById(freelancerId);
+        if (pinned) {
+          freelancers = [pinned];
+          console.log("[concierge] MATCH_READY — pinned freelancer_profiles.id:", pinned.id);
+        } else {
+          console.warn(
+            "[concierge] freelancerId not found, falling back to search:",
+            freelancerId
+          );
+          freelancers = await fetchMatchedFreelancers(matchData, category);
+        }
+      } else {
+        freelancers = await fetchMatchedFreelancers(matchData, category);
+      }
+
       return NextResponse.json({
-        reply: stripMatchReadyBlock(rawText) || "I found some great matches for you!",
+        reply:
+          stripMatchReadyBlock(rawText) ||
+          "I found a great match for you!",
         matchReady: true,
         matchData,
         freelancers,
+        pinnedFreelancerId: freelancerId || null,
       });
     }
 

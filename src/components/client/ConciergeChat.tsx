@@ -29,6 +29,13 @@ function formatTime(date: Date) {
   });
 }
 
+type ConciergeApiBody = {
+  messages: { role: "user" | "assistant"; content: string }[];
+  userLocation: string;
+  category: string;
+  freelancerId: string;
+};
+
 export function ConciergeChat() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -43,10 +50,16 @@ export function ConciergeChat() {
   const [enquirySent, setEnquirySent] = useState<Record<string, boolean>>({});
   const [enquiryLoading, setEnquiryLoading] = useState<string | null>(null);
   const [userLocation, setUserLocation] = useState("");
+  const [toast, setToast] = useState<string | null>(null);
 
   const categoryParam = searchParams.get("category") ?? "";
   const messageParam = searchParams.get("message") ?? "";
   const freelancerIdParam = searchParams.get("freelancer_id") ?? "";
+
+  const showToast = useCallback((message: string) => {
+    setToast(message);
+    window.setTimeout(() => setToast(null), 2500);
+  }, []);
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -62,48 +75,65 @@ export function ConciergeChat() {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+
+      const redirectPath = `/client/concierge${window.location.search}`;
+
       if (!user) {
-        router.replace("/login?redirectTo=/client/concierge");
+        router.replace(
+          `/login?redirectTo=${encodeURIComponent(redirectPath)}`
+        );
         return;
       }
+
       const { data: profile } = await supabase
         .from("profiles")
-        .select("location")
+        .select("location, role")
         .eq("id", user.id)
         .single();
+
+      if (profile?.role === "freelancer") {
+        showToast("Switch to a client account to use the concierge");
+        router.replace("/freelancer/dashboard");
+        return;
+      }
+
       if (profile?.location) setUserLocation(profile.location);
     }
     loadProfile();
-  }, [router]);
+  }, [router, showToast]);
 
-  const sendToApi = useCallback(
-    async (history: ChatMessage[], category: string) => {
-      setIsLoading(true);
-
+  const callConciergeApi = useCallback(
+    async (apiMessages: { role: "user" | "assistant"; content: string }[], category: string) => {
       const res = await fetch("/api/concierge", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: history.map((m) => ({
-            role: m.role,
-            content: m.content,
-          })),
+          messages: apiMessages,
           userLocation,
           category,
-        }),
+          freelancerId: freelancerIdParam,
+        } satisfies ConciergeApiBody),
       });
+      return { res, data: await res.json() };
+    },
+    [userLocation, freelancerIdParam]
+  );
 
-      const data = await res.json();
-      setIsLoading(false);
-
-      if (!res.ok) {
+  const applyApiResponse = useCallback(
+    (data: {
+      reply?: string;
+      matchReady?: boolean;
+      matchData?: MatchData;
+      freelancers?: MatchedFreelancer[];
+      error?: string;
+    }) => {
+      if (data.error) {
         setMessages((prev) => [
           ...prev,
           {
             id: crypto.randomUUID(),
             role: "assistant",
-            content:
-              data.error ?? "Sorry, something went wrong. Please try again.",
+            content: String(data.error),
             timestamp: new Date(),
           },
         ]);
@@ -115,7 +145,7 @@ export function ConciergeChat() {
         {
           id: crypto.randomUUID(),
           role: "assistant",
-          content: data.reply,
+          content: data.reply ?? "",
           timestamp: new Date(),
         },
       ]);
@@ -125,7 +155,28 @@ export function ConciergeChat() {
         setFreelancers(data.freelancers ?? []);
       }
     },
-    [userLocation]
+    []
+  );
+
+  const sendToApi = useCallback(
+    async (history: ChatMessage[], category: string) => {
+      setIsLoading(true);
+      const { res, data } = await callConciergeApi(
+        history.map((m) => ({ role: m.role, content: m.content })),
+        category
+      );
+      setIsLoading(false);
+
+      if (!res.ok) {
+        applyApiResponse({
+          error: data.error ?? "Sorry, something went wrong. Please try again.",
+        });
+        return;
+      }
+
+      applyApiResponse(data);
+    },
+    [callConciergeApi, applyApiResponse]
   );
 
   const sendMessage = useCallback(
@@ -143,7 +194,7 @@ export function ConciergeChat() {
       const history = [...messages, userMsg];
       setMessages(history);
       setInput("");
-      await sendToApi(history, category);
+      await sendToApi(history, category || categoryParam);
     },
     [isLoading, messages, sendToApi, categoryParam]
   );
@@ -153,6 +204,13 @@ export function ConciergeChat() {
     initializedRef.current = true;
 
     async function init() {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) return;
+
       if (messageParam) {
         const userMsg: ChatMessage = {
           id: crypto.randomUUID(),
@@ -162,32 +220,12 @@ export function ConciergeChat() {
         };
         setMessages([userMsg]);
         setIsLoading(true);
-        const res = await fetch("/api/concierge", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            messages: [{ role: "user", content: messageParam }],
-            userLocation,
-            category: categoryParam,
-          }),
-        });
-        const data = await res.json();
+        const { res, data } = await callConciergeApi(
+          [{ role: "user", content: messageParam }],
+          categoryParam
+        );
         setIsLoading(false);
-        if (res.ok) {
-          setMessages((prev) => [
-            ...prev,
-            {
-              id: crypto.randomUUID(),
-              role: "assistant",
-              content: data.reply,
-              timestamp: new Date(),
-            },
-          ]);
-          if (data.matchReady && data.matchData) {
-            setMatchData(data.matchData);
-            setFreelancers(data.freelancers ?? []);
-          }
-        }
+        if (res.ok) applyApiResponse(data);
         return;
       }
 
@@ -201,45 +239,76 @@ export function ConciergeChat() {
         };
         setMessages([userMsg]);
         setIsLoading(true);
-        const res = await fetch("/api/concierge", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            messages: [{ role: "user", content: text }],
-            userLocation,
-            category: categoryParam,
-          }),
-        });
-        const data = await res.json();
+        const { res, data } = await callConciergeApi(
+          [{ role: "user", content: text }],
+          categoryParam
+        );
         setIsLoading(false);
+        if (res.ok) applyApiResponse(data);
+        return;
+      }
+
+      if (freelancerIdParam) {
+        const { data: fp } = await supabase
+          .from("freelancer_profiles")
+          .select(
+            `
+            id,
+            category,
+            location,
+            profiles!freelancer_profiles_user_id_fkey(full_name)
+          `
+          )
+          .eq("id", freelancerIdParam)
+          .maybeSingle();
+
+        if (!fp) {
+          setMessages([
+            {
+              id: crypto.randomUUID(),
+              role: "assistant",
+              content:
+                "I couldn't find that professional's profile. Please try another link or search for a service.",
+              timestamp: new Date(),
+            },
+          ]);
+          return;
+        }
+
+        const profile = Array.isArray(fp.profiles) ? fp.profiles[0] : fp.profiles;
+        const name = profile?.full_name ?? "this professional";
+        const openingUser = `I'm interested in hiring ${name}, a ${fp.category} professional in ${fp.location}. I viewed their Elev8U profile and would like to send an enquiry.`;
+
+        const userMsg: ChatMessage = {
+          id: crypto.randomUUID(),
+          role: "user",
+          content: openingUser,
+          timestamp: new Date(),
+        };
+
+        setMessages([userMsg]);
+        setIsLoading(true);
+
+        const { res, data } = await callConciergeApi(
+          [{ role: "user", content: openingUser }],
+          fp.category
+        );
+        setIsLoading(false);
+
         if (res.ok) {
+          applyApiResponse(data);
+        } else {
           setMessages((prev) => [
             ...prev,
             {
               id: crypto.randomUUID(),
               role: "assistant",
-              content: data.reply,
+              content:
+                "Hi! I can help you send an enquiry. What specific work do you need done, what's your budget in Rands, and when do you need it?",
               timestamp: new Date(),
             },
           ]);
-          if (data.matchReady && data.matchData) {
-            setMatchData(data.matchData);
-            setFreelancers(data.freelancers ?? []);
-          }
         }
-        return;
-      }
-
-      if (freelancerIdParam) {
-        setMessages([
-          {
-            id: crypto.randomUUID(),
-            role: "assistant",
-            content:
-              "Great choice! Tell me what you need help with and I'll match you with the right professional.",
-            timestamp: new Date(),
-          },
-        ]);
         return;
       }
 
@@ -254,11 +323,21 @@ export function ConciergeChat() {
     }
 
     init();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [
+    messageParam,
+    categoryParam,
+    freelancerIdParam,
+    callConciergeApi,
+    applyApiResponse,
+  ]);
 
   async function handleSendEnquiry(freelancer: MatchedFreelancer) {
-    if (!matchData) return;
+    if (!matchData) {
+      showToast("Please complete the conversation before sending an enquiry.");
+      return;
+    }
+
+    const targetFreelancerId = freelancerIdParam || freelancer.id;
 
     setEnquiryLoading(freelancer.id);
     const supabase = createClient();
@@ -267,31 +346,56 @@ export function ConciergeChat() {
     } = await supabase.auth.getUser();
 
     if (!user) {
-      router.push("/login?redirectTo=/client/concierge");
+      setEnquiryLoading(null);
+      showToast("Please sign in as a client to send enquiries.");
+      router.push(
+        `/login?redirectTo=${encodeURIComponent(`/client/concierge?freelancer_id=${targetFreelancerId}`)}`
+      );
+      return;
+    }
+
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+
+    if (profile?.role !== "client") {
+      setEnquiryLoading(null);
+      showToast("Switch to a client account to send enquiries");
       return;
     }
 
     const { budget_min, budget_max } = parseBudgetRange(matchData.budget);
 
-    // freelancer.id is freelancer_profiles.id (not profiles.id / auth uid)
-    const { error } = await supabase.from("leads").insert({
+    const leadPayload = {
       client_id: user.id,
-      freelancer_id: freelancer.id,
+      freelancer_id: targetFreelancerId,
       description: matchData.what,
       budget_min,
       budget_max,
       timeline: matchData.timeline,
-      status: "pending",
+      status: "pending" as const,
+    };
+
+    console.log("[concierge] Inserting lead:", {
+      client_id: leadPayload.client_id,
+      freelancer_id: leadPayload.freelancer_id,
+      idsAreDifferent: leadPayload.client_id !== leadPayload.freelancer_id,
     });
+
+    const { error } = await supabase.from("leads").insert(leadPayload);
 
     setEnquiryLoading(null);
 
     if (error) {
-      alert(error.message);
+      console.error("[concierge] Lead insert failed:", error.message, error);
+      showToast("Failed to send enquiry. Please try again.");
       return;
     }
 
     setEnquirySent((prev) => ({ ...prev, [freelancer.id]: true }));
+    showToast(`Enquiry sent! ${freelancer.name} will be in touch soon.`);
   }
 
   function handleSubmit(e: React.FormEvent) {
@@ -301,6 +405,12 @@ export function ConciergeChat() {
 
   return (
     <div className="flex h-dvh flex-col bg-white">
+      {toast && (
+        <div className="fixed left-1/2 top-4 z-[100] -translate-x-1/2 rounded-full bg-zinc-900 px-4 py-2 text-sm text-white shadow-lg">
+          {toast}
+        </div>
+      )}
+
       <header className="flex shrink-0 items-center gap-3 bg-[#0F6E56] px-4 py-3 text-white">
         <Link
           href="/client/home"
@@ -402,12 +512,6 @@ export function ConciergeChat() {
                             : "Send enquiry"}
                       </button>
                     </div>
-                    {enquirySent[f.id] && (
-                      <p className="mt-2 text-center text-xs text-[#085041]">
-                        Your enquiry has been sent! {f.name} will be in touch
-                        soon.
-                      </p>
-                    )}
                   </div>
                 ))}
               </div>
