@@ -382,7 +382,7 @@ export function ConciergeChat() {
                     </div>
                     <div className="mt-3 flex gap-2">
                       <Link
-                        href={`/client/concierge?freelancer_id=${f.id}`}
+                        href={`/freelancer/${f.id}`}
                         className="flex-1 rounded-lg border border-[#1D9E75] py-2 text-center text-sm font-medium text-[#1D9E75] hover:bg-[#E1F5EE]"
                       >
                         View profile

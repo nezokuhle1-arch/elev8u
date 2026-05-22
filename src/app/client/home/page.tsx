@@ -178,7 +178,7 @@ export default async function ClientHomePage() {
                     </div>
                   </div>
                   <Link
-                    href={`/client/concierge?freelancer_id=${f.id}`}
+                    href={`/freelancer/${f.id}`}
                     className="shrink-0 rounded-lg border border-[#1D9E75] px-3 py-1.5 text-xs font-medium text-[#1D9E75] hover:bg-[#E1F5EE]"
                   >
                     View profile

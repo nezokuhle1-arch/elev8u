@@ -30,6 +30,13 @@ export function formatBudget(min: number | null, max: number | null): string {
   return "Budget TBD";
 }
 
+export function formatMemberSince(dateString: string): string {
+  return new Date(dateString).toLocaleDateString("en-ZA", {
+    month: "short",
+    year: "numeric",
+  });
+}
+
 export function formatBookingDate(dateString: string) {
   const date = new Date(dateString);
   return {
