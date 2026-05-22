@@ -6,6 +6,7 @@ const PROTECTED_ROUTES = [
   "/freelancer/profile/setup",
   "/client/home",
   "/client/concierge",
+  "/client/bookings",
 ];
 
 export async function middleware(request: NextRequest) {
@@ -41,8 +42,9 @@ export async function middleware(request: NextRequest) {
   const isProtected = PROTECTED_ROUTES.some(
     (route) => pathname === route || pathname.startsWith(`${route}/`)
   );
+  const isBookingRoute = pathname.startsWith("/booking");
 
-  if (isProtected && !user) {
+  if ((isProtected || isBookingRoute) && !user) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.searchParams.set("redirectTo", pathname);

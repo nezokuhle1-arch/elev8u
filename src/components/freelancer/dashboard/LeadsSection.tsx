@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/supabase/client";
 import { formatBudget, formatTimeAgo } from "@/lib/format";
-import { Inbox } from "lucide-react";
+import { Inbox, Link2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -25,7 +25,7 @@ export function LeadsSection({ initialLeads }: LeadsSectionProps) {
   const router = useRouter();
   const [leads, setLeads] = useState(initialLeads);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
-  const [acceptedIds, setAcceptedIds] = useState<Set<string>>(new Set());
+  const [toast, setToast] = useState<string | null>(null);
 
   async function updateLeadStatus(
     leadId: string,
@@ -47,7 +47,9 @@ export function LeadsSection({ initialLeads }: LeadsSectionProps) {
     }
 
     if (status === "accepted") {
-      setAcceptedIds((prev) => new Set(prev).add(leadId));
+      setLeads((prev) =>
+        prev.map((l) => (l.id === leadId ? { ...l, status: "accepted" } : l))
+      );
     } else {
       setLeads((prev) => prev.filter((l) => l.id !== leadId));
     }
@@ -55,15 +57,34 @@ export function LeadsSection({ initialLeads }: LeadsSectionProps) {
     router.refresh();
   }
 
+  async function copyBookingLink(leadId: string) {
+    const url = `${window.location.origin}/booking/${leadId}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setToast("Booking link copied! Share with your client.");
+      setTimeout(() => setToast(null), 3000);
+    } catch {
+      alert(url);
+    }
+  }
+
   return (
-    <section id="leads" className="px-4 py-4">
+    <section id="leads" className="relative px-4 py-4">
+      {toast && (
+        <div className="fixed bottom-24 left-1/2 z-50 max-w-[90%] -translate-x-1/2 rounded-lg bg-zinc-900 px-4 py-2 text-center text-sm text-white shadow-lg">
+          {toast}
+        </div>
+      )}
+
       <div className="mb-3 flex items-center justify-between">
         <h2 className="font-semibold text-zinc-900">New leads</h2>
         <button
           type="button"
           className="text-sm font-medium text-[#1D9E75]"
           onClick={() => {
-            document.getElementById("leads")?.scrollIntoView({ behavior: "smooth" });
+            document
+              .getElementById("leads")
+              ?.scrollIntoView({ behavior: "smooth" });
           }}
         >
           View all
@@ -81,7 +102,7 @@ export function LeadsSection({ initialLeads }: LeadsSectionProps) {
       ) : (
         <div className="space-y-2">
           {leads.map((lead) => {
-            const isAccepted = acceptedIds.has(lead.id);
+            const isAccepted = lead.status === "accepted";
 
             return (
               <article
@@ -125,7 +146,16 @@ export function LeadsSection({ initialLeads }: LeadsSectionProps) {
                   )}
                 </div>
 
-                {!isAccepted && (
+                {isAccepted ? (
+                  <button
+                    type="button"
+                    onClick={() => copyBookingLink(lead.id)}
+                    className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg border border-[#1D9E75] bg-[#E1F5EE] py-2 text-sm font-medium text-[#0F6E56] hover:bg-[#d4ede4]"
+                  >
+                    <Link2 className="h-4 w-4" />
+                    Share booking link
+                  </button>
+                ) : (
                   <div className="mt-3 flex gap-2">
                     <button
                       type="button"

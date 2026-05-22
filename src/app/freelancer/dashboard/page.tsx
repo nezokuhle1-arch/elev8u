@@ -72,9 +72,9 @@ export default async function FreelancerDashboardPage() {
       `
       )
       .eq("freelancer_id", freelancerId)
-      .eq("status", "pending")
+      .in("status", ["pending", "accepted"])
       .order("created_at", { ascending: false })
-      .limit(3),
+      .limit(5),
     supabase
       .from("bookings")
       .select(

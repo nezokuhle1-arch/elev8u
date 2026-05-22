@@ -37,6 +37,18 @@ export function formatMemberSince(dateString: string): string {
   });
 }
 
+export function formatBookingDateTime(dateString: string): string {
+  return new Date(dateString).toLocaleString("en-ZA", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+}
+
 export function formatBookingDate(dateString: string) {
   const date = new Date(dateString);
   return {

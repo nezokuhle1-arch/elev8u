@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 const tabs = [
   { label: "Home", href: "/client/home", icon: Home },
   { label: "Search", href: "/client/concierge", icon: Search },
-  { label: "Bookings", href: "/client/home#bookings", icon: Calendar },
+  { label: "Bookings", href: "/client/bookings", icon: Calendar },
   { label: "Profile", href: "/client/home#profile", icon: User },
 ] as const;
 
@@ -23,7 +23,9 @@ export function ClientBottomNav() {
           const isActive =
             label === "Search"
               ? pathname === "/client/concierge"
-              : pathname === basePath && label === "Home";
+              : label === "Bookings"
+                ? pathname === "/client/bookings"
+                : pathname === basePath && label === "Home";
 
           return (
             <Link
