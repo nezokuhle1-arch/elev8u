@@ -46,6 +46,7 @@ export function ConciergeChat() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [matchData, setMatchData] = useState<MatchData | null>(null);
+  const [matchReady, setMatchReady] = useState(false);
   const [freelancers, setFreelancers] = useState<MatchedFreelancer[]>([]);
   const [enquirySent, setEnquirySent] = useState<Record<string, boolean>>({});
   const [enquiryLoading, setEnquiryLoading] = useState<string | null>(null);
@@ -67,7 +68,7 @@ export function ConciergeChat() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isLoading, freelancers, scrollToBottom]);
+  }, [messages, isLoading, freelancers, matchReady, scrollToBottom]);
 
   useEffect(() => {
     async function loadProfile() {
@@ -121,6 +122,7 @@ export function ConciergeChat() {
 
   const applyApiResponse = useCallback(
     (data: {
+      message?: string;
       reply?: string;
       matchReady?: boolean;
       matchData?: MatchData;
@@ -140,18 +142,24 @@ export function ConciergeChat() {
         return;
       }
 
+      const assistantMessage = data.message ?? data.reply ?? "";
+
       setMessages((prev) => [
         ...prev,
         {
           id: crypto.randomUUID(),
           role: "assistant",
-          content: data.reply ?? "",
+          content: assistantMessage,
           timestamp: new Date(),
         },
       ]);
 
-      if (data.matchReady && data.matchData) {
-        setMatchData(data.matchData);
+      console.log("[chat] matchReady:", data.matchReady);
+      console.log("[chat] freelancers:", data.freelancers);
+
+      if (data.matchReady) {
+        setMatchReady(true);
+        if (data.matchData) setMatchData(data.matchData);
         setFreelancers(data.freelancers ?? []);
       }
     },
@@ -411,7 +419,7 @@ export function ConciergeChat() {
         </div>
       )}
 
-      <header className="flex shrink-0 items-center gap-3 bg-[#0F6E56] px-4 py-3 text-white">
+      <header className="flex shrink-0 items-center gap-3 bg-gradient-to-r from-[#1A3FA0] to-[#305CDE] px-4 py-3 text-white">
         <Link
           href="/client/home"
           className="rounded-full p-1 hover:bg-white/10"
@@ -435,7 +443,7 @@ export function ConciergeChat() {
               <div
                 className={`max-w-[80%] px-4 py-3 text-sm ${
                   msg.role === "user"
-                    ? "rounded-2xl rounded-tr-none bg-[#1D9E75] text-white"
+                    ? "rounded-2xl rounded-tr-none bg-[#305CDE] text-white"
                     : "rounded-2xl rounded-tl-none bg-gray-100 text-zinc-800"
                 }`}
               >
@@ -457,9 +465,9 @@ export function ConciergeChat() {
             </div>
           )}
 
-          {freelancers.length > 0 && matchData && (
-            <div className="rounded-xl border border-[#1D9E75]/30 bg-[#E1F5EE]/50 p-4">
-              <h3 className="mb-3 font-semibold text-[#085041]">
+          {matchReady && freelancers.length > 0 && matchData && (
+            <div className="rounded-xl border border-[#305CDE]/30 bg-[#E8EEFB]/80 p-4">
+              <h3 className="mb-3 font-semibold text-[#1A3FA0]">
                 Matched professionals
               </h3>
               <div className="space-y-3">
@@ -469,15 +477,15 @@ export function ConciergeChat() {
                     className="rounded-xl border border-gray-100 bg-white p-3"
                   >
                     <div className="flex gap-3">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E1F5EE] text-sm font-semibold text-[#0F6E56]">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E8EEFB] text-sm font-semibold text-[#305CDE]">
                         {getInitials(f.name)}
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="font-medium text-zinc-900">{f.name}</p>
-                        <p className="text-sm text-[#0F6E56]">{f.category}</p>
+                        <p className="text-sm text-[#305CDE]">{f.category}</p>
                         <p className="text-xs text-gray-400">{f.location}</p>
-                        <div className="mt-1 flex items-center gap-1 text-sm text-[#0F6E56]">
-                          <Star className="h-3.5 w-3.5 fill-[#1D9E75] text-[#1D9E75]" />
+                        <div className="mt-1 flex items-center gap-1 text-sm text-[#305CDE]">
+                          <Star className="h-3.5 w-3.5 fill-[#305CDE] text-[#305CDE]" />
                           {f.rating.toFixed(1)}
                           {f.priceMin != null && (
                             <span className="ml-2 text-gray-500">
@@ -493,7 +501,7 @@ export function ConciergeChat() {
                     <div className="mt-3 flex gap-2">
                       <Link
                         href={`/freelancer/${f.id}`}
-                        className="flex-1 rounded-lg border border-[#1D9E75] py-2 text-center text-sm font-medium text-[#1D9E75] hover:bg-[#E1F5EE]"
+                        className="flex-1 rounded-lg border border-[#305CDE] py-2 text-center text-sm font-medium text-[#305CDE] hover:bg-[#E8EEFB]"
                       >
                         View profile
                       </Link>
@@ -503,7 +511,7 @@ export function ConciergeChat() {
                           enquiryLoading === f.id || enquirySent[f.id]
                         }
                         onClick={() => handleSendEnquiry(f)}
-                        className="flex-1 rounded-lg bg-[#1D9E75] py-2 text-sm font-medium text-white hover:bg-[#0F6E56] disabled:opacity-60"
+                        className="flex-1 rounded-lg bg-[#305CDE] py-2 text-sm font-medium text-white hover:bg-[#1A3FA0] disabled:opacity-60"
                       >
                         {enquirySent[f.id]
                           ? "Enquiry sent ✓"
@@ -515,6 +523,20 @@ export function ConciergeChat() {
                   </div>
                 ))}
               </div>
+            </div>
+          )}
+
+          {matchReady && freelancers.length === 0 && (
+            <div className="rounded-xl border border-[#305CDE]/30 bg-[#E8EEFB]/80 p-4 text-center">
+              <p className="text-sm text-zinc-700">
+                No freelancers found in your area yet. Be the first to sign up!
+              </p>
+              <Link
+                href="/signup"
+                className="mt-3 inline-block rounded-lg bg-[#305CDE] px-4 py-2 text-sm font-medium text-white hover:bg-[#1A3FA0]"
+              >
+                Join as Freelancer
+              </Link>
             </div>
           )}
 
@@ -538,12 +560,12 @@ export function ConciergeChat() {
               }}
               placeholder="Type your message..."
               disabled={isLoading}
-              className="min-w-0 flex-1 rounded-lg border border-gray-200 px-4 py-3 text-sm outline-none focus:border-[#1D9E75] focus:ring-2 focus:ring-[#1D9E75]/20 disabled:opacity-50"
+              className="min-w-0 flex-1 rounded-lg border border-gray-200 px-4 py-3 text-sm outline-none focus:border-[#305CDE] focus:ring-2 focus:ring-[#305CDE]/20 disabled:opacity-50"
             />
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
-              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#1D9E75] text-white hover:bg-[#0F6E56] disabled:opacity-50"
+              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#305CDE] text-white hover:bg-[#1A3FA0] disabled:opacity-50"
               aria-label="Send message"
             >
               <Send className="h-4 w-4" />

@@ -116,7 +116,7 @@ async function fetchMatchedFreelancers(
       service_tiers(price)
     `
     )
-    .eq("is_vetted", false)
+    .eq("is_vetted", true)
     .order("rating", { ascending: false })
     .limit(3);
 
@@ -131,8 +131,12 @@ async function fetchMatchedFreelancers(
 
   const { data, error } = await query;
 
+  if (error) {
+    console.error("[concierge] freelancer query error:", error.message);
+  }
+
   if (error || !data?.length) {
-    const { data: fallback } = await supabase
+    const { data: fallback, error: fallbackError } = await supabase
       .from("freelancer_profiles")
       .select(
         `
@@ -144,11 +148,15 @@ async function fetchMatchedFreelancers(
         service_tiers(price)
       `
       )
-      .eq("is_vetted", false)
+      .eq("is_vetted", true)
       .order("rating", { ascending: false })
       .limit(3);
 
-    if (!fallback) return [];
+    if (fallbackError) {
+      console.error("[concierge] fallback query error:", fallbackError.message);
+    }
+
+    if (!fallback?.length) return [];
 
     return mapFreelancers(fallback as FreelancerRow[]);
   }
@@ -202,13 +210,17 @@ export async function POST(request: Request) {
     const matchData = parseMatchReady(rawText);
 
     if (matchData) {
+      console.log("[concierge] MATCH_READY detected", matchData);
       let freelancers: MatchedFreelancer[] = [];
 
       if (freelancerId) {
         const pinned = await fetchFreelancerById(freelancerId);
         if (pinned) {
           freelancers = [pinned];
-          console.log("[concierge] MATCH_READY — pinned freelancer_profiles.id:", pinned.id);
+          console.log(
+            "[concierge] MATCH_READY — pinned freelancer_profiles.id:",
+            pinned.id
+          );
         } else {
           console.warn(
             "[concierge] freelancerId not found, falling back to search:",
@@ -220,20 +232,26 @@ export async function POST(request: Request) {
         freelancers = await fetchMatchedFreelancers(matchData, category);
       }
 
+      console.log("[concierge] matched freelancers:", freelancers);
+
+      const message =
+        stripMatchReadyBlock(rawText) || "I found a great match for you!";
+
       return NextResponse.json({
-        reply:
-          stripMatchReadyBlock(rawText) ||
-          "I found a great match for you!",
+        message,
+        reply: message,
         matchReady: true,
         matchData,
-        freelancers,
+        freelancers: freelancers ?? [],
         pinnedFreelancerId: freelancerId || null,
       });
     }
 
     return NextResponse.json({
+      message: rawText,
       reply: rawText,
       matchReady: false,
+      freelancers: [],
     });
   } catch (err) {
     console.error("Concierge API error:", err);
