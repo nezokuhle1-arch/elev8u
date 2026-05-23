@@ -10,25 +10,6 @@ export default async function ConciergePage() {
 
   const isGuestMode = !user;
 
-  // #region agent log
-  fetch("http://127.0.0.1:7540/ingest/93bcde73-d130-4d09-99cd-abc4ba828e24", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Debug-Session-Id": "dcc49e",
-    },
-    body: JSON.stringify({
-      sessionId: "dcc49e",
-      runId: "guest-mode-debug",
-      hypothesisId: "H1-H3",
-      location: "concierge/page.tsx:server",
-      message: "server auth check for isGuestMode",
-      data: { hasUser: !!user, isGuestMode, userRole: user ? "present" : "none" },
-      timestamp: Date.now(),
-    }),
-  }).catch(() => {});
-  // #endregion
-
   return (
     <Suspense
       fallback={

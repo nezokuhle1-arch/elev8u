@@ -142,17 +142,17 @@ export function VettingDashboard({
   const list = tab === "pending" ? pending : approved;
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="mx-auto min-h-screen max-w-[600px]">
-        <header className="flex items-center justify-between bg-[#0F6E56] px-4 py-3 text-white">
-          <span className="text-lg font-bold text-[#1D9E75]">Elev8U</span>
+    <div className="flex min-h-screen justify-center bg-gray-50">
+      <div className="w-full max-w-[600px] min-h-screen bg-white shadow-sm">
+        <header className="flex items-center justify-between bg-[#1A3FA0] px-4 py-3 text-white">
+          <span className="text-lg font-bold text-[#305CDE]">Elev8U</span>
           <span className="text-sm font-medium">Admin · Vetting</span>
-          <span className="max-w-[120px] truncate text-sm text-[#E1F5EE]">
+          <span className="max-w-[120px] truncate text-sm text-[#E8EEFB]">
             {adminName}
           </span>
         </header>
 
-        <div className="grid grid-cols-3 gap-3 px-4 py-4">
+        <div className="grid grid-cols-1 gap-3 px-4 py-4 sm:grid-cols-3">
           <StatCard label="Pending review" value={stats.pending} />
           <StatCard label="Approved today" value={stats.approvedToday} />
           <StatCard label="Total active" value={stats.totalActive} />
@@ -167,7 +167,7 @@ export function VettingDashboard({
               className={cn(
                 "flex-1 py-3 text-sm font-medium capitalize transition-colors",
                 tab === t
-                  ? "border-b-2 border-[#1D9E75] text-[#1D9E75]"
+                  ? "border-b-2 border-[#305CDE] text-[#305CDE]"
                   : "text-gray-400"
               )}
             >
@@ -219,7 +219,7 @@ export function VettingDashboard({
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
     <div className="rounded-xl border border-gray-100 bg-white p-4 text-center">
-      <p className="text-2xl font-semibold text-[#0F6E56]">{value}</p>
+      <p className="text-2xl font-semibold text-[#1A3FA0]">{value}</p>
       <p className="mt-1 text-xs text-gray-500">{label}</p>
     </div>
   );
@@ -229,7 +229,7 @@ function EmptyState({ tab }: { tab: Tab }) {
   if (tab === "pending") {
     return (
       <div className="py-16 text-center">
-        <CheckCircle className="mx-auto h-12 w-12 text-[#1D9E75]" />
+        <CheckCircle className="mx-auto h-12 w-12 text-[#305CDE]" />
         <p className="mt-4 font-medium text-zinc-700">
           All caught up! No profiles pending review.
         </p>
@@ -283,7 +283,7 @@ function FreelancerCard({
       )}
     >
       <div className="flex items-start gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#E1F5EE] text-sm font-semibold text-[#0F6E56]">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#E8EEFB] text-sm font-semibold text-[#1A3FA0]">
           {getInitials(freelancer.full_name)}
         </div>
         <div className="min-w-0 flex-1">
@@ -293,7 +293,7 @@ function FreelancerCard({
               <p className="truncate text-sm text-gray-400">{freelancer.email}</p>
             </div>
             <div className="flex shrink-0 flex-col items-end gap-1">
-              <span className="rounded-full bg-[#E1F5EE] px-2 py-1 text-xs text-[#0F6E56]">
+              <span className="rounded-full bg-[#E8EEFB] px-2 py-1 text-xs text-[#1A3FA0]">
                 {freelancer.category}
               </span>
               <span className="text-xs text-gray-400">
@@ -318,7 +318,7 @@ function FreelancerCard({
           {freelancer.skills.map((skill) => (
             <span
               key={skill}
-              className="rounded-full bg-[#E1F5EE] px-2 py-0.5 text-xs text-[#085041]"
+              className="rounded-full bg-[#E8EEFB] px-2 py-0.5 text-xs text-[#1A3FA0]"
             >
               {skill}
             </span>
@@ -336,12 +336,12 @@ function FreelancerCard({
       </div>
 
       {tab === "pending" && !isRejecting && (
-        <div className="mt-4 flex gap-2">
+        <div className="mt-4 flex flex-col gap-2 sm:flex-row">
           <button
             type="button"
             disabled={isUpdating}
             onClick={onApprove}
-            className="flex-1 rounded-lg bg-[#1D9E75] p-2 text-sm font-medium text-white hover:bg-[#0F6E56] disabled:opacity-50"
+            className="flex-1 rounded-lg bg-[#305CDE] p-2 text-sm font-medium text-white hover:bg-[#1A3FA0] disabled:opacity-50"
           >
             {isUpdating ? "Saving…" : "Approve"}
           </button>

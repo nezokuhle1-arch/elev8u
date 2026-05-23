@@ -28,11 +28,11 @@ export function ClientHomeSearch() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="e.g. I need a mechanic in Soweto..."
-        className="min-w-0 flex-1 bg-transparent px-2 py-2 text-sm text-zinc-800 outline-none placeholder:text-gray-400"
+        className="min-w-0 flex-1 bg-transparent px-2 py-2 text-sm text-zinc-800 outline-none placeholder:text-gray-400 sm:text-base"
       />
       <button
         type="submit"
-        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1D9E75] text-white hover:bg-[#0F6E56]"
+        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#305CDE] text-white hover:bg-[#1A3FA0]"
         aria-label="Search"
       >
         <Send className="h-4 w-4" />

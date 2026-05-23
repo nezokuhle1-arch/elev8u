@@ -80,7 +80,7 @@ export function LeadsSection({ initialLeads }: LeadsSectionProps) {
         <h2 className="font-semibold text-zinc-900">New leads</h2>
         <button
           type="button"
-          className="text-sm font-medium text-[#1D9E75]"
+          className="text-sm font-medium text-[#305CDE]"
           onClick={() => {
             document
               .getElementById("leads")
@@ -121,11 +121,11 @@ export function LeadsSection({ initialLeads }: LeadsSectionProps) {
                     </div>
                   </div>
                   {isAccepted ? (
-                    <span className="shrink-0 rounded-full bg-[#E1F5EE] px-2 py-0.5 text-xs font-medium text-[#085041]">
+                    <span className="shrink-0 rounded-full bg-[#E8EEFB] px-2 py-0.5 text-xs font-medium text-[#1A3FA0]">
                       Accepted
                     </span>
                   ) : (
-                    <span className="shrink-0 rounded-full bg-[#E1F5EE] px-2 py-0.5 text-xs font-medium text-[#1D9E75]">
+                    <span className="shrink-0 rounded-full bg-[#E8EEFB] px-2 py-0.5 text-xs font-medium text-[#305CDE]">
                       New
                     </span>
                   )}
@@ -136,7 +136,7 @@ export function LeadsSection({ initialLeads }: LeadsSectionProps) {
                 </p>
 
                 <div className="mt-2 flex flex-wrap gap-2">
-                  <span className="rounded-full bg-[#E1F5EE] px-2.5 py-0.5 text-xs text-[#085041]">
+                  <span className="rounded-full bg-[#E8EEFB] px-2.5 py-0.5 text-xs text-[#1A3FA0]">
                     {formatBudget(lead.budget_min, lead.budget_max)}
                   </span>
                   {lead.timeline && (
@@ -150,7 +150,7 @@ export function LeadsSection({ initialLeads }: LeadsSectionProps) {
                   <button
                     type="button"
                     onClick={() => copyBookingLink(lead.id)}
-                    className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg border border-[#1D9E75] bg-[#E1F5EE] py-2 text-sm font-medium text-[#0F6E56] hover:bg-[#d4ede4]"
+                    className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg border border-[#305CDE] bg-[#E8EEFB] py-2 text-sm font-medium text-[#1A3FA0] hover:bg-[#dbe4fb]"
                   >
                     <Link2 className="h-4 w-4" />
                     Share booking link
@@ -161,7 +161,7 @@ export function LeadsSection({ initialLeads }: LeadsSectionProps) {
                       type="button"
                       disabled={updatingId === lead.id}
                       onClick={() => updateLeadStatus(lead.id, "accepted")}
-                      className="flex-1 rounded-lg bg-[#1D9E75] py-2 text-sm font-medium text-white hover:bg-[#0F6E56] disabled:opacity-50"
+                      className="flex-1 rounded-lg bg-[#305CDE] py-2 text-sm font-medium text-white hover:bg-[#1A3FA0] disabled:opacity-50"
                     >
                       {updatingId === lead.id ? "Saving…" : "Accept lead"}
                     </button>

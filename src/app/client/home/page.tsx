@@ -90,10 +90,12 @@ export default async function ClientHomePage() {
   const initials = getInitials(fullName);
 
   return (
-    <div className="min-h-screen bg-white pb-20">
-      <div className="mx-auto min-h-screen max-w-[480px]">
-        <header className="flex items-center justify-between bg-[#0F6E56] px-4 py-3 text-white">
-          <span className="font-medium text-[#E1F5EE]">Elev8U</span>
+    <div className="flex min-h-screen justify-center bg-gray-50">
+      <div className="relative w-full max-w-[480px] min-h-screen bg-white pb-20 shadow-sm">
+        <header className="flex items-center justify-between bg-[#1A3FA0] px-4 py-3 text-white">
+          <span className="text-base font-medium text-[#E8EEFB] sm:text-lg">
+            Elev8U
+          </span>
           <div className="flex items-center gap-3">
             <button
               type="button"
@@ -103,7 +105,7 @@ export default async function ClientHomePage() {
               <Bell className="h-5 w-5" />
             </button>
             <div
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1D9E75] text-sm font-semibold"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#305CDE] text-sm font-semibold"
               aria-label={`${fullName} avatar`}
             >
               {initials}
@@ -114,7 +116,7 @@ export default async function ClientHomePage() {
         <section
           className="px-4 pb-6 pt-6"
           style={{
-            background: "linear-gradient(180deg, #0F6E56 0%, #1D9E75 100%)",
+            background: "linear-gradient(180deg, #1A3FA0 0%, #305CDE 100%)",
           }}
         >
           <h1 className="text-2xl font-medium text-white">
@@ -137,9 +139,9 @@ export default async function ClientHomePage() {
               <Link
                 key={name}
                 href={`/client/concierge?category=${encodeURIComponent(name)}`}
-                className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
+                className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition-shadow hover:border-[#305CDE] hover:shadow-md"
               >
-                <Icon className="h-6 w-6 text-[#1D9E75]" />
+                <Icon className="h-6 w-6 text-[#305CDE]" />
                 <p className="mt-2 text-sm font-medium text-zinc-900">{name}</p>
                 <p className="mt-0.5 text-xs text-gray-400">
                   {countMap[name] ?? 0} professional
@@ -165,21 +167,21 @@ export default async function ClientHomePage() {
                   key={f.id}
                   className="flex items-center gap-3 rounded-xl border border-gray-100 bg-white p-3 shadow-sm"
                 >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E1F5EE] text-sm font-semibold text-[#0F6E56]">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E8EEFB] text-sm font-semibold text-[#1A3FA0]">
                     {getInitials(f.name)}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="font-medium text-zinc-900">{f.name}</p>
-                    <p className="text-sm text-[#0F6E56]">{f.category}</p>
+                    <p className="truncate font-medium text-zinc-900">{f.name}</p>
+                    <p className="text-sm text-[#1A3FA0]">{f.category}</p>
                     <p className="text-xs text-gray-400">{f.location}</p>
-                    <div className="mt-1 flex items-center gap-1 text-sm text-[#0F6E56]">
-                      <Star className="h-3.5 w-3.5 fill-[#1D9E75] text-[#1D9E75]" />
+                    <div className="mt-1 flex items-center gap-1 text-sm text-[#1A3FA0]">
+                      <Star className="h-3.5 w-3.5 fill-[#305CDE] text-[#305CDE]" />
                       {f.rating.toFixed(1)}
                     </div>
                   </div>
                   <Link
                     href={`/freelancer/${f.id}`}
-                    className="shrink-0 rounded-lg border border-[#1D9E75] px-3 py-1.5 text-xs font-medium text-[#1D9E75] hover:bg-[#E1F5EE]"
+                    className="shrink-0 rounded-lg border border-[#305CDE] px-3 py-1.5 text-xs font-medium text-[#305CDE] hover:bg-[#E8EEFB]"
                   >
                     View profile
                   </Link>

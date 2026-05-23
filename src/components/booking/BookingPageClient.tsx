@@ -97,9 +97,9 @@ export function BookingPageClient({
   );
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="mx-auto min-h-screen max-w-[480px]">
-        <header className="flex items-center gap-3 bg-[#0F6E56] px-4 py-3 text-white">
+    <div className="flex min-h-screen justify-center bg-gray-50">
+      <div className="w-full max-w-[600px] min-h-screen bg-white shadow-sm">
+        <header className="flex items-center gap-3 bg-[#1A3FA0] px-4 py-3 text-white">
           <Link
             href="/client/home"
             className="rounded-full p-1 hover:bg-white/10"
@@ -108,13 +108,13 @@ export function BookingPageClient({
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <h1 className="flex-1 text-base font-medium">Book a session</h1>
-          <span className="font-medium text-[#E1F5EE]">Elev8U</span>
+          <span className="font-medium text-[#E8EEFB]">Elev8U</span>
         </header>
 
         <div className="px-4 py-4">
           <article className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm">
             <div className="flex gap-3">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E1F5EE] text-sm font-semibold text-[#0F6E56]">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E8EEFB] text-sm font-semibold text-[#1A3FA0]">
                 {getInitials(freelancer.name)}
               </div>
               <div className="min-w-0 flex-1">
@@ -132,7 +132,7 @@ export function BookingPageClient({
               {lead.description}
             </p>
             <div className="mt-2 flex flex-wrap gap-2">
-              <span className="rounded-full bg-[#E1F5EE] px-2.5 py-0.5 text-xs text-[#085041]">
+              <span className="rounded-full bg-[#E8EEFB] px-2.5 py-0.5 text-xs text-[#1A3FA0]">
                 {formatBudget(lead.budget_min, lead.budget_max)}
               </span>
               {lead.timeline && (
@@ -146,39 +146,39 @@ export function BookingPageClient({
           <h2 className="mt-6 text-sm font-medium text-zinc-900">
             Choose booking type
           </h2>
-          <div className="mt-3 grid gap-3">
+          <div className="mt-3 flex flex-col gap-3 sm:flex-row">
             <button
               type="button"
               onClick={() => setBookingType("call")}
               className={cn(
-                "flex items-start gap-3 rounded-xl border-2 p-4 text-left transition-colors",
+                "flex flex-1 items-start gap-3 rounded-xl border-2 p-4 text-left transition-colors",
                 bookingType === "call"
-                  ? "border-[#1D9E75] bg-[#E1F5EE]"
+                  ? "border-[#305CDE] bg-[#E8EEFB]"
                   : "border-gray-100 bg-white"
               )}
             >
               <div className="rounded-lg bg-white p-2">
-                <Phone className="h-5 w-5 text-[#1D9E75]" />
+                <Phone className="h-5 w-5 text-[#305CDE]" />
               </div>
               <div className="flex-1">
                 <p className="font-medium text-zinc-900">Phone / Video call</p>
                 <p className="text-sm text-gray-500">30 min consultation</p>
               </div>
-              <span className="text-sm font-medium text-[#1D9E75]">Free</span>
+              <span className="text-sm font-medium text-[#305CDE]">Free</span>
             </button>
 
             <button
               type="button"
               onClick={() => setBookingType("site")}
               className={cn(
-                "flex items-start gap-3 rounded-xl border-2 p-4 text-left transition-colors",
+                "flex flex-1 items-start gap-3 rounded-xl border-2 p-4 text-left transition-colors",
                 bookingType === "site"
-                  ? "border-[#1D9E75] bg-[#E1F5EE]"
+                  ? "border-[#305CDE] bg-[#E8EEFB]"
                   : "border-gray-100 bg-white"
               )}
             >
               <div className="rounded-lg bg-white p-2">
-                <MapPin className="h-5 w-5 text-[#1D9E75]" />
+                <MapPin className="h-5 w-5 text-[#305CDE]" />
               </div>
               <div className="flex-1">
                 <p className="font-medium text-zinc-900">Site visit</p>
@@ -196,7 +196,7 @@ export function BookingPageClient({
             <CalEmbed calLink={calLink} onBookingSuccess={handleBookingSuccess} />
             {saving && (
               <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/80">
-                <Loader2 className="h-8 w-8 animate-spin text-[#1D9E75]" />
+                <Loader2 className="h-8 w-8 animate-spin text-[#305CDE]" />
               </div>
             )}
           </div>

@@ -37,10 +37,10 @@ export default function CalEmbed({ calLink, onBookingSuccess }: CalEmbedProps) {
   }, []);
 
   return (
-    <div className="relative min-h-[600px] w-full">
+    <div className="relative min-h-[400px] w-full sm:min-h-[500px]">
       {loading && (
-        <div className="absolute inset-0 z-10 flex min-h-[600px] flex-col items-center justify-center gap-3 bg-white">
-          <Loader2 className="h-8 w-8 animate-spin text-[#1D9E75]" />
+        <div className="absolute inset-0 z-10 flex min-h-[400px] flex-col items-center justify-center gap-3 bg-white sm:min-h-[500px]">
+          <Loader2 className="h-8 w-8 animate-spin text-[#305CDE]" />
           <p className="text-sm text-gray-500">Loading booking calendar...</p>
         </div>
       )}
@@ -50,7 +50,7 @@ export default function CalEmbed({ calLink, onBookingSuccess }: CalEmbedProps) {
         style={{
           width: "100%",
           height: "100%",
-          minHeight: "600px",
+          minHeight: "400px",
           overflow: "scroll",
         }}
         config={{

@@ -88,55 +88,6 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
   }, [messages, isLoading, freelancers, matchReady, scrollToBottom]);
 
   useEffect(() => {
-    if (!matchReady) return;
-    // #region agent log
-    fetch("http://127.0.0.1:7540/ingest/93bcde73-d130-4d09-99cd-abc4ba828e24", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Debug-Session-Id": "dcc49e",
-      },
-      body: JSON.stringify({
-        sessionId: "dcc49e",
-        runId: "guest-mode-debug-v2",
-        hypothesisId: "H5",
-        location: "ConciergeChat.tsx:renderButtons",
-        message: "match card button mode at render",
-        data: {
-          showGuestButtons,
-          authUser: authUser === "loading" ? "loading" : authUser ? "logged-in" : "guest",
-          fromLanding,
-          isGuestModeProp: isGuestMode,
-          freelancerCount: freelancers.length,
-        },
-        timestamp: Date.now(),
-      }),
-    }).catch(() => {});
-    // #endregion
-  }, [matchReady, showGuestButtons, authUser, fromLanding, isGuestMode, freelancers.length]);
-
-  useEffect(() => {
-    // #region agent log
-    fetch("http://127.0.0.1:7540/ingest/93bcde73-d130-4d09-99cd-abc4ba828e24", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Debug-Session-Id": "dcc49e",
-      },
-      body: JSON.stringify({
-        sessionId: "dcc49e",
-        runId: "guest-mode-debug-v2",
-        hypothesisId: "H2",
-        location: "ConciergeChat.tsx:props",
-        message: "isGuestMode prop received",
-        data: { isGuestModeProp: isGuestMode, fromLanding },
-        timestamp: Date.now(),
-      }),
-    }).catch(() => {});
-    // #endregion
-  }, [isGuestMode, fromLanding]);
-
-  useEffect(() => {
     const supabase = createClient();
 
     async function syncAuth() {
@@ -144,29 +95,6 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
         data: { user },
       } = await supabase.auth.getUser();
       setAuthUser(user ? { id: user.id } : null);
-
-      // #region agent log
-      fetch("http://127.0.0.1:7540/ingest/93bcde73-d130-4d09-99cd-abc4ba828e24", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Debug-Session-Id": "dcc49e",
-        },
-        body: JSON.stringify({
-          sessionId: "dcc49e",
-          runId: "guest-mode-debug-v2",
-          hypothesisId: "H1-H4",
-          location: "ConciergeChat.tsx:clientAuth",
-          message: "client auth sync",
-          data: {
-            clientHasUser: !!user,
-            fromLanding,
-            isGuestModeProp: isGuestMode,
-          },
-          timestamp: Date.now(),
-        }),
-      }).catch(() => {});
-      // #endregion
     }
 
     void syncAuth();
@@ -266,35 +194,10 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
         },
       ]);
 
-      console.log("[chat] matchReady:", data.matchReady);
-      console.log("[chat] freelancers:", data.freelancers);
-
       if (data.matchReady) {
         setMatchReady(true);
         if (data.matchData) setMatchData(data.matchData);
         setFreelancers(data.freelancers ?? []);
-
-        // #region agent log
-        fetch("http://127.0.0.1:7540/ingest/93bcde73-d130-4d09-99cd-abc4ba828e24", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Debug-Session-Id": "dcc49e",
-          },
-          body: JSON.stringify({
-            sessionId: "dcc49e",
-            runId: "guest-mode-debug",
-            hypothesisId: "H5",
-            location: "ConciergeChat.tsx:matchReady",
-            message: "match ready state applied",
-            data: {
-              freelancerCount: (data.freelancers ?? []).length,
-              isGuestModeProp: isGuestMode,
-            },
-            timestamp: Date.now(),
-          }),
-        }).catch(() => {});
-        // #endregion
       }
     },
     [isGuestMode]
@@ -553,7 +456,8 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
   }
 
   return (
-    <div className="flex h-dvh flex-col bg-white">
+    <div className="flex min-h-screen justify-center bg-gray-50">
+      <div className="flex h-dvh w-full max-w-[480px] flex-col bg-white shadow-sm">
       {toast && (
         <div className="fixed left-1/2 top-4 z-[100] -translate-x-1/2 rounded-full bg-zinc-900 px-4 py-2 text-sm text-white shadow-lg">
           {toast}
@@ -568,13 +472,13 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
         >
           <ArrowLeft className="h-5 w-5" />
         </Link>
-        <div>
-          <p className="font-medium">Evolute AI</p>
-          <p className="text-xs text-white/70">Powered by Claude</p>
+        <div className="min-w-0 flex-1">
+          <p className="truncate font-medium">Evolute AI</p>
+          <p className="truncate text-xs text-white/70">Powered by Claude</p>
         </div>
       </header>
 
-      <div className="mx-auto flex w-full max-w-[480px] flex-1 flex-col overflow-hidden">
+      <div className="flex flex-1 flex-col overflow-hidden">
         <div className="flex-1 space-y-4 overflow-y-auto px-4 py-4 pb-4">
           {messages.map((msg) => (
             <div
@@ -582,7 +486,7 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
               className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}
             >
               <div
-                className={`max-w-[80%] px-4 py-3 text-sm ${
+                className={`max-w-[85%] px-4 py-3 text-sm ${
                   msg.role === "user"
                     ? "rounded-2xl rounded-tr-none bg-[#305CDE] text-white"
                     : "rounded-2xl rounded-tl-none bg-gray-100 text-zinc-800"
@@ -771,6 +675,7 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 }

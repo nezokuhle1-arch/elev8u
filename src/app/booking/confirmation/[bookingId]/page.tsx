@@ -70,13 +70,13 @@ export default async function BookingConfirmationPage({
     booking.notes?.toLowerCase().includes("site") ? "Site visit" : "Phone call";
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="mx-auto min-h-screen max-w-[480px] px-4 py-10">
+    <div className="flex min-h-screen justify-center bg-gray-50">
+      <div className="w-full max-w-[600px] min-h-screen bg-white px-4 py-10 shadow-sm">
         <div className="flex flex-col items-center text-center">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#E1F5EE]">
-            <Check className="h-10 w-10 text-[#1D9E75]" strokeWidth={2.5} />
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#E8EEFB]">
+            <Check className="h-10 w-10 text-[#305CDE]" strokeWidth={2.5} />
           </div>
-          <h1 className="mt-6 text-2xl font-medium text-[#0F6E56]">
+          <h1 className="mt-6 text-2xl font-medium text-[#305CDE]">
             Booking confirmed!
           </h1>
           <p className="mt-2 text-sm text-gray-500">
@@ -110,7 +110,7 @@ export default async function BookingConfirmationPage({
         <div className="mt-6 space-y-3">
           <Link
             href="/client/bookings"
-            className="block w-full rounded-lg bg-[#1D9E75] py-3 text-center text-sm font-medium text-white hover:bg-[#0F6E56]"
+            className="block w-full rounded-lg bg-[#305CDE] py-3 text-center text-sm font-medium text-white hover:bg-[#1A3FA0]"
           >
             View my bookings
           </Link>

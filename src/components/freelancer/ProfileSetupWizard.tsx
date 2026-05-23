@@ -97,7 +97,9 @@ const PRICING_HINTS: Record<string, { oneTime: string; subscription: string }> =
 };
 
 const inputClassName =
-  "w-full rounded-lg border border-gray-200 p-3 text-sm outline-none focus:border-[#1D9E75] focus:ring-2 focus:ring-[#1D9E75]/20";
+  "w-full rounded-lg border border-gray-200 p-3 outline-none focus:border-[#305CDE] focus:ring-2 focus:ring-[#305CDE]/20";
+
+const STEP_LABELS = ["Basic info", "Bio & skills", "Pricing", "Review"];
 
 type FormData = {
   fullName: string;
@@ -348,17 +350,25 @@ export function ProfileSetupWizard() {
   }
 
   return (
-    <div className="min-h-screen bg-white px-4 py-8">
-      <div className="mx-auto max-w-2xl">
+    <div className="flex min-h-screen justify-center bg-gray-50">
+      <div className="w-full max-w-[480px] min-h-screen bg-white px-4 py-8 shadow-sm">
         {/* Progress */}
-        <div className="mb-8 flex gap-2">
+        <div className="mb-8 flex justify-between gap-1">
           {[1, 2, 3, 4].map((n) => (
-            <div
-              key={n}
-              className={`h-1.5 flex-1 rounded-full transition-colors ${
-                n <= step ? "bg-[#1D9E75]" : "bg-gray-200"
-              }`}
-            />
+            <div key={n} className="flex flex-1 flex-col items-center gap-1.5">
+              <div
+                className={`h-2.5 w-2.5 rounded-full transition-colors ${
+                  n < step
+                    ? "bg-[#1A3FA0]"
+                    : n === step
+                      ? "bg-[#305CDE]"
+                      : "bg-gray-200"
+                }`}
+              />
+              <span className="hidden min-[400px]:block text-center text-[10px] text-gray-500">
+                {STEP_LABELS[n - 1]}
+              </span>
+            </div>
           ))}
         </div>
 
@@ -452,7 +462,7 @@ export function ProfileSetupWizard() {
               />
               <p
                 className={`mt-1.5 text-sm ${
-                  bioMinMet ? "text-[#1D9E75]" : "text-zinc-500"
+                  bioMinMet ? "text-[#305CDE]" : "text-zinc-500"
                 }`}
               >
                 {form.bio.trim().length} / 50 minimum
@@ -480,7 +490,7 @@ export function ProfileSetupWizard() {
                 <button
                   type="button"
                   onClick={() => addSkill(skillInput)}
-                  className="shrink-0 rounded-lg bg-[#1D9E75] px-4 py-3 text-sm font-medium text-white hover:bg-[#0F6E56]"
+                  className="shrink-0 rounded-lg bg-[#305CDE] px-4 py-3 text-sm font-medium text-white hover:bg-[#1A3FA0]"
                 >
                   Add
                 </button>
@@ -491,13 +501,13 @@ export function ProfileSetupWizard() {
                   {form.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="inline-flex items-center gap-1 rounded-full bg-[#E1F5EE] px-3 py-1 text-sm text-[#085041]"
+                      className="inline-flex items-center gap-1 rounded-full bg-[#E8EEFB] px-3 py-1 text-sm text-[#1A3FA0]"
                     >
                       {skill}
                       <button
                         type="button"
                         onClick={() => removeSkill(skill)}
-                        className="rounded-full p-0.5 hover:bg-[#1D9E75]/20"
+                        className="rounded-full p-0.5 hover:bg-[#305CDE]/20"
                         aria-label={`Remove ${skill}`}
                       >
                         <X className="h-3.5 w-3.5" />
@@ -522,7 +532,7 @@ export function ProfileSetupWizard() {
                       type="button"
                       onClick={() => addSkill(suggestion)}
                       disabled={form.skills.includes(suggestion)}
-                      className="rounded-full border border-gray-200 px-3 py-1 text-xs text-zinc-600 hover:border-[#1D9E75] hover:text-[#1D9E75] disabled:opacity-40"
+                      className="rounded-full border border-gray-200 px-3 py-1 text-xs text-zinc-600 hover:border-[#305CDE] hover:text-[#305CDE] disabled:opacity-40"
                     >
                       + {suggestion}
                     </button>
@@ -545,10 +555,10 @@ export function ProfileSetupWizard() {
               </p>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-xl border border-gray-200 p-5">
+            <div className="flex flex-col gap-4 min-[400px]:flex-row">
+              <div className="flex-1 rounded-xl border border-gray-200 p-5">
                 <div className="mb-4 flex items-center gap-2">
-                  <Briefcase className="h-5 w-5 text-[#1D9E75]" />
+                  <Briefcase className="h-5 w-5 text-[#305CDE]" />
                   <span className="font-semibold text-zinc-900">One-time</span>
                 </div>
                 <div className="space-y-3">
@@ -590,9 +600,9 @@ export function ProfileSetupWizard() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-gray-200 p-5">
+              <div className="flex-1 rounded-xl border border-gray-200 p-5">
                 <div className="mb-4 flex items-center gap-2">
-                  <Repeat className="h-5 w-5 text-[#1D9E75]" />
+                  <Repeat className="h-5 w-5 text-[#305CDE]" />
                   <span className="font-semibold text-zinc-900">
                     Subscription
                   </span>
@@ -637,17 +647,17 @@ export function ProfileSetupWizard() {
               </div>
             </div>
 
-            <div className="flex gap-3 rounded-xl border border-[#1D9E75]/30 bg-[#E1F5EE] p-4">
-              <Sparkles className="h-5 w-5 shrink-0 text-[#1D9E75]" />
+            <div className="flex gap-3 rounded-xl border border-[#534AB7]/30 bg-[#EEEDFE] p-4">
+              <Sparkles className="h-5 w-5 shrink-0 text-[#534AB7]" />
               <div>
-                <p className="text-sm font-medium text-[#085041]">
+                <p className="text-sm font-medium text-[#26215C]">
                   AI pricing hint for {form.category || "your category"}
                 </p>
-                <p className="mt-1 text-sm text-[#085041]/80">
+                <p className="mt-1 text-sm text-[#26215C]/80">
                   One-time: {pricingHint.oneTime} · Subscription:{" "}
                   {pricingHint.subscription}
                 </p>
-                <p className="mt-1 text-xs text-[#085041]/60">
+                <p className="mt-1 text-xs text-[#26215C]/60">
                   Typical rates in South Africa — adjust based on your experience
                   and demand.
                 </p>
@@ -686,7 +696,7 @@ export function ProfileSetupWizard() {
                   {form.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full bg-[#E1F5EE] px-2.5 py-0.5 text-xs text-[#085041]"
+                      className="rounded-full bg-[#E8EEFB] px-2.5 py-0.5 text-xs text-[#1A3FA0]"
                     >
                       {skill}
                     </span>
@@ -718,12 +728,12 @@ export function ProfileSetupWizard() {
         )}
 
         {/* Navigation */}
-        <div className="mt-8 flex items-center justify-between gap-4">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           {step > 1 ? (
             <button
               type="button"
               onClick={handleBack}
-              className="inline-flex items-center gap-1 rounded-lg border border-gray-200 px-4 py-2.5 text-sm font-medium text-zinc-700 hover:bg-gray-50"
+              className="inline-flex w-full items-center justify-center gap-1 rounded-lg border border-gray-200 px-4 py-2.5 text-sm font-medium text-zinc-700 hover:bg-gray-50 sm:w-auto"
             >
               <ChevronLeft className="h-4 w-4" />
               Back
@@ -741,7 +751,7 @@ export function ProfileSetupWizard() {
                 (step === 2 && !canProceedStep2) ||
                 (step === 3 && !canProceedStep3)
               }
-              className="inline-flex items-center gap-1 rounded-lg bg-[#1D9E75] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#0F6E56] disabled:opacity-50"
+              className="inline-flex w-full items-center justify-center gap-1 rounded-lg bg-[#305CDE] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1A3FA0] disabled:opacity-50 sm:ml-auto sm:w-auto"
             >
               Continue
               <ChevronRight className="h-4 w-4" />
@@ -751,7 +761,7 @@ export function ProfileSetupWizard() {
               type="button"
               onClick={handleSubmit}
               disabled={submitting}
-              className="rounded-lg bg-[#1D9E75] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#0F6E56] disabled:opacity-50"
+              className="w-full rounded-lg bg-[#305CDE] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1A3FA0] disabled:opacity-50 sm:ml-auto sm:w-auto"
             >
               {submitting ? "Publishing…" : "Publish profile"}
             </button>

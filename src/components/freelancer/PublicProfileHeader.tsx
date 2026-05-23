@@ -47,7 +47,7 @@ export function PublicProfileHeader({ profileUrl }: PublicProfileHeaderProps) {
         >
           <ArrowLeft className="h-5 w-5" />
         </button>
-        <Link href="/" className="font-medium text-[#1D9E75]">
+        <Link href="/" className="font-medium text-[#305CDE]">
           Elev8U
         </Link>
         <button

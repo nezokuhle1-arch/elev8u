@@ -90,17 +90,17 @@ export default async function PublicFreelancerProfilePage({ params }: PageProps)
   const memberSince = formatMemberSince(freelancer.created_at);
 
   return (
-    <div className="min-h-screen bg-white pb-28">
-      <div className="mx-auto max-w-[480px]">
+    <div className="flex min-h-screen justify-center bg-gray-50">
+      <div className="w-full max-w-[700px] min-h-screen bg-white pb-20 shadow-sm">
         <PublicProfileHeader profileUrl={`/freelancer/${id}`} />
 
         {/* Hero */}
         <section className="px-4 py-8 text-center">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#E1F5EE] text-2xl font-semibold text-[#0F6E56]">
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#E8EEFB] text-2xl font-semibold text-[#1A3FA0]">
             {initials}
           </div>
           <h1 className="mt-4 text-2xl font-medium text-zinc-900">{fullName}</h1>
-          <span className="mt-2 inline-block rounded-full bg-[#E1F5EE] px-3 py-1 text-sm text-[#0F6E56]">
+          <span className="mt-2 inline-block rounded-full bg-[#E8EEFB] px-3 py-1 text-sm text-[#305CDE]">
             {freelancer.category}
           </span>
           {displayLocation && (
@@ -109,14 +109,14 @@ export default async function PublicFreelancerProfilePage({ params }: PageProps)
               {displayLocation}
             </p>
           )}
-          <div className="mt-3 flex items-center justify-center gap-1 text-sm text-[#0F6E56]">
-            <Star className="h-4 w-4 fill-[#1D9E75] text-[#1D9E75]" />
+          <div className="mt-3 flex items-center justify-center gap-1 text-sm text-[#1A3FA0]">
+            <Star className="h-4 w-4 fill-[#305CDE] text-[#305CDE]" />
             <span className="font-medium">{rating}</span>
             <span className="text-gray-400">({reviewCount} reviews)</span>
           </div>
           {freelancer.is_vetted && (
-            <span className="mt-3 inline-flex items-center gap-1 rounded-full bg-[#E1F5EE] px-3 py-1 text-xs font-medium text-[#085041]">
-              <ShieldCheck className="h-4 w-4 text-[#1D9E75]" />
+            <span className="mt-3 inline-flex items-center gap-1 rounded-full bg-[#E8EEFB] px-3 py-1 text-xs font-medium text-[#1A3FA0]">
+              <ShieldCheck className="h-4 w-4 text-[#305CDE]" />
               Verified by Elev8U
             </span>
           )}
@@ -125,17 +125,17 @@ export default async function PublicFreelancerProfilePage({ params }: PageProps)
         {/* Stats */}
         <section className="grid grid-cols-3 gap-2 px-4">
           <div className="rounded-xl bg-gray-50 p-3 text-center">
-            <p className="text-xl font-medium text-[#0F6E56]">
+            <p className="text-xl font-medium text-[#305CDE]">
               {completedJobs ?? 0}
             </p>
             <p className="mt-1 text-xs text-gray-400">Completed jobs</p>
           </div>
           <div className="rounded-xl bg-gray-50 p-3 text-center">
-            <p className="text-xl font-medium text-[#0F6E56]">{rating}</p>
+            <p className="text-xl font-medium text-[#305CDE]">{rating}</p>
             <p className="mt-1 text-xs text-gray-400">Rating</p>
           </div>
           <div className="rounded-xl bg-gray-50 p-3 text-center">
-            <p className="text-xl font-medium text-[#0F6E56]">{memberSince}</p>
+            <p className="text-xl font-medium text-[#305CDE]">{memberSince}</p>
             <p className="mt-1 text-xs text-gray-400">Member since</p>
           </div>
         </section>
@@ -158,7 +158,7 @@ export default async function PublicFreelancerProfilePage({ params }: PageProps)
               {skills!.map((s) => (
                 <span
                   key={s.skill}
-                  className="rounded-full border border-[#5DCAA5] bg-[#E1F5EE] px-3 py-1 text-xs text-[#085041]"
+                  className="rounded-full border border-[#6B8EE8] bg-[#E8EEFB] px-3 py-1 text-xs text-[#1A3FA0]"
                 >
                   {s.skill}
                 </span>
@@ -195,7 +195,7 @@ export default async function PublicFreelancerProfilePage({ params }: PageProps)
                         : "One-time"}
                     </span>
                   </div>
-                  <p className="shrink-0 font-medium text-[#0F6E56]">
+                  <p className="shrink-0 font-medium text-[#1A3FA0]">
                     R{Number(tier.price)}
                     {tier.type === "subscription" ? "/mo" : ""}
                   </p>

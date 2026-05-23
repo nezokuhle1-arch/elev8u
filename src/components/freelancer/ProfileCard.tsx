@@ -20,14 +20,14 @@ export function ProfileCard({
           <p className="text-sm text-zinc-600">{profile.location}</p>
           <p className="mt-2 text-sm text-zinc-700">{profile.bio}</p>
           {profile.is_vetted && (
-            <span className="mt-2 inline-block rounded-full bg-[#E1F5EE] px-2 py-0.5 text-xs font-medium text-[#1D9E75]">
+            <span className="mt-2 inline-block rounded-full bg-[#E8EEFB] px-2 py-0.5 text-xs font-medium text-[#305CDE]">
               Vetted
             </span>
           )}
           {showViewProfile && (
             <Link
               href={`/freelancer/${profile.id}`}
-              className="mt-3 inline-block rounded-lg border border-[#1D9E75] px-3 py-1.5 text-xs font-medium text-[#1D9E75] hover:bg-[#E1F5EE]"
+              className="mt-3 inline-block rounded-lg border border-[#305CDE] px-3 py-1.5 text-xs font-medium text-[#305CDE] hover:bg-[#E8EEFB]"
             >
               View profile
             </Link>

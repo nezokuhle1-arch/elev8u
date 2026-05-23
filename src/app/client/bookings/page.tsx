@@ -29,9 +29,9 @@ export default async function ClientBookingsPage() {
 
   return (
     <div className="min-h-screen bg-white pb-20">
-      <div className="mx-auto min-h-screen max-w-[480px]">
-        <header className="flex items-center justify-between bg-[#0F6E56] px-4 py-3 text-white">
-          <span className="font-medium text-[#E1F5EE]">Elev8U</span>
+      <div className="mx-auto w-full min-h-screen max-w-[480px]">
+        <header className="flex items-center justify-between bg-[#1A3FA0] px-4 py-3 text-white">
+          <span className="font-medium text-[#E8EEFB]">Elev8U</span>
           <div className="flex items-center gap-3">
             <button
               type="button"
@@ -41,7 +41,7 @@ export default async function ClientBookingsPage() {
               <Bell className="h-5 w-5" />
             </button>
             <div
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1D9E75] text-sm font-semibold"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#305CDE] text-sm font-semibold"
               aria-label={`${fullName} avatar`}
             >
               {initials}
@@ -50,7 +50,7 @@ export default async function ClientBookingsPage() {
         </header>
 
         <div className="flex flex-col items-center px-4 py-16 text-center">
-          <Calendar className="h-16 w-16 text-[#1D9E75]" strokeWidth={1.5} />
+          <Calendar className="h-16 w-16 text-[#305CDE]" strokeWidth={1.5} />
           <h1 className="mt-6 text-xl font-medium text-zinc-900">
             Your bookings
           </h1>
@@ -59,7 +59,7 @@ export default async function ClientBookingsPage() {
           </p>
           <Link
             href="/client/home"
-            className="mt-8 rounded-lg bg-[#1D9E75] px-6 py-3 text-sm font-medium text-white hover:bg-[#0F6E56]"
+            className="mt-8 rounded-lg bg-[#305CDE] px-6 py-3 text-sm font-medium text-white hover:bg-[#1A3FA0]"
           >
             Find a professional
           </Link>

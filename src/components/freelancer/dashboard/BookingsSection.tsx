@@ -17,7 +17,7 @@ export function BookingsSection({ bookings }: BookingsSectionProps) {
     <section id="bookings" className="px-4 py-4">
       <div className="mb-3 flex items-center justify-between">
         <h2 className="font-semibold text-zinc-900">Upcoming bookings</h2>
-        <a href="#bookings" className="text-sm font-medium text-[#1D9E75]">
+        <a href="#bookings" className="text-sm font-medium text-[#305CDE]">
           Calendar
         </a>
       </div>
@@ -40,11 +40,11 @@ export function BookingsSection({ bookings }: BookingsSectionProps) {
                 key={booking.id}
                 className="flex gap-3 rounded-xl border border-gray-100 bg-white p-3"
               >
-                <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-lg bg-[#E1F5EE]">
-                  <span className="text-xl font-semibold leading-none text-[#085041]">
+                <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-lg bg-[#E8EEFB]">
+                  <span className="text-xl font-semibold leading-none text-[#1A3FA0]">
                     {day}
                   </span>
-                  <span className="mt-0.5 text-xs uppercase text-[#0F6E56]">
+                  <span className="mt-0.5 text-xs uppercase text-[#1A3FA0]">
                     {month}
                   </span>
                 </div>

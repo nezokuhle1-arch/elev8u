@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 const inputClassName =
-  "w-full rounded-lg border border-gray-200 p-3 text-sm outline-none focus:border-[#1D9E75] focus:ring-2 focus:ring-[#1D9E75]/20";
+  "w-full rounded-lg border border-gray-200 p-3 text-sm outline-none focus:border-[#305CDE] focus:ring-2 focus:ring-[#305CDE]/20";
 
 export function LoginForm() {
   const router = useRouter();
@@ -62,8 +62,8 @@ export function LoginForm() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-white px-4">
-      <div className="w-full max-w-[400px]">
-        <p className="text-center text-2xl font-bold text-[#1D9E75]">Elev8U</p>
+      <div className="w-full sm:max-w-md">
+        <p className="text-center text-2xl font-bold text-[#305CDE]">Elev8U</p>
         <h1 className="mt-6 text-center text-2xl font-bold text-zinc-900">
           Welcome back
         </h1>
@@ -120,7 +120,7 @@ export function LoginForm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-[#1D9E75] p-3 font-medium text-white hover:bg-[#0F6E56] disabled:opacity-60"
+            className="w-full rounded-lg bg-[#305CDE] p-3 font-medium text-white hover:bg-[#1A3FA0] disabled:opacity-60"
           >
             {loading ? "Signing in…" : "Sign in"}
           </button>
@@ -128,7 +128,7 @@ export function LoginForm() {
 
         <p className="mt-6 text-center text-sm text-zinc-600">
           Don&apos;t have an account?{" "}
-          <Link href="/signup" className="font-medium text-[#1D9E75]">
+          <Link href="/signup" className="font-medium text-[#305CDE]">
             Sign up
           </Link>
         </p>

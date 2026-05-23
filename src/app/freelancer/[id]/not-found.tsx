@@ -15,7 +15,7 @@ export default function FreelancerNotFound() {
           </p>
           <Link
             href="/client/home"
-            className="mt-6 inline-block rounded-lg bg-[#1D9E75] px-6 py-3 text-sm font-medium text-white hover:bg-[#0F6E56]"
+            className="mt-6 inline-block rounded-lg bg-[#305CDE] px-6 py-3 text-sm font-medium text-white hover:bg-[#1A3FA0]"
           >
             Find a professional
           </Link>

@@ -9,7 +9,7 @@ import { FormEvent, useState } from "react";
 type Role = "freelancer" | "client";
 
 const inputClassName =
-  "w-full rounded-lg border border-gray-200 p-3 text-sm outline-none focus:border-[#1D9E75] focus:ring-2 focus:ring-[#1D9E75]/20";
+  "w-full rounded-lg border border-gray-200 p-3 text-sm outline-none focus:border-[#305CDE] focus:ring-2 focus:ring-[#305CDE]/20";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -63,24 +63,24 @@ export default function SignupPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-white px-4">
-      <div className="w-full max-w-[400px]">
-        <p className="text-center text-2xl font-bold text-[#1D9E75]">Elev8U</p>
+      <div className="w-full sm:max-w-md">
+        <p className="text-center text-2xl font-bold text-[#305CDE]">Elev8U</p>
         <h1 className="mt-6 text-center text-2xl font-bold text-zinc-900">
           Create your account
         </h1>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="flex flex-col gap-3 sm:flex-row">
             <button
               type="button"
               onClick={() => setRole("freelancer")}
-              className={`rounded-lg border-2 p-4 text-left transition-colors ${
+              className={`w-full rounded-lg border-2 p-4 text-left transition-colors sm:flex-1 ${
                 role === "freelancer"
-                  ? "border-[#1D9E75] bg-[#E1F5EE]"
+                  ? "border-[#305CDE] bg-[#E8EEFB]"
                   : "border-gray-200 bg-white hover:border-gray-300"
               }`}
             >
-              <Briefcase className="h-6 w-6 text-[#1D9E75]" />
+              <Briefcase className="h-6 w-6 text-[#305CDE]" />
               <p className="mt-2 font-semibold text-zinc-900">
                 I&apos;m a Freelancer
               </p>
@@ -91,13 +91,13 @@ export default function SignupPage() {
             <button
               type="button"
               onClick={() => setRole("client")}
-              className={`rounded-lg border-2 p-4 text-left transition-colors ${
+              className={`w-full rounded-lg border-2 p-4 text-left transition-colors sm:flex-1 ${
                 role === "client"
-                  ? "border-[#1D9E75] bg-[#E1F5EE]"
+                  ? "border-[#305CDE] bg-[#E8EEFB]"
                   : "border-gray-200 bg-white hover:border-gray-300"
               }`}
             >
-              <Search className="h-6 w-6 text-[#1D9E75]" />
+              <Search className="h-6 w-6 text-[#305CDE]" />
               <p className="mt-2 font-semibold text-zinc-900">
                 I&apos;m looking for a Pro
               </p>
@@ -174,7 +174,7 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-[#1D9E75] p-3 font-medium text-white hover:bg-[#0F6E56] disabled:opacity-60"
+            className="w-full rounded-lg bg-[#305CDE] p-3 font-medium text-white hover:bg-[#1A3FA0] disabled:opacity-60"
           >
             {loading ? "Creating account…" : "Create account"}
           </button>
@@ -182,7 +182,7 @@ export default function SignupPage() {
 
         <p className="mt-6 text-center text-sm text-zinc-600">
           Already have an account?{" "}
-          <Link href="/login" className="font-medium text-[#1D9E75]">
+          <Link href="/login" className="font-medium text-[#305CDE]">
             Sign in
           </Link>
         </p>

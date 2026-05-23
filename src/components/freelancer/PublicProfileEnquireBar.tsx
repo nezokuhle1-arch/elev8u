@@ -50,14 +50,14 @@ export function PublicProfileEnquireBar({
         <div className="mx-auto flex max-w-[480px] items-center justify-between gap-4">
           <div>
             <p className="text-sm text-gray-500">From</p>
-            <p className="font-medium text-[#0F6E56]">
+            <p className="font-medium text-[#1A3FA0]">
               {lowestPrice != null ? `R${lowestPrice}` : "Contact for quote"}
             </p>
           </div>
           <button
             type="button"
             onClick={handleEnquire}
-            className="rounded-xl bg-[#1D9E75] px-6 py-3 font-medium text-white hover:bg-[#0F6E56]"
+            className="rounded-xl bg-[#305CDE] px-6 py-3 font-medium text-white hover:bg-[#1A3FA0]"
           >
             Send enquiry
           </button>

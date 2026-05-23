@@ -140,11 +140,13 @@ export default async function FreelancerDashboardPage() {
   const rating = Number(freelancerProfile.rating ?? 0).toFixed(1);
 
   return (
-    <div className="min-h-screen bg-white pb-24">
-      <div className="mx-auto min-h-screen max-w-[480px]">
+    <div className="flex min-h-screen justify-center bg-gray-50">
+      <div className="relative w-full max-w-[480px] min-h-screen bg-white pb-24 shadow-sm">
         {/* Header */}
-        <header className="flex items-center justify-between bg-[#0F6E56] px-4 py-3 text-white">
-          <span className="font-medium text-[#E1F5EE]">Elev8U</span>
+        <header className="flex items-center justify-between bg-[#1A3FA0] px-4 py-3 text-white">
+          <span className="text-base font-medium text-[#E8EEFB] sm:text-lg">
+            Elev8U
+          </span>
           <div className="flex items-center gap-3">
             <button
               type="button"
@@ -154,7 +156,7 @@ export default async function FreelancerDashboardPage() {
               <Bell className="h-5 w-5" />
             </button>
             <div
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1D9E75] text-sm font-semibold"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#305CDE] text-sm font-semibold"
               aria-label={`${fullName} avatar`}
             >
               {initials}
@@ -163,12 +165,12 @@ export default async function FreelancerDashboardPage() {
         </header>
 
         {/* Hero */}
-        <section className="bg-[#E1F5EE] px-4 py-5">
+        <section className="bg-[#E8EEFB] px-4 py-5">
           {freelancerProfile.is_vetted ? (
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/80 px-2.5 py-1 text-xs font-medium text-[#085041]">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#305CDE] px-2.5 py-1 text-xs font-medium text-white">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1D9E75] opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#1D9E75]" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
               </span>
               Profile live
             </span>
@@ -177,14 +179,14 @@ export default async function FreelancerDashboardPage() {
               <span className="inline-flex rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-800">
                 Pending review
               </span>
-              <p className="mt-2 text-xs text-[#0F6E56]/80">
+              <p className="mt-2 text-xs text-[#1A3FA0]/80">
                 Your profile is under review. Leads are still visible to you.
               </p>
             </div>
           )}
 
-          <h1 className="mt-3 text-2xl font-bold text-[#085041]">{fullName}</h1>
-          <p className="mt-1 text-sm text-[#0F6E56]">
+          <h1 className="mt-3 text-2xl font-bold text-[#1A3FA0]">{fullName}</h1>
+          <p className="mt-1 text-sm text-[#305CDE]">
             {freelancerProfile.category} · {freelancerProfile.location}
           </p>
         </section>
@@ -192,19 +194,21 @@ export default async function FreelancerDashboardPage() {
         {/* Stats */}
         <section className="grid grid-cols-3 gap-2 px-4 py-4">
           <div className="rounded-lg bg-gray-50 p-3 text-center">
-            <p className="text-2xl font-medium text-[#0F6E56]">
+            <p className="text-lg font-medium text-[#305CDE] sm:text-2xl">
               {pendingLeadsCount ?? 0}
             </p>
             <p className="mt-1 text-xs text-gray-400">New leads</p>
           </div>
           <div className="rounded-lg bg-gray-50 p-3 text-center">
-            <p className="text-2xl font-medium text-[#0F6E56]">
+            <p className="text-lg font-medium text-[#305CDE] sm:text-2xl">
               {upcomingBookingsCount ?? 0}
             </p>
             <p className="mt-1 text-xs text-gray-400">Bookings</p>
           </div>
           <div className="rounded-lg bg-gray-50 p-3 text-center">
-            <p className="text-2xl font-medium text-[#0F6E56]">{rating}</p>
+            <p className="text-lg font-medium text-[#305CDE] sm:text-2xl">
+              {rating}
+            </p>
             <p className="mt-1 text-xs text-gray-400">Rating</p>
           </div>
         </section>

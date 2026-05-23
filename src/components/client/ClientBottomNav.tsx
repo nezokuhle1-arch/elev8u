@@ -33,10 +33,10 @@ export function ClientBottomNav() {
               href={href}
               className={cn(
                 "flex flex-col items-center gap-0.5 px-3 py-1 text-[10px] font-medium",
-                isActive ? "text-[#1D9E75]" : "text-gray-400"
+                isActive ? "text-[#305CDE]" : "text-gray-400"
               )}
             >
-              <Icon className="h-5 w-5" />
+              <Icon className="h-[20px] w-[20px]" />
               {label}
             </Link>
           );
