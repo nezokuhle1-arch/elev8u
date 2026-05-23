@@ -6,7 +6,7 @@ export default function ConciergePage() {
     <Suspense
       fallback={
         <div className="flex h-dvh items-center justify-center bg-white">
-          <p className="text-zinc-600">Loading assistant…</p>
+          <p className="text-zinc-600">Loading Evolute AI…</p>
         </div>
       }
     >

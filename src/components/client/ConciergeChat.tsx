@@ -20,7 +20,7 @@ type ChatMessage = {
 };
 
 const OPENING_MESSAGE =
-  "Hi! 👋 I'm your Elev8U assistant. I'll help you find the perfect local professional. What kind of service are you looking for today?";
+  "Hi! 👋 I'm Evolute AI, your intelligent matching assistant. I'll help you find the perfect local professional in seconds. What do you need help with today?";
 
 function formatTime(date: Date) {
   return date.toLocaleTimeString("en-ZA", {
@@ -420,8 +420,8 @@ export function ConciergeChat() {
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <div>
-          <p className="font-medium">Elev8U Assistant</p>
-          <p className="text-xs text-white/70">AI-powered matching</p>
+          <p className="font-medium">Evolute AI</p>
+          <p className="text-xs text-white/70">Powered by Claude</p>
         </div>
       </header>
 
