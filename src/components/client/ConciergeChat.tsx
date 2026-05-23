@@ -36,7 +36,11 @@ type ConciergeApiBody = {
   freelancerId: string;
 };
 
-export function ConciergeChat() {
+type ConciergeChatProps = {
+  isGuestMode?: boolean;
+};
+
+export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -50,6 +54,10 @@ export function ConciergeChat() {
   const [freelancers, setFreelancers] = useState<MatchedFreelancer[]>([]);
   const [enquirySent, setEnquirySent] = useState<Record<string, boolean>>({});
   const [enquiryLoading, setEnquiryLoading] = useState<string | null>(null);
+  const [loadingProfile, setLoadingProfile] = useState<string | null>(null);
+  const [signupOverlayFreelancerId, setSignupOverlayFreelancerId] = useState<
+    string | null
+  >(null);
   const [userLocation, setUserLocation] = useState("");
   const [toast, setToast] = useState<string | null>(null);
 
@@ -71,6 +79,8 @@ export function ConciergeChat() {
   }, [messages, isLoading, freelancers, matchReady, scrollToBottom]);
 
   useEffect(() => {
+    if (isGuestMode) return;
+
     async function loadProfile() {
       const supabase = createClient();
       const {
@@ -101,7 +111,7 @@ export function ConciergeChat() {
       if (profile?.location) setUserLocation(profile.location);
     }
     loadProfile();
-  }, [router, showToast]);
+  }, [router, showToast, isGuestMode]);
 
   const callConciergeApi = useCallback(
     async (apiMessages: { role: "user" | "assistant"; content: string }[], category: string) => {
@@ -217,7 +227,7 @@ export function ConciergeChat() {
         data: { user },
       } = await supabase.auth.getUser();
 
-      if (!user) return;
+      if (!user && !isGuestMode) return;
 
       if (messageParam) {
         const userMsg: ChatMessage = {
@@ -337,7 +347,13 @@ export function ConciergeChat() {
     freelancerIdParam,
     callConciergeApi,
     applyApiResponse,
+    isGuestMode,
   ]);
+
+  function handleViewProfile(freelancerId: string) {
+    setLoadingProfile(freelancerId);
+    router.push(`/freelancer/${freelancerId}`);
+  }
 
   async function handleSendEnquiry(freelancer: MatchedFreelancer) {
     if (!matchData) {
@@ -421,7 +437,7 @@ export function ConciergeChat() {
 
       <header className="flex shrink-0 items-center gap-3 bg-gradient-to-r from-[#1A3FA0] to-[#305CDE] px-4 py-3 text-white">
         <Link
-          href="/client/home"
+          href={isGuestMode ? "/" : "/client/home"}
           className="rounded-full p-1 hover:bg-white/10"
           aria-label="Back"
         >
@@ -474,7 +490,7 @@ export function ConciergeChat() {
                 {freelancers.map((f) => (
                   <div
                     key={f.id}
-                    className="rounded-xl border border-gray-100 bg-white p-3"
+                    className="relative rounded-xl border border-gray-100 bg-white p-3"
                   >
                     <div className="flex gap-3">
                       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E8EEFB] text-sm font-semibold text-[#305CDE]">
@@ -498,28 +514,85 @@ export function ConciergeChat() {
                         </div>
                       </div>
                     </div>
-                    <div className="mt-3 flex gap-2">
-                      <Link
-                        href={`/freelancer/${f.id}`}
-                        className="flex-1 rounded-lg border border-[#305CDE] py-2 text-center text-sm font-medium text-[#305CDE] hover:bg-[#E8EEFB]"
-                      >
-                        View profile
-                      </Link>
+
+                    {isGuestMode ? (
                       <button
                         type="button"
-                        disabled={
-                          enquiryLoading === f.id || enquirySent[f.id]
-                        }
-                        onClick={() => handleSendEnquiry(f)}
-                        className="flex-1 rounded-lg bg-[#305CDE] py-2 text-sm font-medium text-white hover:bg-[#1A3FA0] disabled:opacity-60"
+                        onClick={() => setSignupOverlayFreelancerId(f.id)}
+                        className="mt-3 w-full rounded-xl bg-[#305CDE] py-2.5 text-sm font-medium text-white hover:bg-[#1A3FA0]"
                       >
-                        {enquirySent[f.id]
-                          ? "Enquiry sent ✓"
-                          : enquiryLoading === f.id
-                            ? "Sending…"
-                            : "Send enquiry"}
+                        Continue →
                       </button>
-                    </div>
+                    ) : (
+                      <div className="mt-3 flex gap-2">
+                        <button
+                          type="button"
+                          disabled={loadingProfile === f.id}
+                          onClick={() => handleViewProfile(f.id)}
+                          className="flex flex-1 items-center justify-center rounded-lg border border-[#305CDE] py-2 text-sm font-medium text-[#305CDE] hover:bg-[#E8EEFB] disabled:opacity-60"
+                        >
+                          {loadingProfile === f.id ? (
+                            <span className="flex items-center gap-2">
+                              <span className="h-3 w-3 animate-spin rounded-full border-2 border-[#305CDE] border-t-transparent" />
+                              Loading profile...
+                            </span>
+                          ) : (
+                            "View profile"
+                          )}
+                        </button>
+                        <button
+                          type="button"
+                          disabled={
+                            enquiryLoading === f.id || enquirySent[f.id]
+                          }
+                          onClick={() => handleSendEnquiry(f)}
+                          className="flex-1 rounded-lg bg-[#305CDE] py-2 text-sm font-medium text-white hover:bg-[#1A3FA0] disabled:opacity-60"
+                        >
+                          {enquirySent[f.id]
+                            ? "Enquiry sent ✓"
+                            : enquiryLoading === f.id
+                              ? "Sending…"
+                              : "Send enquiry"}
+                        </button>
+                      </div>
+                    )}
+
+                    {isGuestMode && signupOverlayFreelancerId === f.id && (
+                      <div className="absolute inset-0 z-20 flex flex-col items-center justify-center rounded-2xl bg-[#0A1628]/95 p-6 text-center backdrop-blur-sm">
+                        <span className="mb-3 text-4xl">🎉</span>
+                        <p className="mb-2 text-lg font-bold text-white">
+                          Your match is ready!
+                        </p>
+                        <p className="mb-6 text-sm text-white/60">
+                          Create your free Elev8U account to connect with{" "}
+                          {f.name} and get started.
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => router.push("/signup")}
+                          className="w-full rounded-xl bg-[#305CDE] py-3 font-semibold text-white hover:bg-[#1A3FA0]"
+                        >
+                          Create free account →
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => router.push("/login")}
+                          className="mt-3 cursor-pointer text-sm text-[#6B8EE8]"
+                        >
+                          Sign in instead
+                        </button>
+                        <p className="mt-4 text-xs text-white/25">
+                          Free to join · No credit card required
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => setSignupOverlayFreelancerId(null)}
+                          className="mt-3 text-xs text-white/40 hover:text-white/60"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

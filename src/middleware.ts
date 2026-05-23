@@ -5,7 +5,6 @@ const PROTECTED_ROUTES = [
   "/freelancer/dashboard",
   "/freelancer/profile/setup",
   "/client/home",
-  "/client/concierge",
   "/client/bookings",
 ];
 

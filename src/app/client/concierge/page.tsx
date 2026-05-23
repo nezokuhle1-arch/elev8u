@@ -1,7 +1,15 @@
 import { ConciergeChat } from "@/components/client/ConciergeChat";
+import { createClient } from "@/lib/supabase/server";
 import { Suspense } from "react";
 
-export default function ConciergePage() {
+export default async function ConciergePage() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const isGuestMode = !user;
+
   return (
     <Suspense
       fallback={
@@ -15,7 +23,7 @@ export default function ConciergePage() {
         </div>
       }
     >
-      <ConciergeChat />
+      <ConciergeChat isGuestMode={isGuestMode} />
     </Suspense>
   );
 }
