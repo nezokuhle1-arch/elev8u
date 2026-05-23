@@ -15,7 +15,7 @@ export function EvoluteInputBarInner() {
     if (!message.trim()) return;
     setLoading(true);
     await new Promise((r) => setTimeout(r, 1800));
-    const href = `/client/concierge?message=${encodeURIComponent(message.trim())}`;
+    const href = `/client/concierge?guest=1&message=${encodeURIComponent(message.trim())}`;
     startTransition(() => {
       router.push(href);
     });

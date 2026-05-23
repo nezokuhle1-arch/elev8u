@@ -60,10 +60,19 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
   >(null);
   const [userLocation, setUserLocation] = useState("");
   const [toast, setToast] = useState<string | null>(null);
+  const [authUser, setAuthUser] = useState<"loading" | null | { id: string }>(
+    "loading"
+  );
 
   const categoryParam = searchParams.get("category") ?? "";
   const messageParam = searchParams.get("message") ?? "";
   const freelancerIdParam = searchParams.get("freelancer_id") ?? "";
+  const fromLanding = searchParams.get("guest") === "1";
+
+  const showGuestButtons =
+    authUser === "loading"
+      ? fromLanding || isGuestMode
+      : authUser === null;
 
   const showToast = useCallback((message: string) => {
     setToast(message);
@@ -79,7 +88,100 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
   }, [messages, isLoading, freelancers, matchReady, scrollToBottom]);
 
   useEffect(() => {
-    if (isGuestMode) return;
+    if (!matchReady) return;
+    // #region agent log
+    fetch("http://127.0.0.1:7540/ingest/93bcde73-d130-4d09-99cd-abc4ba828e24", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Debug-Session-Id": "dcc49e",
+      },
+      body: JSON.stringify({
+        sessionId: "dcc49e",
+        runId: "guest-mode-debug-v2",
+        hypothesisId: "H5",
+        location: "ConciergeChat.tsx:renderButtons",
+        message: "match card button mode at render",
+        data: {
+          showGuestButtons,
+          authUser: authUser === "loading" ? "loading" : authUser ? "logged-in" : "guest",
+          fromLanding,
+          isGuestModeProp: isGuestMode,
+          freelancerCount: freelancers.length,
+        },
+        timestamp: Date.now(),
+      }),
+    }).catch(() => {});
+    // #endregion
+  }, [matchReady, showGuestButtons, authUser, fromLanding, isGuestMode, freelancers.length]);
+
+  useEffect(() => {
+    // #region agent log
+    fetch("http://127.0.0.1:7540/ingest/93bcde73-d130-4d09-99cd-abc4ba828e24", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Debug-Session-Id": "dcc49e",
+      },
+      body: JSON.stringify({
+        sessionId: "dcc49e",
+        runId: "guest-mode-debug-v2",
+        hypothesisId: "H2",
+        location: "ConciergeChat.tsx:props",
+        message: "isGuestMode prop received",
+        data: { isGuestModeProp: isGuestMode, fromLanding },
+        timestamp: Date.now(),
+      }),
+    }).catch(() => {});
+    // #endregion
+  }, [isGuestMode, fromLanding]);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    async function syncAuth() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setAuthUser(user ? { id: user.id } : null);
+
+      // #region agent log
+      fetch("http://127.0.0.1:7540/ingest/93bcde73-d130-4d09-99cd-abc4ba828e24", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Debug-Session-Id": "dcc49e",
+        },
+        body: JSON.stringify({
+          sessionId: "dcc49e",
+          runId: "guest-mode-debug-v2",
+          hypothesisId: "H1-H4",
+          location: "ConciergeChat.tsx:clientAuth",
+          message: "client auth sync",
+          data: {
+            clientHasUser: !!user,
+            fromLanding,
+            isGuestModeProp: isGuestMode,
+          },
+          timestamp: Date.now(),
+        }),
+      }).catch(() => {});
+      // #endregion
+    }
+
+    void syncAuth();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setAuthUser(session?.user ? { id: session.user.id } : null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [fromLanding, isGuestMode]);
+
+  useEffect(() => {
+    if (authUser === "loading" || authUser === null) return;
 
     async function loadProfile() {
       const supabase = createClient();
@@ -111,7 +213,7 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
       if (profile?.location) setUserLocation(profile.location);
     }
     loadProfile();
-  }, [router, showToast, isGuestMode]);
+  }, [router, showToast, authUser]);
 
   const callConciergeApi = useCallback(
     async (apiMessages: { role: "user" | "assistant"; content: string }[], category: string) => {
@@ -171,9 +273,31 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
         setMatchReady(true);
         if (data.matchData) setMatchData(data.matchData);
         setFreelancers(data.freelancers ?? []);
+
+        // #region agent log
+        fetch("http://127.0.0.1:7540/ingest/93bcde73-d130-4d09-99cd-abc4ba828e24", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Debug-Session-Id": "dcc49e",
+          },
+          body: JSON.stringify({
+            sessionId: "dcc49e",
+            runId: "guest-mode-debug",
+            hypothesisId: "H5",
+            location: "ConciergeChat.tsx:matchReady",
+            message: "match ready state applied",
+            data: {
+              freelancerCount: (data.freelancers ?? []).length,
+              isGuestModeProp: isGuestMode,
+            },
+            timestamp: Date.now(),
+          }),
+        }).catch(() => {});
+        // #endregion
       }
     },
-    []
+    [isGuestMode]
   );
 
   const sendToApi = useCallback(
@@ -227,7 +351,7 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
         data: { user },
       } = await supabase.auth.getUser();
 
-      if (!user && !isGuestMode) return;
+      if (!user && !fromLanding && !isGuestMode) return;
 
       if (messageParam) {
         const userMsg: ChatMessage = {
@@ -348,6 +472,7 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
     callConciergeApi,
     applyApiResponse,
     isGuestMode,
+    fromLanding,
   ]);
 
   function handleViewProfile(freelancerId: string) {
@@ -437,7 +562,7 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
 
       <header className="flex shrink-0 items-center gap-3 bg-gradient-to-r from-[#1A3FA0] to-[#305CDE] px-4 py-3 text-white">
         <Link
-          href={isGuestMode ? "/" : "/client/home"}
+          href={showGuestButtons ? "/" : "/client/home"}
           className="rounded-full p-1 hover:bg-white/10"
           aria-label="Back"
         >
@@ -515,7 +640,7 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
                       </div>
                     </div>
 
-                    {isGuestMode ? (
+                    {showGuestButtons ? (
                       <button
                         type="button"
                         onClick={() => setSignupOverlayFreelancerId(f.id)}
@@ -557,7 +682,7 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
                       </div>
                     )}
 
-                    {isGuestMode && signupOverlayFreelancerId === f.id && (
+                    {showGuestButtons && signupOverlayFreelancerId === f.id && (
                       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center rounded-2xl bg-[#0A1628]/95 p-6 text-center backdrop-blur-sm">
                         <span className="mb-3 text-4xl">🎉</span>
                         <p className="mb-2 text-lg font-bold text-white">
