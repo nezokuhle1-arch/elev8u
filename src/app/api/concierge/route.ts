@@ -210,29 +210,18 @@ export async function POST(request: Request) {
     const matchData = parseMatchReady(rawText);
 
     if (matchData) {
-      console.log("[concierge] MATCH_READY detected", matchData);
       let freelancers: MatchedFreelancer[] = [];
 
       if (freelancerId) {
         const pinned = await fetchFreelancerById(freelancerId);
         if (pinned) {
           freelancers = [pinned];
-          console.log(
-            "[concierge] MATCH_READY — pinned freelancer_profiles.id:",
-            pinned.id
-          );
         } else {
-          console.warn(
-            "[concierge] freelancerId not found, falling back to search:",
-            freelancerId
-          );
           freelancers = await fetchMatchedFreelancers(matchData, category);
         }
       } else {
         freelancers = await fetchMatchedFreelancers(matchData, category);
       }
-
-      console.log("[concierge] matched freelancers:", freelancers);
 
       const message =
         stripMatchReadyBlock(rawText) || "I found a great match for you!";

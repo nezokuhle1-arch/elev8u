@@ -430,12 +430,6 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
       status: "pending" as const,
     };
 
-    console.log("[concierge] Inserting lead:", {
-      client_id: leadPayload.client_id,
-      freelancer_id: leadPayload.freelancer_id,
-      idsAreDifferent: leadPayload.client_id !== leadPayload.freelancer_id,
-    });
-
     const { error } = await supabase.from("leads").insert(leadPayload);
 
     setEnquiryLoading(null);

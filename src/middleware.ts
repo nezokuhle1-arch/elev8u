@@ -52,18 +52,16 @@ export async function middleware(request: NextRequest) {
   const isAdminRoute = pathname.startsWith("/admin");
 
   if ((isProtected || isBookingRoute) && !user) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    url.searchParams.set("redirectTo", redirectTarget);
-    return NextResponse.redirect(url);
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set("redirectTo", redirectTarget);
+    return NextResponse.redirect(loginUrl);
   }
 
   if (isAdminRoute) {
     if (!user) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/login";
-      url.searchParams.set("redirectTo", redirectTarget);
-      return NextResponse.redirect(url);
+      const loginUrl = new URL("/login", request.url);
+      loginUrl.searchParams.set("redirectTo", redirectTarget);
+      return NextResponse.redirect(loginUrl);
     }
 
     const { data: profile } = await supabase
@@ -73,10 +71,9 @@ export async function middleware(request: NextRequest) {
       .single();
 
     if (profile?.role !== "admin") {
-      const url = request.nextUrl.clone();
-      url.pathname = "/login";
-      url.searchParams.set("redirectTo", redirectTarget);
-      return NextResponse.redirect(url);
+      const loginUrl = new URL("/login", request.url);
+      loginUrl.searchParams.set("redirectTo", redirectTarget);
+      return NextResponse.redirect(loginUrl);
     }
   }
 
@@ -85,6 +82,10 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/freelancer/:path*",
+    "/client/:path*",
+    "/admin/:path*",
+    "/booking/:path*",
+    "/reset-password",
   ],
 };
