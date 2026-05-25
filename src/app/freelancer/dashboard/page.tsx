@@ -4,6 +4,7 @@ import {
   LeadsSection,
   type DashboardLead,
 } from "@/components/freelancer/dashboard/LeadsSection";
+import { ProfileDropdown } from "@/components/freelancer/ProfileDropdown";
 import { getInitials } from "@/lib/format";
 import { createClient } from "@/lib/supabase/server";
 import { Bell } from "lucide-react";
@@ -155,12 +156,7 @@ export default async function FreelancerDashboardPage() {
             >
               <Bell className="h-5 w-5" />
             </button>
-            <div
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#305CDE] text-sm font-semibold"
-              aria-label={`${fullName} avatar`}
-            >
-              {initials}
-            </div>
+            <ProfileDropdown initials={initials} />
           </div>
         </header>
 

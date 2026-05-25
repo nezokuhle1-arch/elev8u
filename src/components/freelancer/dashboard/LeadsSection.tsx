@@ -78,17 +78,12 @@ export function LeadsSection({ initialLeads }: LeadsSectionProps) {
 
       <div className="mb-3 flex items-center justify-between">
         <h2 className="font-semibold text-zinc-900">New leads</h2>
-        <button
-          type="button"
+        <a
+          href="/freelancer/leads"
           className="text-sm font-medium text-[#305CDE]"
-          onClick={() => {
-            document
-              .getElementById("leads")
-              ?.scrollIntoView({ behavior: "smooth" });
-          }}
         >
           View all
-        </button>
+        </a>
       </div>
 
       {leads.length === 0 ? (

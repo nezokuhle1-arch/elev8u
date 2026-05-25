@@ -248,7 +248,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div id="for-freelancers">
+          <div>
             <p className="mb-8 text-xs font-bold tracking-widest text-[#6B8EE8]">
               FOR FREELANCERS
             </p>
@@ -273,7 +273,7 @@ export default function Home() {
       </section>
 
       {/* SUBSCRIPTION */}
-      <section className="bg-[#060d1f] px-6 py-20">
+      <section id="for-freelancers" className="bg-[#060d1f] px-6 py-20">
         <div className="glass-strong mx-auto max-w-5xl rounded-3xl border border-[#305CDE]/20 bg-gradient-to-br from-[#0d1f3c] to-[#0a1628] p-10 shadow-2xl shadow-[#305CDE]/10">
           <div className="grid items-center gap-12 md:grid-cols-2">
             <div>
@@ -421,7 +421,7 @@ export default function Home() {
               </li>
               <li>
                 <a
-                  href="#categories"
+                  href="#for-freelancers"
                   className="text-white/25 transition-colors hover:text-white/60"
                 >
                   Pricing
@@ -434,16 +434,36 @@ export default function Home() {
             <p className="mb-3 text-sm font-medium text-white/50">Company</p>
             <ul className="space-y-2 text-sm">
               <li>
-                <span className="text-white/25">About</span>
+                <Link
+                  href="/about"
+                  className="text-white/25 transition-colors hover:text-white/60"
+                >
+                  About
+                </Link>
               </li>
               <li>
-                <span className="text-white/25">Contact</span>
+                <Link
+                  href="/contact"
+                  className="text-white/25 transition-colors hover:text-white/60"
+                >
+                  Contact
+                </Link>
               </li>
               <li>
-                <span className="text-white/25">Privacy</span>
+                <Link
+                  href="/privacy"
+                  className="text-white/25 transition-colors hover:text-white/60"
+                >
+                  Privacy Policy
+                </Link>
               </li>
               <li>
-                <span className="text-white/25">Terms</span>
+                <Link
+                  href="/terms"
+                  className="text-white/25 transition-colors hover:text-white/60"
+                >
+                  Terms of Service
+                </Link>
               </li>
             </ul>
           </div>

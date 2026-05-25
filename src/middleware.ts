@@ -4,8 +4,14 @@ import { NextResponse, type NextRequest } from "next/server";
 const PROTECTED_ROUTES = [
   "/freelancer/dashboard",
   "/freelancer/profile/setup",
+  "/freelancer/leads",
+  "/freelancer/calendar",
+  "/freelancer/earnings",
+  "/freelancer/profile",
   "/client/home",
   "/client/bookings",
+  "/client/profile",
+  "/client/search",
 ];
 
 export async function middleware(request: NextRequest) {

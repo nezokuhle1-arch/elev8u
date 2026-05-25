@@ -1,4 +1,5 @@
 import { ClientBottomNav } from "@/components/client/ClientBottomNav";
+import { ClientProfileDropdown } from "@/components/client/ClientProfileDropdown";
 import { ClientHomeSearch } from "@/components/client/ClientHomeSearch";
 import { getInitials } from "@/lib/format";
 import { createClient } from "@/lib/supabase/server";
@@ -104,12 +105,7 @@ export default async function ClientHomePage() {
             >
               <Bell className="h-5 w-5" />
             </button>
-            <div
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#305CDE] text-sm font-semibold"
-              aria-label={`${fullName} avatar`}
-            >
-              {initials}
-            </div>
+            <ClientProfileDropdown initials={initials} />
           </div>
         </header>
 

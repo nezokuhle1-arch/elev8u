@@ -13,10 +13,10 @@ import { usePathname } from "next/navigation";
 
 const tabs = [
   { label: "Home", href: "/freelancer/dashboard", icon: Home },
-  { label: "Leads", href: "/freelancer/dashboard#leads", icon: MessageSquare },
-  { label: "Calendar", href: "/freelancer/dashboard#bookings", icon: Calendar },
-  { label: "Earnings", href: "/freelancer/dashboard#earnings", icon: BarChart3 },
-  { label: "Profile", href: "/freelancer/profile/setup", icon: User },
+  { label: "Leads", href: "/freelancer/leads", icon: MessageSquare },
+  { label: "Calendar", href: "/freelancer/calendar", icon: Calendar },
+  { label: "Earnings", href: "/freelancer/earnings", icon: BarChart3 },
+  { label: "Profile", href: "/freelancer/profile", icon: User },
 ] as const;
 
 export function BottomNav() {
@@ -29,7 +29,9 @@ export function BottomNav() {
           const isActive =
             href === "/freelancer/dashboard"
               ? pathname === "/freelancer/dashboard"
-              : pathname.startsWith(href.split("#")[0]);
+              : href === "/freelancer/profile"
+                ? pathname === "/freelancer/profile"
+                : pathname === href || pathname.startsWith(`${href}/`);
 
           return (
             <Link

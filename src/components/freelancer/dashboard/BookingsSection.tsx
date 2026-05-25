@@ -17,7 +17,7 @@ export function BookingsSection({ bookings }: BookingsSectionProps) {
     <section id="bookings" className="px-4 py-4">
       <div className="mb-3 flex items-center justify-between">
         <h2 className="font-semibold text-zinc-900">Upcoming bookings</h2>
-        <a href="#bookings" className="text-sm font-medium text-[#305CDE]">
+        <a href="/freelancer/calendar" className="text-sm font-medium text-[#305CDE]">
           Calendar
         </a>
       </div>

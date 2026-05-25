@@ -9,7 +9,7 @@ const tabs = [
   { label: "Home", href: "/client/home", icon: Home },
   { label: "Search", href: "/client/concierge", icon: Search },
   { label: "Bookings", href: "/client/bookings", icon: Calendar },
-  { label: "Profile", href: "/client/home#profile", icon: User },
+  { label: "Profile", href: "/client/profile", icon: User },
 ] as const;
 
 export function ClientBottomNav() {
@@ -23,9 +23,8 @@ export function ClientBottomNav() {
           const isActive =
             label === "Search"
               ? pathname === "/client/concierge"
-              : label === "Bookings"
-                ? pathname === "/client/bookings"
-                : pathname === basePath && label === "Home";
+              : pathname === basePath ||
+                (label !== "Home" && pathname.startsWith(`${basePath}/`));
 
           return (
             <Link
