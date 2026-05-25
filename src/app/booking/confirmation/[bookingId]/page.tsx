@@ -1,3 +1,4 @@
+import { Elev8ULogo } from "@/components/ui/Elev8ULogo";
 import { formatBookingDateTime } from "@/lib/format";
 import { createClient } from "@/lib/supabase/server";
 import { Check, Repeat } from "lucide-react";
@@ -72,6 +73,10 @@ export default async function BookingConfirmationPage({
   return (
     <div className="flex min-h-screen justify-center bg-gray-50">
       <div className="w-full max-w-[600px] min-h-screen bg-white px-4 py-10 shadow-sm">
+        <div className="mb-8 flex justify-center">
+          <Elev8ULogo size="md" theme="light" centered href="/" />
+        </div>
+
         <div className="flex flex-col items-center text-center">
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#E8EEFB]">
             <Check className="h-10 w-10 text-[#305CDE]" strokeWidth={2.5} />

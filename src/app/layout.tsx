@@ -34,6 +34,11 @@ export const metadata: Metadata = {
     description:
       "AI-powered marketplace for South Africa. Powered by Evolute AI.",
   },
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

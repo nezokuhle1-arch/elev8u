@@ -1,5 +1,6 @@
 "use client";
 
+import { Elev8ULogo } from "@/components/ui/Elev8ULogo";
 import { createClient } from "@/lib/supabase/client";
 import { Briefcase, Eye, EyeOff, Search } from "lucide-react";
 import Link from "next/link";
@@ -64,7 +65,7 @@ export default function SignupPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-white px-4">
       <div className="w-full sm:max-w-md">
-        <p className="text-center text-2xl font-bold text-[#305CDE]">Elev8U</p>
+        <Elev8ULogo size="md" theme="light" centered href="/" />
         <h1 className="mt-6 text-center text-2xl font-bold text-zinc-900">
           Create your account
         </h1>

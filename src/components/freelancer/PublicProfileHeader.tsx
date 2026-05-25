@@ -1,5 +1,6 @@
 "use client";
 
+import { Elev8ULogo } from "@/components/ui/Elev8ULogo";
 import { ArrowLeft, Share2 } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useState } from "react";
@@ -47,9 +48,7 @@ export function PublicProfileHeader({ profileUrl }: PublicProfileHeaderProps) {
         >
           <ArrowLeft className="h-5 w-5" />
         </button>
-        <Link href="/" className="font-medium text-[#305CDE]">
-          Elev8U
-        </Link>
+        <Elev8ULogo size="sm" theme="light" href="/" />
         <button
           type="button"
           onClick={handleShare}

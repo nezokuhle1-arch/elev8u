@@ -1,6 +1,7 @@
 "use client";
 
 import CalEmbed from "@/components/booking/CalEmbed";
+import { Elev8ULogo } from "@/components/ui/Elev8ULogo";
 import { createClient } from "@/lib/supabase/client";
 import { formatBudget, getInitials } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -108,7 +109,7 @@ export function BookingPageClient({
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <h1 className="flex-1 text-base font-medium">Book a session</h1>
-          <span className="font-medium text-[#E8EEFB]">Elev8U</span>
+          <Elev8ULogo size="sm" theme="dark" href="/" />
         </header>
 
         <div className="px-4 py-4">

@@ -1,12 +1,13 @@
+import { Elev8ULogo } from "@/components/ui/Elev8ULogo";
 import Link from "next/link";
 
 export default function AboutPage() {
   return (
     <div className="gradient-hero min-h-screen bg-[#0A1628] text-white">
       <div className="mx-auto max-w-3xl px-6 py-24 text-center">
-        <p className="mb-4 text-sm font-bold tracking-widest text-[#6B8EE8]">
-          Elev8U
-        </p>
+        <div className="mb-8 flex justify-center">
+          <Elev8ULogo size="md" theme="dark" centered href="/" />
+        </div>
         <h1 className="mb-6 text-4xl font-bold text-white">
           Built for South Africa
         </h1>

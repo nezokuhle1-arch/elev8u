@@ -1,5 +1,6 @@
 "use client";
 
+import { Elev8ULogo } from "@/components/ui/Elev8ULogo";
 import { createClient } from "@/lib/supabase/client";
 import type { VettingFreelancer } from "@/lib/admin/vetting";
 import { formatTimeAgo, getInitials } from "@/lib/format";
@@ -145,7 +146,7 @@ export function VettingDashboard({
     <div className="flex min-h-screen justify-center bg-gray-50">
       <div className="w-full max-w-[600px] min-h-screen bg-white shadow-sm">
         <header className="flex items-center justify-between bg-[#1A3FA0] px-4 py-3 text-white">
-          <span className="text-lg font-bold text-[#305CDE]">Elev8U</span>
+          <Elev8ULogo size="sm" theme="dark" href="/" />
           <span className="text-sm font-medium">Admin · Vetting</span>
           <span className="max-w-[120px] truncate text-sm text-[#E8EEFB]">
             {adminName}

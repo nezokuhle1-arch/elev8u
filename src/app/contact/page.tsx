@@ -1,3 +1,4 @@
+import { Elev8ULogo } from "@/components/ui/Elev8ULogo";
 import { Mail, Users } from "lucide-react";
 import Link from "next/link";
 
@@ -5,6 +6,9 @@ export default function ContactPage() {
   return (
     <div className="gradient-hero min-h-screen bg-[#0A1628] text-white">
       <div className="mx-auto max-w-xl px-6 py-24">
+        <div className="mb-8 flex justify-center">
+          <Elev8ULogo size="md" theme="dark" centered href="/" />
+        </div>
         <p className="text-sm font-bold tracking-widest text-[#6B8EE8]">
           Contact
         </p>

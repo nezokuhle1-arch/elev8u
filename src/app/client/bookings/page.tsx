@@ -1,3 +1,4 @@
+import { Elev8ULogo } from "@/components/ui/Elev8ULogo";
 import { ClientBottomNav } from "@/components/client/ClientBottomNav";
 import { getInitials } from "@/lib/format";
 import { createClient } from "@/lib/supabase/server";
@@ -31,7 +32,7 @@ export default async function ClientBookingsPage() {
     <div className="min-h-screen bg-white pb-20">
       <div className="mx-auto w-full min-h-screen max-w-[480px]">
         <header className="flex items-center justify-between bg-[#1A3FA0] px-4 py-3 text-white">
-          <span className="font-medium text-[#E8EEFB]">Elev8U</span>
+          <Elev8ULogo size="sm" theme="dark" href="/client/home" />
           <div className="flex items-center gap-3">
             <button
               type="button"

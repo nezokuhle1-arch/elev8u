@@ -1,3 +1,4 @@
+import { Elev8ULogo } from "@/components/ui/Elev8ULogo";
 import { ClientBottomNav } from "@/components/client/ClientBottomNav";
 import { ClientProfileDropdown } from "@/components/client/ClientProfileDropdown";
 import { ClientHomeSearch } from "@/components/client/ClientHomeSearch";
@@ -94,9 +95,7 @@ export default async function ClientHomePage() {
     <div className="flex min-h-screen justify-center bg-gray-50">
       <div className="relative w-full max-w-[480px] min-h-screen bg-white pb-20 shadow-sm">
         <header className="flex items-center justify-between bg-[#1A3FA0] px-4 py-3 text-white">
-          <span className="text-base font-medium text-[#E8EEFB] sm:text-lg">
-            Elev8U
-          </span>
+          <Elev8ULogo size="sm" theme="dark" href="/client/home" />
           <div className="flex items-center gap-3">
             <button
               type="button"

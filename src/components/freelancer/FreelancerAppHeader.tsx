@@ -1,4 +1,5 @@
 import { ProfileDropdown } from "@/components/freelancer/ProfileDropdown";
+import { Elev8ULogo } from "@/components/ui/Elev8ULogo";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
@@ -30,11 +31,14 @@ export function FreelancerAppHeader({
       )}
 
       {title ? (
-        <h1 className="flex-1 text-base font-medium">{title}</h1>
+        <div className="flex min-w-0 flex-1 items-center gap-2">
+          <Elev8ULogo size="sm" theme="dark" />
+          <h1 className="truncate text-base font-medium">{title}</h1>
+        </div>
       ) : showLogo ? (
-        <span className="flex-1 text-base font-medium text-[#E8EEFB] sm:text-lg">
-          Elev8U
-        </span>
+        <div className="flex-1">
+          <Elev8ULogo size="sm" theme="dark" href="/freelancer/dashboard" />
+        </div>
       ) : (
         <span className="flex-1" />
       )}

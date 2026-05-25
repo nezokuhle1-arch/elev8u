@@ -4,10 +4,9 @@ import {
   LeadsSection,
   type DashboardLead,
 } from "@/components/freelancer/dashboard/LeadsSection";
-import { ProfileDropdown } from "@/components/freelancer/ProfileDropdown";
+import { FreelancerAppHeader } from "@/components/freelancer/FreelancerAppHeader";
 import { getInitials } from "@/lib/format";
 import { createClient } from "@/lib/supabase/server";
-import { Bell } from "lucide-react";
 import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
@@ -143,22 +142,7 @@ export default async function FreelancerDashboardPage() {
   return (
     <div className="flex min-h-screen justify-center bg-gray-50">
       <div className="relative w-full max-w-[480px] min-h-screen bg-white pb-24 shadow-sm">
-        {/* Header */}
-        <header className="flex items-center justify-between bg-[#1A3FA0] px-4 py-3 text-white">
-          <span className="text-base font-medium text-[#E8EEFB] sm:text-lg">
-            Elev8U
-          </span>
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              className="rounded-full p-1 hover:bg-white/10"
-              aria-label="Notifications"
-            >
-              <Bell className="h-5 w-5" />
-            </button>
-            <ProfileDropdown initials={initials} />
-          </div>
-        </header>
+        <FreelancerAppHeader initials={initials} />
 
         {/* Hero */}
         <section className="bg-[#E8EEFB] px-4 py-5">

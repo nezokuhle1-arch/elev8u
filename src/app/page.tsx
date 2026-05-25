@@ -1,3 +1,4 @@
+import { Elev8ULogo } from "@/components/ui/Elev8ULogo";
 import EvoluteInputBar from "@/components/landing/EvoluteInputBar";
 import ParticleBackground from "@/components/landing/ParticleBackground";
 import { ServiceOrbital } from "@/components/landing/ServiceOrbital";
@@ -62,9 +63,9 @@ export default function Home() {
       {/* NAVBAR */}
       <nav className="glass-strong fixed left-0 right-0 top-0 z-50 border-b border-white/10">
         <div className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4">
-          <div className="flex items-center">
-            <span className="text-xl font-bold text-white">Elev8U</span>
-            <span className="glass ml-3 hidden rounded-full px-3 py-1 text-xs text-white/70 sm:inline">
+          <div className="flex items-center gap-3">
+            <Elev8ULogo size="md" theme="dark" href="/" />
+            <span className="glass hidden rounded-full px-3 py-1 text-xs text-white/70 sm:inline">
               Powered by Evolute AI
             </span>
           </div>
@@ -377,7 +378,9 @@ export default function Home() {
       <footer className="bg-[#030812] px-6 py-12 text-white/30">
         <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-4">
           <div className="md:col-span-2">
-            <p className="mb-2 text-xl font-bold text-white">Elev8U</p>
+            <div className="mb-2">
+              <Elev8ULogo size="sm" theme="dark" href="/" />
+            </div>
             <p className="text-sm text-white/30">
               Elevate your skills. Find work that pays.
             </p>

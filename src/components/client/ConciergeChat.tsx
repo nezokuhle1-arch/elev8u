@@ -7,6 +7,7 @@ import {
   type MatchedFreelancer,
 } from "@/lib/concierge";
 import { getInitials } from "@/lib/format";
+import { Elev8ULogo } from "@/components/ui/Elev8ULogo";
 import { ArrowLeft, Send, Star } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -466,6 +467,7 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
         >
           <ArrowLeft className="h-5 w-5" />
         </Link>
+        <Elev8ULogo size="sm" theme="dark" href="/" />
         <div className="min-w-0 flex-1">
           <p className="truncate font-medium">Evolute AI</p>
           <p className="truncate text-xs text-white/70">Powered by Claude</p>
