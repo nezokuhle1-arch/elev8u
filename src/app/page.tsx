@@ -1,3 +1,4 @@
+import { LandingNavbar } from "@/components/landing/LandingNavbar";
 import { Elev8ULogo } from "@/components/ui/Elev8ULogo";
 import EvoluteInputBar from "@/components/landing/EvoluteInputBar";
 import ParticleBackground from "@/components/landing/ParticleBackground";
@@ -60,53 +61,7 @@ const STATS = [
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#0A1628] text-white">
-      {/* NAVBAR */}
-      <nav className="glass-strong fixed left-0 right-0 top-0 z-50 border-b border-white/10">
-        <div className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-3">
-            <Elev8ULogo size="md" theme="dark" href="/" />
-            <span className="glass hidden rounded-full px-3 py-1 text-xs text-white/70 sm:inline">
-              Powered by Evolute AI
-            </span>
-          </div>
-
-          <div className="hidden items-center gap-8 md:flex">
-            <a
-              href="#how-it-works"
-              className="text-sm text-white/60 transition-colors duration-200 hover:text-white"
-            >
-              How it works
-            </a>
-            <a
-              href="#categories"
-              className="text-sm text-white/60 transition-colors duration-200 hover:text-white"
-            >
-              Categories
-            </a>
-            <a
-              href="#for-freelancers"
-              className="text-sm text-white/60 transition-colors duration-200 hover:text-white"
-            >
-              For Freelancers
-            </a>
-          </div>
-
-          <div className="flex items-center">
-            <Link
-              href="/login"
-              className="mr-4 text-sm text-white/60 transition-colors duration-200 hover:text-white"
-            >
-              Sign in
-            </Link>
-            <Link
-              href="/signup"
-              className="rounded-xl bg-[#305CDE] px-5 py-2.5 text-sm font-medium text-white shadow-lg shadow-[#305CDE]/25 transition-all duration-200 hover:bg-[#1A3FA0]"
-            >
-              Get started free
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <LandingNavbar />
 
       {/* HERO */}
       <section className="gradient-hero relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pb-20 pt-24">
@@ -207,7 +162,7 @@ export default function Home() {
       </section>
 
       {/* CATEGORIES ORBITAL */}
-      <section id="categories" className="bg-[#060d1f] px-6 py-20">
+      <section id="categories" className="bg-[#060d1f] px-6 pb-20 pt-20">
         <h2 className="mb-3 text-center text-3xl font-bold text-white">
           Every service, one platform
         </h2>
@@ -218,7 +173,7 @@ export default function Home() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section id="how-it-works" className="bg-[#0A1628] px-6 py-20">
+      <section id="how-it-works" className="bg-[#0A1628] px-6 pb-20 pt-20">
         <h2 className="mb-3 text-center text-3xl font-bold text-white">
           How Elev8U works
         </h2>
@@ -274,7 +229,7 @@ export default function Home() {
       </section>
 
       {/* SUBSCRIPTION */}
-      <section id="for-freelancers" className="bg-[#060d1f] px-6 py-20">
+      <section id="for-freelancers" className="bg-[#060d1f] px-6 pb-20 pt-20">
         <div className="glass-strong mx-auto max-w-5xl rounded-3xl border border-[#305CDE]/20 bg-gradient-to-br from-[#0d1f3c] to-[#0a1628] p-10 shadow-2xl shadow-[#305CDE]/10">
           <div className="grid items-center gap-12 md:grid-cols-2">
             <div>

@@ -43,6 +43,7 @@ select {
 /* ── Dark theme base ── */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 70px;
 }
 
 /* ── Glass effects (visible on dark) ── */

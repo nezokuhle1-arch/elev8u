@@ -10,6 +10,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const SERVICES = [
   { name: "Automotive", icon: Car },
@@ -27,10 +28,42 @@ const NODE_OFFSET = 56;
 
 export function ServiceOrbital() {
   const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  function goToCategory(name: string) {
+    router.push(`/signup?category=${encodeURIComponent(name)}`);
+  }
+
+  if (isMobile) {
+    return (
+      <div className="mx-auto grid max-w-sm grid-cols-2 gap-3 px-4">
+        {SERVICES.map(({ name, icon: Icon }) => (
+          <button
+            key={name}
+            type="button"
+            onClick={() => goToCategory(name)}
+            className="glass-card flex cursor-pointer flex-col items-center gap-2 rounded-2xl border border-white/10 p-4 transition-all hover:bg-white/15"
+          >
+            <Icon className="mx-auto h-8 w-8 text-[#6B8EE8]" />
+            <span className="mt-1 text-center text-xs font-medium text-white/70">
+              {name}
+            </span>
+          </button>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto w-full max-w-[600px] overflow-hidden px-2">
-      <div className="relative mx-auto h-[600px] w-[600px] scale-[0.55] sm:scale-75 md:scale-100">
+      <div className="relative mx-auto h-[600px] w-[600px]">
         <svg
           className="pointer-events-none absolute inset-0 h-full w-full"
           aria-hidden
@@ -75,11 +108,7 @@ export function ServiceOrbital() {
               >
                 <button
                   type="button"
-                  onClick={() =>
-                    router.push(
-                      `/signup?category=${encodeURIComponent(name)}`
-                    )
-                  }
+                  onClick={() => goToCategory(name)}
                   className="glass-strong w-28 cursor-pointer rounded-2xl p-4 text-center transition-all duration-300 hover:scale-110 hover:border-[#305CDE]/50 hover:bg-white/15 hover:shadow-lg hover:shadow-[#305CDE]/20"
                 >
                   <Icon className="mx-auto mb-2 h-8 w-8 text-[#6B8EE8]" />
