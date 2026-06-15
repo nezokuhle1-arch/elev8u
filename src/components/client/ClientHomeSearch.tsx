@@ -28,7 +28,7 @@ export function ClientHomeSearch() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="e.g. I need a mechanic in Soweto..."
-        className="min-w-0 flex-1 bg-transparent px-2 py-2 text-sm text-zinc-800 outline-none placeholder:text-gray-400 sm:text-base"
+        className="min-w-0 flex-1 bg-transparent px-2 py-2 text-base text-zinc-800 outline-none placeholder:text-gray-400"
       />
       <button
         type="submit"

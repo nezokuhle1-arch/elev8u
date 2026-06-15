@@ -10,7 +10,7 @@ import { FormEvent, useState } from "react";
 type Role = "freelancer" | "client";
 
 const inputClassName =
-  "w-full rounded-lg border border-gray-200 p-3 text-sm outline-none focus:border-[#305CDE] focus:ring-2 focus:ring-[#305CDE]/20";
+  "w-full rounded-lg border border-gray-200 bg-white p-3 text-base text-gray-900 placeholder:text-gray-400 outline-none focus:border-[#305CDE] focus:ring-2 focus:ring-[#305CDE]/20";
 
 export default function SignupPage() {
   const router = useRouter();

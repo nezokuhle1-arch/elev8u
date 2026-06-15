@@ -658,7 +658,7 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
               }}
               placeholder="Type your message..."
               disabled={isLoading}
-              className="min-w-0 flex-1 rounded-lg border border-gray-200 px-4 py-3 text-sm outline-none focus:border-[#305CDE] focus:ring-2 focus:ring-[#305CDE]/20 disabled:opacity-50"
+              className="min-w-0 flex-1 rounded-lg border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 placeholder:text-gray-400 outline-none focus:border-[#305CDE] focus:ring-2 focus:ring-[#305CDE]/20 disabled:opacity-50"
             />
             <button
               type="submit"

@@ -364,7 +364,7 @@ function FreelancerCard({
             value={rejectReason}
             onChange={(e) => onRejectReasonChange(e.target.value)}
             placeholder="Reason for rejection (optional)"
-            className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-red-300"
+            className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 outline-none focus:border-red-300"
           />
           <button
             type="button"

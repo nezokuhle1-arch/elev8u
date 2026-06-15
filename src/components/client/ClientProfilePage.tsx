@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const inputClassName =
-  "w-full rounded-lg border border-gray-200 p-3 outline-none focus:border-[#305CDE] focus:ring-2 focus:ring-[#305CDE]/20";
+  "w-full rounded-lg border border-gray-200 bg-white p-3 text-base text-gray-900 placeholder:text-gray-400 outline-none focus:border-[#305CDE] focus:ring-2 focus:ring-[#305CDE]/20";
 
 type ClientProfilePageProps = {
   fullName: string;

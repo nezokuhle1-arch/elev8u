@@ -97,7 +97,7 @@ const PRICING_HINTS: Record<string, { oneTime: string; subscription: string }> =
 };
 
 const inputClassName =
-  "w-full rounded-lg border border-gray-200 p-3 outline-none focus:border-[#305CDE] focus:ring-2 focus:ring-[#305CDE]/20";
+  "w-full rounded-lg border border-gray-200 bg-white p-3 text-base text-gray-900 placeholder:text-gray-400 outline-none focus:border-[#305CDE] focus:ring-2 focus:ring-[#305CDE]/20";
 
 const STEP_LABELS = ["Basic info", "Bio & skills", "Pricing", "Review"];
 
