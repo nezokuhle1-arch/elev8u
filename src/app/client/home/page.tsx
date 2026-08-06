@@ -6,6 +6,7 @@ import { getInitials } from "@/lib/format";
 import { createClient } from "@/lib/supabase/server";
 import {
   Bell,
+  Bot,
   Camera,
   Car,
   Code,
@@ -25,6 +26,7 @@ const CATEGORIES = [
   { name: "Plumbing", icon: Droplets },
   { name: "Electrical", icon: Zap },
   { name: "Web Development", icon: Code },
+  { name: "AI & Automation", icon: Bot },
   { name: "Photography", icon: Camera },
   { name: "Cleaning", icon: Sparkles },
   { name: "Hair & Beauty", icon: Scissors },

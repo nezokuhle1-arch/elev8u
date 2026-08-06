@@ -4,6 +4,7 @@ export const FREELANCER_CATEGORIES = [
   "Plumbing",
   "Electrical",
   "Web Development",
+  "AI & Automation",
   "Photography",
   "Cleaning",
   "Carpentry",
@@ -27,6 +28,12 @@ export const CATEGORY_SKILL_SUGGESTIONS: Record<string, string[]> = {
     "Print design",
   ],
   "Web Development": ["React", "Next.js", "UI design", "API integration"],
+  "AI & Automation": [
+    "Workflow automation",
+    "AI tool adoption",
+    "Process design",
+    "Strategy consulting",
+  ],
 };
 
 export const GENERIC_SKILL_SUGGESTIONS = [
