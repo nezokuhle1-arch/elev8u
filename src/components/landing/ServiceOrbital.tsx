@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Bot,
   Camera,
   Car,
   Code,
@@ -16,6 +17,7 @@ const SERVICES = [
   { name: "Automotive", icon: Car },
   { name: "Graphic Design", icon: Palette },
   { name: "Web Development", icon: Code },
+  { name: "AI & Automation", icon: Bot },
   { name: "Copywriting", icon: PenTool },
   { name: "Photography", icon: Camera },
   { name: "Cleaning", icon: Sparkles },

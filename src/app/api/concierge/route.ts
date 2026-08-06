@@ -36,7 +36,17 @@ Rules:
 - If they give multiple pieces of info at once, acknowledge and ask for the next missing piece
 - Be encouraging — remind them that Evolute AI and Elev8U have vetted professionals ready to help
 - Never discuss anything outside of finding a service professional
-- If asked off-topic questions, gently redirect to their service need`;
+- If asked off-topic questions, gently redirect to their service need
+
+Category definitions (use these to understand what the client needs, especially when categories could be confused):
+
+AI & Automation
+Freelancers in this category help businesses install or improve AI-assisted operating
+systems: workflow automation, AI tool adoption, process design, and organizational/
+strategy consulting that leverages AI. This is distinct from Web Development — a client
+asking "can you automate my business processes" or "help me use AI to run my business
+better" belongs here, not with a web developer, unless they are specifically requesting
+a website or app to be built.`;
 
 type FreelancerRow = {
   id: string;
