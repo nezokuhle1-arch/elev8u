@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elev8U — Pricing (Mobile)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; font-family:'Google Sans Flex','Google Sans',system-ui,-apple-system,sans-serif; background:#FFFFFF; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  button { font-family:inherit; cursor:pointer; }
+  input:focus { outline:none; }
+  .check { flex-shrink:0; margin-top:2px; }
+  @keyframes blobA { 0%,100% { border-radius:42% 58% 70% 30% / 45% 45% 55% 55%; transform:rotate(0deg) scale(1); } 33% { border-radius:62% 38% 35% 65% / 55% 68% 32% 45%; transform:rotate(10deg) scale(1.05); } 66% { border-radius:35% 65% 58% 42% / 40% 33% 67% 60%; transform:rotate(-8deg) scale(0.97); } }
+  @keyframes blobB { 0%,100% { border-radius:58% 42% 33% 67% / 38% 58% 42% 62%; transform:rotate(0deg) scale(1); } 50% { border-radius:38% 62% 62% 38% / 60% 40% 60% 40%; transform:rotate(-12deg) scale(1.06); } }
+  @keyframes blobC { 0%,100% { border-radius:48% 52% 40% 60% / 55% 45% 55% 45%; transform:rotate(0deg) scale(1); } 40% { border-radius:65% 35% 60% 40% / 42% 60% 40% 58%; transform:rotate(9deg) scale(0.96); } 75% { border-radius:40% 60% 45% 55% / 65% 50% 50% 35%; transform:rotate(-6deg) scale(1.03); } }
+  @keyframes glassDrift { 0%,100% { border-radius:46% 54% 52% 48% / 50% 48% 52% 50%; transform:rotate(0deg); } 50% { border-radius:52% 48% 46% 54% / 48% 52% 48% 52%; transform:rotate(6deg); } }
+  @keyframes sheen { 0% { background-position:-160% -60%; } 100% { background-position:160% 60%; } }
+  @keyframes caretBlink { 0%,45% { opacity:1; } 50%,95% { opacity:0; } 100% { opacity:1; } }
+  @keyframes goalFill { 0% { width:0%; } 55% { width:88%; } 85% { width:88%; } 100% { width:0%; } }
+  @keyframes rowReveal { 0%,8% { opacity:0; transform:translateY(6px); } 20%,88% { opacity:1; transform:translateY(0); } 96%,100% { opacity:0; transform:translateY(6px); } }
+  .blob { position:absolute; filter:blur(28px); }
+  .blobA { animation:blobA 16s ease-in-out infinite; }
+  .blobB { animation:blobB 21s ease-in-out infinite; }
+  .blobC { animation:blobC 13s ease-in-out infinite; }
+  .caret { display:inline-block; width:2px; height:0.9em; background:currentColor; vertical-align:text-bottom; margin-left:2px; animation:caretBlink 0.9s step-end infinite; }
+  .goal-fill { animation:goalFill 4.5s ease-in-out infinite; }
+  .evo-row-1 { animation:rowReveal 4.2s ease-in-out infinite; }
+  .evo-row-2 { animation:rowReveal 4.2s ease-in-out infinite; animation-delay:0.5s; }
+  @media (prefers-reduced-motion: reduce) {
+    .blobA, .blobB, .blobC, .goal-fill, .evo-row-1, .evo-row-2, .caret { animation:none; }
+  }
+</style>
+</helmet>
+<div style="width:100%;background:#FFFFFF;color:#0A0A0A;box-sizing:border-box;overflow-x:hidden;">
+
+  <div style="position:relative;z-index:20;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;">
+      <span style="font-size:19px;letter-spacing:-0.4px;"><span style="color:#0A0A0A;font-weight:500;">Elev</span><span style="color:{{accent}};font-weight:700;">8</span><span style="color:#0A0A0A;font-weight:500;">U</span></span>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <a href="Join.dc.html" style="background:{{accent}};color:#fff;font-size:12.5px;font-weight:600;padding:9px 16px;border-radius:20px;">Get started</a>
+        <button type="button" aria-label="Menu" aria-expanded="{{ menuOpen }}" onClick="{{ toggleMenu }}" style="width:32px;height:32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:transparent;border:0;padding:0;">
+          <span style="{{ bar1Style }}"></span><span style="{{ bar2Style }}"></span>
+        </button>
+      </div>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;top:100%;left:0;right:0;background:#fff;padding:2px 20px 18px;box-shadow:0 24px 40px -24px rgba(10,10,10,0.25);border-bottom:1px solid rgba(10,10,10,0.07);">
+        <a href="ForFreelancers.dc.html" style="display:block;padding:15px 0;border-bottom:1px solid rgba(10,10,10,0.07);font-size:17px;font-weight:500;letter-spacing:-0.3px;color:#0A0A0A;">For freelancers</a><a href="ForClients.dc.html" style="display:block;padding:15px 0;border-bottom:1px solid rgba(10,10,10,0.07);font-size:17px;font-weight:500;letter-spacing:-0.3px;color:#0A0A0A;">For clients</a><a href="Pricing.dc.html" style="display:block;padding:15px 0;border-bottom:1px solid rgba(10,10,10,0.07);font-size:17px;font-weight:600;letter-spacing:-0.3px;color:{{accent}};">Pricing</a><a href="SignInMobile.dc.html" style="display:block;padding:15px 0 4px;font-size:17px;font-weight:500;letter-spacing:-0.3px;color:#0A0A0A;">Sign in</a>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="padding:22px 20px 8px;text-align:center;">
+    <h1 style="margin:0 0 16px;font-size:34px;line-height:1.1;letter-spacing:-1px;"><span style="font-weight:400;color:#6B6B6B;">Simple pricing.</span><br><span style="font-weight:700;color:#0A0A0A;">Real value on Pro.</span></h1>
+    <p style="margin:0;font-size:14.5px;color:#6B6B6B;line-height:1.6;">Free to join. Free to browse. You only pay when you're earning, and Pro pays for itself.</p>
+  </div>
+  <div style="padding:34px 20px 20px;">
+    <div style="text-align:center;margin-bottom:18px;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:{{accent}};">For freelancers</span></div>
+    <div style="margin-bottom:26px;"><div role="group" aria-label="Billing period" style="display:flex;gap:2px;background:#F1F1F3;border-radius:26px;padding:4px;"><button type="button" onClick="{{ setMonthly }}" aria-pressed="{{ isMonthly }}" style="{{ monthlyStyle }}">Monthly</button><button type="button" onClick="{{ setYearly }}" aria-pressed="{{ isYearly }}" style="{{ yearlyStyle }}">Yearly <span style="font-size:11px;font-weight:600;color:{{accent}};margin-left:3px;">2 months free</span></button></div></div>
+    <div style="display:flex;flex-direction:column;gap:16px;"><div style="background:#fff;border:1px solid rgba(10,10,10,0.08);border-radius:22px;padding:26px;box-shadow:0 18px 40px -26px rgba(10,10,10,0.15);"><div style="font-size:15px;font-weight:600;color:#6B6B6B;margin-bottom:4px;">Free</div><div style="margin-bottom:20px;"><span style="font-size:36px;font-weight:600;letter-spacing:-1px;">R0</span><span style="font-size:14px;color:#6B6B6B;">/month</span></div><div style="display:flex;flex-direction:column;gap:13px;margin-bottom:24px;"><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#3A3A3E;line-height:1.45;">Full marketplace listing, matched by Evolute AI</span></div><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#3A3A3E;line-height:1.45;">15% commission per completed booking</span></div><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#3A3A3E;line-height:1.45;">Up to 3 portfolio photos</span></div><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#3A3A3E;line-height:1.45;">Up to 3 services listed</span></div><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#3A3A3E;line-height:1.45;">Standard support</span></div></div><a href="Join.dc.html" style="display:block;text-align:center;padding:13px;border:1px solid rgba(10,10,10,0.15);border-radius:22px;font-size:14px;font-weight:600;color:#0A0A0A;">Get started</a></div><div style="position:relative;background:linear-gradient(150deg,{{accent}} 0%,#1A3FA0 100%);border-radius:22px;padding:26px;box-shadow:0 28px 55px -24px rgba(10,20,60,0.5);margin-top:6px;"><span style="position:absolute;top:-12px;left:26px;background:#0A0A0A;color:#fff;font-size:11px;font-weight:600;padding:5px 13px;border-radius:20px;white-space:nowrap;">Most popular</span><div style="font-size:15px;font-weight:600;color:rgba(255,255,255,0.85);margin:6px 0 4px;">Pro</div><div style="margin-bottom:4px;"><span style="font-size:36px;font-weight:600;letter-spacing:-1px;color:#fff;">{{ proPrice }}</span><span style="font-size:14px;color:rgba(255,255,255,0.75);">{{ proUnit }}</span></div><div style="margin-bottom:20px;font-size:12.5px;color:rgba(255,255,255,0.75);min-height:18px;">{{ proNote }}</div><div style="display:flex;flex-direction:column;gap:13px;margin-bottom:16px;"><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#fff;line-height:1.45;">Everything in Free, plus:</span></div><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#fff;line-height:1.45;"><strong>8% commission</strong>, lower on every booking</span></div><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#fff;line-height:1.45;">Response Agent: drafts replies in seconds</span></div><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#fff;line-height:1.45;">Growth Agent: weekly digest, goals, one action that moves the needle</span></div><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#fff;line-height:1.45;">Profile Optimiser: rewrites your bio, flags what's missing</span></div><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#fff;line-height:1.45;">Unlimited portfolio photos</span></div><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#fff;line-height:1.45;">Up to 5 services listed, including custom quotes</span></div><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#fff;line-height:1.45;">Priority support</span></div></div><p style="margin:0 0 20px;font-size:11.5px;color:rgba(255,255,255,0.7);line-height:1.5;">Once you're doing around R3,500/month in bookings, Pro pays for itself on commission savings alone. Everything else is bonus.</p><a href="#" style="display:block;text-align:center;padding:13px;background:#fff;border-radius:22px;font-size:14px;font-weight:600;color:{{accent}};">Start free trial</a></div><div style="background:#fff;border:1px solid rgba(10,10,10,0.08);border-radius:22px;padding:26px;box-shadow:0 18px 40px -26px rgba(10,10,10,0.15);"><div style="font-size:15px;font-weight:600;color:#6B6B6B;margin-bottom:4px;">Custom</div><div style="margin-bottom:20px;"><span style="font-size:26px;font-weight:600;letter-spacing:-0.5px;">Let's talk</span></div><div style="display:flex;flex-direction:column;gap:13px;margin-bottom:24px;"><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#3A3A3E;line-height:1.45;">Multi-seat accounts for small teams</span></div><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#3A3A3E;line-height:1.45;">Custom commission at volume</span></div><div style="display:flex;gap:10px;"><svg class="check" width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M3 7L6 10L11 4" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:13.5px;color:#3A3A3E;line-height:1.45;">Dedicated account manager</span></div></div><a href="#" style="display:block;text-align:center;padding:13px;border:1px solid rgba(10,10,10,0.15);border-radius:22px;font-size:14px;font-weight:600;color:#0A0A0A;">Contact sales</a></div></div>
+  </div>
+  <div style="padding:34px 20px 20px;">
+    <div style="text-align:center;margin-bottom:18px;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:{{accent}};">For clients</span></div>
+    <div style="display:flex;flex-direction:column;gap:14px;"><div style="background:#F5F6F8;border-radius:22px;padding:24px;"><div style="font-size:15px;font-weight:600;margin-bottom:8px;">Pay per booking</div><p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">Free to search and get matched, with no subscription and no listing fee. A <strong style="color:#0A0A0A;">5% service fee</strong> (capped at R150) applies only when you book, shown clearly before you confirm.</p></div><div style="background:#F5F6F8;border-radius:22px;padding:24px;"><div style="font-size:15px;font-weight:600;margin-bottom:8px;">Recurring plan: R49/month</div><p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">Booking the same freelancer regularly? Skip the per-booking fee entirely for that relationship.</p></div></div>
+  </div>
+  <div style="padding:34px 20px 40px;">
+    <h2 style="margin:0 0 24px;font-size:24px;font-weight:500;letter-spacing:-0.5px;text-align:center;">Questions</h2>
+    <div style="display:flex;flex-direction:column;gap:22px;"><div><div style="font-size:14.5px;font-weight:600;margin-bottom:6px;line-height:1.35;">Why does Elev8U take a commission at all?</div><p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">It's what funds vetting, dispute support, and Evolute's matching, the same reason every marketplace works this way.</p></div><div><div style="font-size:14.5px;font-weight:600;margin-bottom:6px;line-height:1.35;">What happens if I don't book anything on the Free plan?</div><p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">Nothing. R0 means R0, with no charge in a slow month, ever.</p></div><div><div style="font-size:14.5px;font-weight:600;margin-bottom:6px;line-height:1.35;">Can I switch between Free and Pro anytime?</div><p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">Yes. Monthly Pro is month to month with no lock-in. Yearly Pro is billed once and runs for 12 months.</p></div><div><div style="font-size:14.5px;font-weight:600;margin-bottom:6px;line-height:1.35;">Why do clients pay a fee if the platform is "free"?</div><p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">Browsing, chatting with Evolute, and getting matched cost nothing. The fee only applies once you're actually booking, like Fiverr or Upwork's buyer fee, just lower.</p></div></div>
+  </div>
+  <div style="padding:8px 20px 56px;">
+    <div style="background:linear-gradient(135deg,{{accent}} 0%,#1A3FA0 100%);border-radius:24px;padding:40px 24px;text-align:center;">
+      <h2 style="margin:0 0 24px;font-size:24px;line-height:1.2;font-weight:500;color:#fff;letter-spacing:-0.5px;">Ready to get started?</h2>
+      <div style="display:flex;flex-direction:column;gap:10px;"><a href="ForClients.dc.html" style="display:block;background:#fff;color:{{accent}};font-size:14px;font-weight:600;padding:14px 24px;border-radius:24px;">Find a professional</a><a href="Join.dc.html" style="display:block;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.4);color:#fff;font-size:14px;font-weight:600;padding:13px 24px;border-radius:24px;">Join as a freelancer</a></div>
+    </div>
+  </div>
+
+  <div style="padding:0 20px 34px;">
+    <div style="padding-bottom:26px;border-bottom:1px solid rgba(10,10,10,0.08);">
+      <span style="font-size:18px;letter-spacing:-0.4px;"><span style="color:#0A0A0A;font-weight:500;">Elev</span><span style="color:{{accent}};font-weight:700;">8</span><span style="color:#0A0A0A;font-weight:500;">U</span></span>
+      <p style="margin:10px 0 24px;font-size:12.5px;color:#6B6B6B;line-height:1.6;">Matching skilled South Africans with the people who need them, powered by AI.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;">
+        <div><div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#9A9A9A;margin-bottom:12px;">Product</div><div style="display:flex;flex-direction:column;gap:10px;"><a href="ForFreelancers.dc.html" style="font-size:13px;color:#3A3A3E;">For Freelancers</a><a href="ForClients.dc.html" style="font-size:13px;color:#3A3A3E;">For Clients</a><a href="Pricing.dc.html" style="font-size:13px;color:#3A3A3E;">Pricing</a></div></div>
+        <div><div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#9A9A9A;margin-bottom:12px;">Company</div><div style="display:flex;flex-direction:column;gap:10px;"><a href="#" style="font-size:13px;color:#3A3A3E;">About</a><a href="#" style="font-size:13px;color:#3A3A3E;">Contact</a></div></div>
+        <div><div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#9A9A9A;margin-bottom:12px;">Legal</div><div style="display:flex;flex-direction:column;gap:10px;"><a href="#" style="font-size:13px;color:#3A3A3E;">Privacy</a><a href="#" style="font-size:13px;color:#3A3A3E;">Terms</a></div></div>
+      </div>
+    </div>
+    <p style="margin:20px 0 0;font-size:12px;color:#9A9A9A;line-height:1.5;">&copy; 2026 Elev8U. A Nexarc Technologies company.</p>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#305CDE","options":["#305CDE","#1A3FA0","#4B3FD9","#6B8EE8"]}}'>
+class Component extends DCLogic {
+
+  renderVals() {
+    const s = this.state || {};
+    const open = !!s.menuOpen;
+    const EO = 'cubic-bezier(0.76, 0, 0.24, 1)';
+    const yearly = s.yearly ?? false;
+    const on = 'flex:1;border:0;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;color:#0A0A0A;background:#fff;padding:10px 8px;border-radius:22px;box-shadow:0 2px 8px -2px rgba(10,10,10,0.2);';
+    const off = 'flex:1;border:0;cursor:pointer;font-family:inherit;font-size:13px;font-weight:500;color:#6B6B6B;background:transparent;padding:10px 8px;border-radius:22px;';
+
+    return {
+      accent: this.props.accent ?? '#305CDE',
+      menuOpen: open,
+      toggleMenu: () => this.setState({ menuOpen: !open }),
+      bar1Style: 'display:block;width:22px;height:2px;background:#0A0A0A;transition:transform 400ms ' + EO + ';transform:' + (open ? 'translateY(4px) rotate(45deg)' : 'none') + ';',
+      bar2Style: 'display:block;width:22px;height:2px;background:#0A0A0A;transition:transform 400ms ' + EO + ';transform:' + (open ? 'translateY(-4px) rotate(-45deg)' : 'none') + ';',
+      isMonthly: !yearly,
+      isYearly: yearly,
+      monthlyStyle: yearly ? off : on,
+      yearlyStyle: yearly ? on : off,
+      proPrice: yearly ? 'R2,490' : 'R249',
+      proUnit: yearly ? '/year' : '/month',
+      proNote: yearly ? 'Billed once a year. You save R498.' : 'Billed monthly. Cancel anytime.',
+      setMonthly: () => this.setState({ yearly: false }),
+      setYearly: () => this.setState({ yearly: true })
+    };
+  }
+}
+</script>
+</body>
+</html>
