@@ -11,6 +11,13 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* V2 public site tokens (build spec section 2) */
+  --color-ink: #0A0A0A;
+  --color-accent: #305CDE;
+  --color-accent-hover: #1A3FA0;
+  --color-dark-0: #05070D;
+  --color-error-dark: #FF9E94;
 }
 
 @media (prefers-color-scheme: dark) {
