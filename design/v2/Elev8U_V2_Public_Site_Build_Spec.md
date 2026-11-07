@@ -105,11 +105,11 @@ Routes are suggestions, except where an existing V1 route is named; reuse those.
 | Waitlist form states | (spec only) | `WaitlistStates.dc.html` | n/a |
 | Waitlist confirmation email | (Resend template) | `WaitlistEmail.dc.html` | n/a |
 | Waitlist share image (1200×630) | `/og/waitlist.png` | `WaitlistShare.dc.html` | n/a |
-| Home | `/` after launch | `Home.dc.html` | not yet designed |
+| Home | `/` after launch | `Home.dc.html` | `HomeMobile.dc.html` |
 | Hero orb concept | n/a | `HeroOrb.dc.html` | n/a |
-| Pricing | `/pricing` | `Pricing.dc.html` | not yet designed |
-| For freelancers | `/for-freelancers` | `ForFreelancers.dc.html` | not yet designed |
-| For clients | `/for-clients` | `ForClients.dc.html` | not yet designed |
+| Pricing | `/pricing` | `Pricing.dc.html` | `PricingMobile.dc.html` |
+| For freelancers | `/for-freelancers` | `ForFreelancers.dc.html` | `ForFreelancersMobile.dc.html` |
+| For clients | `/for-clients` | `ForClients.dc.html` | `ForClientsMobile.dc.html` |
 | Freelancer profile | existing `/freelancer/[id]` | `Profile.dc.html` | `ProfileMobile.dc.html` |
 | Sign in | existing `/login` | `SignIn.dc.html` | `SignInMobile.dc.html` |
 | Join (role chooser) | new `/join` (V1 has `/signup`) | `Join.dc.html` | `JoinMobile.dc.html` |
@@ -118,7 +118,7 @@ Routes are suggestions, except where an existing V1 route is named; reuse those.
 
 Apply steps: 1 Account, 2 Work, 3 Skills and services, 4 About you, 5 Identity, 6 Review and submit, 7 Application received.
 
-Home, Pricing, For freelancers and For clients are designed for desktop only. Mobile versions of those four are still to do before the public-site build reaches them.
+The four marketing pages (Home, Pricing, For freelancers, For clients) have mobile boards at 390px. On mobile the nav collapses to the logo, a Get started button and a menu button that opens a link list. Sample data on Home and For freelancers now matches the rest of the site (Thandi, a web designer in Cape Town).
 
 ---
 
@@ -274,7 +274,7 @@ All new tables need RLS. The waitlist table is insert-only for the public role; 
 - Waitlist route: `/` or `/v2`.
 - Top Rated badge thresholds, and the terms for custom commission at volume.
 - Light-mode error and success colours for forms.
-- Align sample data: Home and the freelancer dashboard canvas still use a mechanic sample; the rest of the site uses web designers, IT and accounting.
+- Sample data: Home and For freelancers now use the web designer sample. The freelancer dashboard canvas still uses a mechanic sample.
 - Whether a "Needs more info" application can be resubmitted in place or needs a new draft.
 
 ## 12. Not yet designed

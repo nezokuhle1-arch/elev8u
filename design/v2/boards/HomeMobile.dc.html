@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elev8U — Home (Mobile)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; font-family:'Google Sans Flex','Google Sans',system-ui,-apple-system,sans-serif; background:#FFFFFF; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  button { font-family:inherit; cursor:pointer; }
+  input:focus { outline:none; }
+  .check { flex-shrink:0; margin-top:2px; }
+  @keyframes blobA { 0%,100% { border-radius:42% 58% 70% 30% / 45% 45% 55% 55%; transform:rotate(0deg) scale(1); } 33% { border-radius:62% 38% 35% 65% / 55% 68% 32% 45%; transform:rotate(10deg) scale(1.05); } 66% { border-radius:35% 65% 58% 42% / 40% 33% 67% 60%; transform:rotate(-8deg) scale(0.97); } }
+  @keyframes blobB { 0%,100% { border-radius:58% 42% 33% 67% / 38% 58% 42% 62%; transform:rotate(0deg) scale(1); } 50% { border-radius:38% 62% 62% 38% / 60% 40% 60% 40%; transform:rotate(-12deg) scale(1.06); } }
+  @keyframes blobC { 0%,100% { border-radius:48% 52% 40% 60% / 55% 45% 55% 45%; transform:rotate(0deg) scale(1); } 40% { border-radius:65% 35% 60% 40% / 42% 60% 40% 58%; transform:rotate(9deg) scale(0.96); } 75% { border-radius:40% 60% 45% 55% / 65% 50% 50% 35%; transform:rotate(-6deg) scale(1.03); } }
+  @keyframes glassDrift { 0%,100% { border-radius:46% 54% 52% 48% / 50% 48% 52% 50%; transform:rotate(0deg); } 50% { border-radius:52% 48% 46% 54% / 48% 52% 48% 52%; transform:rotate(6deg); } }
+  @keyframes sheen { 0% { background-position:-160% -60%; } 100% { background-position:160% 60%; } }
+  @keyframes caretBlink { 0%,45% { opacity:1; } 50%,95% { opacity:0; } 100% { opacity:1; } }
+  @keyframes goalFill { 0% { width:0%; } 55% { width:88%; } 85% { width:88%; } 100% { width:0%; } }
+  @keyframes rowReveal { 0%,8% { opacity:0; transform:translateY(6px); } 20%,88% { opacity:1; transform:translateY(0); } 96%,100% { opacity:0; transform:translateY(6px); } }
+  .blob { position:absolute; filter:blur(28px); }
+  .blobA { animation:blobA 16s ease-in-out infinite; }
+  .blobB { animation:blobB 21s ease-in-out infinite; }
+  .blobC { animation:blobC 13s ease-in-out infinite; }
+  .caret { display:inline-block; width:2px; height:0.9em; background:currentColor; vertical-align:text-bottom; margin-left:2px; animation:caretBlink 0.9s step-end infinite; }
+  .goal-fill { animation:goalFill 4.5s ease-in-out infinite; }
+  .evo-row-1 { animation:rowReveal 4.2s ease-in-out infinite; }
+  .evo-row-2 { animation:rowReveal 4.2s ease-in-out infinite; animation-delay:0.5s; }
+  @media (prefers-reduced-motion: reduce) {
+    .blobA, .blobB, .blobC, .goal-fill, .evo-row-1, .evo-row-2, .caret { animation:none; }
+  }
+</style>
+</helmet>
+<div style="width:100%;background:#FFFFFF;color:#0A0A0A;box-sizing:border-box;overflow-x:hidden;">
+
+  <div style="position:relative;z-index:20;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;">
+      <span style="font-size:19px;letter-spacing:-0.4px;"><span style="color:#0A0A0A;font-weight:500;">Elev</span><span style="color:{{accent}};font-weight:700;">8</span><span style="color:#0A0A0A;font-weight:500;">U</span></span>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <a href="Join.dc.html" style="background:{{accent}};color:#fff;font-size:12.5px;font-weight:600;padding:9px 16px;border-radius:20px;">Get started</a>
+        <button type="button" aria-label="Menu" aria-expanded="{{ menuOpen }}" onClick="{{ toggleMenu }}" style="width:32px;height:32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:transparent;border:0;padding:0;">
+          <span style="{{ bar1Style }}"></span><span style="{{ bar2Style }}"></span>
+        </button>
+      </div>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;top:100%;left:0;right:0;background:#fff;padding:2px 20px 18px;box-shadow:0 24px 40px -24px rgba(10,10,10,0.25);border-bottom:1px solid rgba(10,10,10,0.07);">
+        <a href="ForFreelancers.dc.html" style="display:block;padding:15px 0;border-bottom:1px solid rgba(10,10,10,0.07);font-size:17px;font-weight:500;letter-spacing:-0.3px;color:#0A0A0A;">For freelancers</a><a href="ForClients.dc.html" style="display:block;padding:15px 0;border-bottom:1px solid rgba(10,10,10,0.07);font-size:17px;font-weight:500;letter-spacing:-0.3px;color:#0A0A0A;">For clients</a><a href="Pricing.dc.html" style="display:block;padding:15px 0;border-bottom:1px solid rgba(10,10,10,0.07);font-size:17px;font-weight:500;letter-spacing:-0.3px;color:#0A0A0A;">Pricing</a><a href="SignInMobile.dc.html" style="display:block;padding:15px 0 4px;font-size:17px;font-weight:500;letter-spacing:-0.3px;color:#0A0A0A;">Sign in</a>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="padding:18px 20px 30px;">
+    <h1 style="margin:0 0 16px;font-size:30px;line-height:1.1;letter-spacing:-1px;"><span style="font-weight:400;color:#6B6B6B;">Describe what you need.</span><br><span style="font-weight:700;color:#0A0A0A;">Get matched in minutes.</span></h1>
+    <p style="margin:0 0 24px;font-size:15px;color:#6B6B6B;line-height:1.6;">Elev8U matches you with vetted, skilled professionals across South Africa, powered by AI and backed by real reviews.</p>
+    <div style="display:flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(10,10,10,0.1);border-radius:16px;padding:7px 7px 7px 16px;box-shadow:0 14px 34px -18px rgba(10,10,10,0.2);"><label for="evolute-hero-input-m" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">What do you need help with?</label><input id="evolute-hero-input-m" type="text" placeholder="What do you need help with today?" style="flex:1;min-width:0;border:none;font-size:14px;color:#0A0A0A;background:transparent;"/><button type="button" aria-label="Ask Evolute" style="flex-shrink:0;width:38px;height:38px;border-radius:50%;border:none;background:{{accent}};display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 12V3M7.5 3L3.5 7M7.5 3L11.5 7" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
+    <p style="margin:12px 0 0;font-size:12px;color:#9A9A9A;">Try: "I need a web designer in Cape Town this week"</p>
+    <div style="position:relative;width:300px;height:300px;margin:34px auto 0;">
+      <div class="blob blobA" style="top:17px;right:3px;width:177px;height:177px;background:{{accent}};opacity:0.68;"></div>
+      <div class="blob blobB" style="top:-7px;left:20px;width:157px;height:157px;background:#6B8EE8;opacity:0.55;"></div>
+      <div class="blob blobC" style="bottom:3px;left:31px;width:143px;height:143px;background:#4B3FD9;opacity:0.5;"></div>
+      <div style="position:absolute;top:0;left:0;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0) 0%,rgba(255,255,255,0.35) 62%,rgba(255,255,255,0.85) 82%,#FFFFFF 100%);pointer-events:none;"></div>
+      <div style="animation:glassDrift 24s ease-in-out infinite;position:absolute;top:37px;left:37px;width:226px;height:226px;background:rgba(255,255,255,0.42);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.7);box-shadow:0 8px 40px rgba(48,92,222,0.14), inset 0 1px 1px rgba(255,255,255,0.9);"></div>
+      <div style="position:absolute;top:37px;left:37px;width:226px;height:226px;border-radius:50%;overflow:hidden;pointer-events:none;"><div style="animation:sheen 9s linear infinite;position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(115deg,rgba(255,255,255,0) 42%,rgba(255,255,255,0.8) 50%,rgba(255,255,255,0) 58%);background-size:60% 60%;background-repeat:no-repeat;"></div></div>
+    </div>
+  </div>
+  <div style="padding:20px 20px 56px;text-align:center;">
+    <span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:{{accent}};">See it in action</span><h2 style="margin:10px 0 28px;font-size:25px;line-height:1.15;font-weight:500;letter-spacing:-0.6px;">This isn't just a dashboard. It's a team, run by AI.</h2>
+    <div style="position:relative;padding:26px 0;">
+      <div class="blob blobA" style="top:0;left:-50px;width:200px;height:200px;background:{{accent}};opacity:0.3;"></div>
+      <div class="blob blobC" style="bottom:0;right:-50px;width:190px;height:190px;background:#4B3FD9;opacity:0.25;"></div>
+      <div style="position:relative;background:#F5F6F8;border-radius:22px;padding:10px;text-align:left;box-shadow:0 40px 70px -30px rgba(10,10,10,0.3), 0 0 0 1px rgba(10,10,10,0.04);">
+        <div style="background:#fff;border-radius:16px;padding:16px;">
+          <div style="font-size:12.5px;font-weight:500;color:#6B6B6B;margin-bottom:12px;">Hey, Thandi, here's your week at a glance</div>
+          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px;"><div style="background:linear-gradient(135deg,{{accent}} 0%,#1A3FA0 100%);border-radius:16px;padding:13px;"><span style="font-size:10.5px;font-weight:500;color:rgba(255,255,255,0.78);">New leads</span><div style="font-size:21px;font-weight:600;color:#fff;margin-top:3px;">3</div></div><div style="background:#fff;border:1px solid rgba(10,10,10,0.06);border-radius:16px;padding:13px;"><span style="font-size:10.5px;font-weight:500;color:#6B6B6B;">Bookings</span><div style="font-size:21px;font-weight:600;margin-top:3px;">2</div></div><div style="background:linear-gradient(135deg,{{accent}} 0%,#1A3FA0 100%);border-radius:16px;padding:13px;"><span style="font-size:10.5px;font-weight:500;color:rgba(255,255,255,0.78);">Rating</span><div style="font-size:21px;font-weight:600;color:#fff;margin-top:3px;">4.9</div></div><div style="background:#fff;border:1px solid rgba(10,10,10,0.06);border-radius:16px;padding:13px;"><span style="font-size:10.5px;font-weight:500;color:#6B6B6B;">Profile views</span><div style="font-size:21px;font-weight:600;margin-top:3px;">128</div></div></div>
+          <div style="background:rgba(255,255,255,0.7);border:1px solid rgba(48,92,222,0.14);border-radius:14px;padding:13px;margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="width:22px;height:22px;border-radius:7px;background:rgba(48,92,222,0.1);display:flex;align-items:center;justify-content:center;color:{{accent}};"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L9.4 6.1L14 7.5L9.4 8.9L8 13.5L6.6 8.9L2 7.5L6.6 6.1Z" fill="currentColor"></path></svg></span><span style="font-size:12px;font-weight:600;">Response Agent</span></div>
+            <div style="background:#fff;border-radius:9px;padding:10px;"><p style="margin:0;font-size:11.5px;color:#3A3A3E;line-height:1.5;">"Hi Sipho, yes I can start Monday. A 5-page site is R8,500."</p></div>
+          </div>
+          <div style="background:#fff;border:1px solid rgba(10,10,10,0.06);border-radius:14px;padding:13px;">
+            <div style="font-size:12px;font-weight:600;margin-bottom:10px;">Monthly goal</div>
+            <div style="position:relative;width:100%;height:10px;border-radius:20px;background:#EDEEF0;"><div style="position:absolute;top:0;left:0;width:88%;height:100%;border-radius:20px;background:linear-gradient(90deg,{{accent}} 0%,#22C490 100%);"></div></div>
+            <div style="font-size:10.5px;color:#6B6B6B;margin-top:8px;">R10,500 of R12,000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="padding:0 20px 56px;">
+    <div style="text-align:center;margin-bottom:28px;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:{{accent}};">Your AI team</span><h2 style="margin:10px 0 0;font-size:26px;line-height:1.15;font-weight:500;letter-spacing:-0.6px;">Your AI team never clocks out.</h2></div>
+    <div style="display:flex;flex-direction:column;gap:14px;"><div style="background:linear-gradient(150deg,{{accent}} 0%,#1A3FA0 100%);border-radius:24px;padding:24px;box-shadow:0 24px 50px -28px rgba(10,10,10,0.25);"><h3 style="margin:0 0 10px;font-size:20px;font-weight:600;color:#fff;line-height:1.35;">Evolute <span style="display:inline-flex;background:rgba(255,255,255,0.18);padding:2px 12px;border-radius:20px;">matches you</span> in seconds</h3><p style="margin:0 0 20px;font-size:13.5px;color:rgba(255,255,255,0.8);line-height:1.6;">Describe what you need and Evolute finds vetted professionals who actually fit, not just whoever's cheapest.</p><div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 26px 50px -22px rgba(10,20,60,0.5);"><div style="background:#F5F6F8;border-radius:10px;padding:9px 12px;font-size:12px;color:#3A3A3E;margin-bottom:12px;">"Need a web designer, Cape Town, this week"</div><div style="display:flex;flex-direction:column;gap:8px;"><div style="display:flex;align-items:center;gap:10px;" class="evo-row-1"><span style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:{{accent}};color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;">TM</span><div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:600;">Thandi M.</div><div style="font-size:10.5px;color:#6B6B6B;">Web design &middot; 4.9 rating</div></div><span style="background:rgba(14,124,63,0.08);color:#0E7C3F;font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;flex-shrink:0;">Available</span></div><div style="display:flex;align-items:center;gap:10px;" class="evo-row-2"><span style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:{{accent}};color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;">LN</span><div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:600;">Lindiwe N.</div><div style="font-size:10.5px;color:#6B6B6B;">Web design &middot; 4.8 rating</div></div><span style="background:rgba(14,124,63,0.08);color:#0E7C3F;font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;flex-shrink:0;">Available</span></div></div></div></div><div style="background:#17181D;border-radius:24px;padding:24px;box-shadow:0 24px 50px -28px rgba(10,10,10,0.25);"><h3 style="margin:0 0 10px;font-size:20px;font-weight:600;color:#fff;line-height:1.35;">Response Agent <span style="display:inline-flex;background:rgba(255,255,255,0.14);padding:2px 12px;border-radius:20px;">replies</span> before you even open your phone</h3><p style="margin:0 0 20px;font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.6;">Every lead gets a drafted reply in seconds. You just review, adjust and send.</p><div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 26px 50px -22px rgba(0,0,0,0.55);"><div style="display:flex;align-items:center;gap:9px;margin-bottom:12px;"><span style="width:24px;height:24px;border-radius:8px;background:rgba(48,92,222,0.1);display:flex;align-items:center;justify-content:center;color:{{accent}};"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L9.4 6.1L14 7.5L9.4 8.9L8 13.5L6.6 8.9L2 7.5L6.6 6.1Z" fill="currentColor"></path></svg></span><span style="font-size:13px;font-weight:600;">Response Agent</span></div><div style="background:#F5F6F8;border-radius:10px;padding:11px;margin-bottom:10px;"><p style="margin:0;font-size:11.5px;color:#3A3A3E;line-height:1.55;min-height:4.2em;">"{{ replyTyped }}<span class="caret"></span>"</p></div><div style="display:flex;gap:6px;"><span style="padding:5px 10px;border-radius:20px;border:1px solid rgba(10,10,10,0.09);font-size:10px;color:#5C5C5C;">Rephrase</span><span style="padding:5px 10px;border-radius:20px;border:1px solid rgba(10,10,10,0.09);font-size:10px;color:#5C5C5C;">Shorten</span><span style="padding:5px 10px;border-radius:20px;border:1px solid rgba(10,10,10,0.09);font-size:10px;color:#5C5C5C;">Add price</span></div></div></div><div style="background:#17181D;border-radius:24px;padding:24px;box-shadow:0 24px 50px -28px rgba(10,10,10,0.25);"><h3 style="margin:0 0 10px;font-size:20px;font-weight:600;color:#fff;line-height:1.35;">Growth Agent <span style="display:inline-flex;background:rgba(255,255,255,0.14);padding:2px 12px;border-radius:20px;">tells you</span> exactly what to fix</h3><p style="margin:0 0 20px;font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.6;">A weekly digest of what's working, what's not, and one specific action worth taking.</p><div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 26px 50px -22px rgba(0,0,0,0.55);"><div style="font-size:10.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#8A8A8A;margin-bottom:8px;">This week's action</div><p style="margin:0 0 16px;font-size:12px;color:#3A3A3E;line-height:1.55;">Your care plan is 18% below top web designers in Cape Town. Raising it to R790 could add about R420 a month.</p><div style="position:relative;width:100%;height:10px;border-radius:20px;background:#EDEEF0;"><div style="position:absolute;top:0;left:0;height:100%;border-radius:20px;background:linear-gradient(90deg,{{accent}} 0%,#1A3FA0 100%);" class="goal-fill"></div></div><div style="font-size:11px;color:#6B6B6B;margin-top:8px;">R10,500 of R12,000 monthly goal</div></div></div><div style="background:linear-gradient(150deg,{{accent}} 0%,#1A3FA0 100%);border-radius:24px;padding:24px;box-shadow:0 24px 50px -28px rgba(10,10,10,0.25);"><h3 style="margin:0 0 10px;font-size:20px;font-weight:600;color:#fff;line-height:1.35;">Profile Optimiser <span style="display:inline-flex;background:rgba(255,255,255,0.18);padding:2px 12px;border-radius:20px;">rewrites</span> your bio for you</h3><p style="margin:0 0 20px;font-size:13.5px;color:rgba(255,255,255,0.8);line-height:1.6;">Compares your profile to top earners in your category and drafts the fix, not just the feedback.</p><div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 26px 50px -22px rgba(10,20,60,0.5);"><div style="font-size:9.5px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#9A9A9A;margin-bottom:6px;">Current</div><div style="background:#F5F6F8;border-radius:9px;padding:10px;font-size:11px;color:#6B6B6B;line-height:1.5;margin-bottom:12px;">Web designer in Cape Town. I make websites for small businesses.</div><div style="font-size:9.5px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:{{accent}};margin-bottom:6px;">Suggested</div><div style="background:rgba(48,92,222,0.06);border:1px solid rgba(48,92,222,0.14);border-radius:9px;padding:10px;font-size:11px;color:#2A2A2E;line-height:1.5;min-height:4.4em;">{{ bioTyped }}<span class="caret"></span></div></div></div>
+    </div>
+  </div>
+  <div style="background:#F5F6F8;padding:44px 20px;">
+    <h3 style="margin:0 0 20px;font-size:19px;font-weight:600;">For clients</h3>
+    <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:18px;"><div style="display:flex;gap:14px;"><div style="flex-shrink:0;width:30px;height:30px;border-radius:50%;background:{{accent}};color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;">1</div><div><div style="font-size:15px;font-weight:600;margin-bottom:3px;">Describe your need</div><p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">Tell Evolute what you need, where, and when.</p></div></div><div style="display:flex;gap:14px;"><div style="flex-shrink:0;width:30px;height:30px;border-radius:50%;background:{{accent}};color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;">2</div><div><div style="font-size:15px;font-weight:600;margin-bottom:3px;">Get matched instantly</div><p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">AI matches you with vetted professionals nearby.</p></div></div><div style="display:flex;gap:14px;"><div style="flex-shrink:0;width:30px;height:30px;border-radius:50%;background:{{accent}};color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;">3</div><div><div style="font-size:15px;font-weight:600;margin-bottom:3px;">Book with confidence</div><p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">Real reviews, transparent pricing, no guesswork.</p></div></div></div>
+    <a href="ForClients.dc.html" style="font-size:13.5px;font-weight:600;color:{{accent}};">See how it works for clients &rarr;</a>
+    <div style="height:1px;background:rgba(10,10,10,0.08);margin:32px 0;"></div>
+    <h3 style="margin:0 0 20px;font-size:19px;font-weight:600;">For freelancers</h3>
+    <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:18px;"><div style="display:flex;gap:14px;"><div style="flex-shrink:0;width:30px;height:30px;border-radius:50%;background:#0A0A0A;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;">1</div><div><div style="font-size:15px;font-weight:600;margin-bottom:3px;">Build your profile</div><p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">Showcase your skills, portfolio, and pricing.</p></div></div><div style="display:flex;gap:14px;"><div style="flex-shrink:0;width:30px;height:30px;border-radius:50%;background:#0A0A0A;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;">2</div><div><div style="font-size:15px;font-weight:600;margin-bottom:3px;">Get matched by Evolute</div><p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">Leads come to you, already pre-qualified.</p></div></div><div style="display:flex;gap:14px;"><div style="flex-shrink:0;width:30px;height:30px;border-radius:50%;background:#0A0A0A;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;">3</div><div><div style="font-size:15px;font-weight:600;margin-bottom:3px;">Grow with your AI team</div><p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">Response, Growth, and Profile agents work for you.</p></div></div></div>
+    <a href="ForFreelancers.dc.html" style="font-size:13.5px;font-weight:600;color:#0A0A0A;">See how it works for freelancers &rarr;</a>
+  </div>
+  <div style="padding:56px 20px;text-align:center;"><span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:{{accent}};">Why trust Elev8U</span>
+    <h2 style="margin:10px 0 14px;font-size:24px;line-height:1.2;font-weight:500;letter-spacing:-0.5px;">Vetted professionals. Real reviews. No guesswork.</h2>
+    <p style="margin:0;font-size:14px;color:#6B6B6B;line-height:1.65;">Every freelancer is reviewed before they're matched with a client. Every rating comes from a completed, verified booking, never a paid placement.</p>
+  </div>
+  <div style="padding:8px 20px 56px;">
+    <div style="background:linear-gradient(135deg,{{accent}} 0%,#1A3FA0 100%);border-radius:24px;padding:40px 24px;text-align:center;">
+      <h2 style="margin:0 0 24px;font-size:24px;line-height:1.2;font-weight:500;color:#fff;letter-spacing:-0.5px;">Ready to get started?</h2>
+      <div style="display:flex;flex-direction:column;gap:10px;"><a href="ForClients.dc.html" style="display:block;background:#fff;color:{{accent}};font-size:14px;font-weight:600;padding:14px 24px;border-radius:24px;">Find a professional</a><a href="Join.dc.html" style="display:block;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.4);color:#fff;font-size:14px;font-weight:600;padding:13px 24px;border-radius:24px;">Join as a freelancer</a></div>
+    </div>
+  </div>
+
+  <div style="padding:0 20px 34px;">
+    <div style="padding-bottom:26px;border-bottom:1px solid rgba(10,10,10,0.08);">
+      <span style="font-size:18px;letter-spacing:-0.4px;"><span style="color:#0A0A0A;font-weight:500;">Elev</span><span style="color:{{accent}};font-weight:700;">8</span><span style="color:#0A0A0A;font-weight:500;">U</span></span>
+      <p style="margin:10px 0 24px;font-size:12.5px;color:#6B6B6B;line-height:1.6;">Matching skilled South Africans with the people who need them, powered by AI.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;">
+        <div><div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#9A9A9A;margin-bottom:12px;">Product</div><div style="display:flex;flex-direction:column;gap:10px;"><a href="ForFreelancers.dc.html" style="font-size:13px;color:#3A3A3E;">For Freelancers</a><a href="ForClients.dc.html" style="font-size:13px;color:#3A3A3E;">For Clients</a><a href="Pricing.dc.html" style="font-size:13px;color:#3A3A3E;">Pricing</a></div></div>
+        <div><div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#9A9A9A;margin-bottom:12px;">Company</div><div style="display:flex;flex-direction:column;gap:10px;"><a href="#" style="font-size:13px;color:#3A3A3E;">About</a><a href="#" style="font-size:13px;color:#3A3A3E;">Contact</a></div></div>
+        <div><div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#9A9A9A;margin-bottom:12px;">Legal</div><div style="display:flex;flex-direction:column;gap:10px;"><a href="#" style="font-size:13px;color:#3A3A3E;">Privacy</a><a href="#" style="font-size:13px;color:#3A3A3E;">Terms</a></div></div>
+      </div>
+    </div>
+    <p style="margin:20px 0 0;font-size:12px;color:#9A9A9A;line-height:1.5;">&copy; 2026 Elev8U. A Nexarc Technologies company.</p>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#305CDE","options":["#305CDE","#1A3FA0","#4B3FD9","#6B8EE8"]}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    const replyText = "Hi Sipho, yes I can start Monday. A 5-page site is R8,500 with a 3-week delivery.";
+    const bioText = "Freelance web designer, 6 years building sites for Cape Town small businesses.";
+    this._rt = setInterval(() => { this.setState((s) => { const cycle = replyText.length + 55; let c = (s.replyChars ?? 0) + 1; if (c > cycle) c = 0; return { replyChars: c }; }); }, 38);
+    this._bt = setInterval(() => { this.setState((s) => { const cycle = bioText.length + 55; let c = (s.bioChars ?? 0) + 1; if (c > cycle) c = 0; return { bioChars: c }; }); }, 34);
+  }
+  componentWillUnmount() { clearInterval(this._rt); clearInterval(this._bt); }
+
+  renderVals() {
+    const s = this.state || {};
+    const open = !!s.menuOpen;
+    const EO = 'cubic-bezier(0.76, 0, 0.24, 1)';
+    const replyText = "Hi Sipho, yes I can start Monday. A 5-page site is R8,500 with a 3-week delivery.";
+    const bioText = "Freelance web designer, 6 years building sites for Cape Town small businesses.";
+    const rc = Math.min(s.replyChars ?? 0, replyText.length);
+    const bc = Math.min(s.bioChars ?? 0, bioText.length);
+
+    return {
+      accent: this.props.accent ?? '#305CDE',
+      menuOpen: open,
+      toggleMenu: () => this.setState({ menuOpen: !open }),
+      bar1Style: 'display:block;width:22px;height:2px;background:#0A0A0A;transition:transform 400ms ' + EO + ';transform:' + (open ? 'translateY(4px) rotate(45deg)' : 'none') + ';',
+      bar2Style: 'display:block;width:22px;height:2px;background:#0A0A0A;transition:transform 400ms ' + EO + ';transform:' + (open ? 'translateY(-4px) rotate(-45deg)' : 'none') + ';',
+      replyTyped: replyText.slice(0, rc),
+      bioTyped: bioText.slice(0, bc)
+    };
+  }
+}
+</script>
+</body>
+</html>

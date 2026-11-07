@@ -285,6 +285,42 @@
       "w": 1200,
       "h": 630,
       "title": "Waitlist share image"
+    },
+    "HomeMobile.dc.html": {
+      "x": 0,
+      "y": 11500,
+      "w": 390,
+      "h": 844,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "Home (Mobile)"
+    },
+    "PricingMobile.dc.html": {
+      "x": 470,
+      "y": 11500,
+      "w": 390,
+      "h": 844,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "Pricing (Mobile)"
+    },
+    "ForFreelancersMobile.dc.html": {
+      "x": 940,
+      "y": 11500,
+      "w": 390,
+      "h": 844,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "For Freelancers (Mobile)"
+    },
+    "ForClientsMobile.dc.html": {
+      "x": 1410,
+      "y": 11500,
+      "w": 390,
+      "h": 844,
+      "expand": "fill",
+      "is_interactive": true,
+      "title": "For Clients (Mobile)"
     }
   },
   "order": [
