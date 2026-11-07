@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elev8U — Apply: Verify identity</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; font-family:'Google Sans Flex','Google Sans',system-ui,-apple-system,sans-serif; background:#FFFFFF; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  button { font-family:inherit; cursor:pointer; }
+  input, select, textarea { font-family:inherit; }
+  input:focus, select:focus, textarea:focus { outline:2px solid #305CDE; outline-offset:1px; }
+</style>
+</helmet>
+<div style="width:100%;min-height:900px;background:#FFFFFF;color:#0A0A0A;box-sizing:border-box;">
+  <div style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1280px;margin:0 auto;padding:28px 40px;box-sizing:border-box;"><span style="font-size:21px;letter-spacing:-0.4px;"><span style="color:#0A0A0A;font-weight:500;">Elev</span><span style="color:{{accent}};font-weight:700;">8</span><span style="color:#0A0A0A;font-weight:500;">U</span></span><a href="Home.dc.html" style="font-size:13px;font-weight:500;color:#6B6B6B;">Save &amp; exit</a></div>
+  <div style="max-width:560px;margin:0 auto;padding:10px 40px 80px;box-sizing:border-box;">
+    <div style="display:flex;gap:6px;margin-bottom:14px;"><div style="flex:1;height:4px;border-radius:4px;background:{{accent}};"></div><div style="flex:1;height:4px;border-radius:4px;background:{{accent}};"></div><div style="flex:1;height:4px;border-radius:4px;background:{{accent}};"></div><div style="flex:1;height:4px;border-radius:4px;background:{{accent}};"></div><div style="flex:1;height:4px;border-radius:4px;background:{{accent}};"></div><div style="flex:1;height:4px;border-radius:4px;background:#E6E7EB;"></div></div><div style="font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:{{accent}};margin-bottom:10px;">Step 5 of 6</div><h1 style="margin:0 0 8px;font-size:32px;font-weight:700;letter-spacing:-0.8px;line-height:1.15;">Verify your identity</h1><p style="margin:0 0 30px;font-size:14.5px;color:#6B6B6B;line-height:1.6;">This earns you the ID Verified badge, one of the biggest trust signals on your profile.</p><div style="display:inline-flex;align-items:flex-start;gap:9px;background:#F5F6F8;border-radius:22px;padding:9px 16px 9px 13px;margin-bottom:22px;"><span style="margin-top:1px;flex-shrink:0;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><span style="font-size:12px;font-weight:600;color:#3A3A3E;line-height:1.5;">Encrypted and seen only by our review team. Deleted once you’re verified.</span></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px;"><label for="id-sa" style="display:flex;align-items:center;gap:12px;border:1.5px solid {{accent}};background:rgba(48,92,222,0.04);border-radius:16px;padding:14px 16px;cursor:pointer;"><input type="radio" name="idtype" id="id-sa" checked style="accent-color:{{accent}};width:16px;height:16px;margin:0;"><span><span style="display:block;font-size:13.5px;font-weight:600;">South African ID</span><span style="display:block;font-size:12px;color:#6B6B6B;">Smart card or green book</span></span></label><label for="id-pp" style="display:flex;align-items:center;gap:12px;border:1.5px solid rgba(10,10,10,0.1);background:#fff;border-radius:16px;padding:14px 16px;cursor:pointer;"><input type="radio" name="idtype" id="id-pp"  style="accent-color:{{accent}};width:16px;height:16px;margin:0;"><span><span style="display:block;font-size:13.5px;font-weight:600;">Passport</span><span style="display:block;font-size:12px;color:#6B6B6B;">Any country</span></span></label></div><div style="margin-bottom:18px;"><label for="idnum" style="display:block;font-size:12.5px;font-weight:600;margin-bottom:7px;">ID number</label><input id="idnum" type="text" placeholder="13-digit ID number" style="width:100%;box-sizing:border-box;height:48px;border:1px solid rgba(10,10,10,0.12);border-radius:14px;padding:0 16px;font-size:14px;color:#0A0A0A;background:#fff;"></div><div style="margin-bottom:18px;"><div style="display:block;font-size:12.5px;font-weight:600;margin-bottom:7px;">Photo of your document</div><button type="button" aria-label="Upload a clear photo" style="width:100%;height:96px;border:1.5px dashed rgba(10,10,10,0.18);border-radius:16px;background:#FAFAFB;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#3A3A3E;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6B6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/></svg><span style="font-size:13px;font-weight:600;">Upload a clear photo</span><span style="font-size:11.5px;color:#9A9A9A;">JPG or PNG. All four corners visible.</span></button></div><div style="margin-bottom:6px;"><div style="display:block;font-size:12.5px;font-weight:600;margin-bottom:7px;">Selfie</div><button type="button" aria-label="Take or upload a selfie" style="width:100%;height:96px;border:1.5px dashed rgba(10,10,10,0.18);border-radius:16px;background:#FAFAFB;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#3A3A3E;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6B6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/></svg><span style="font-size:13px;font-weight:600;">Take or upload a selfie</span><span style="font-size:11.5px;color:#9A9A9A;">Good light, face the camera, no sunglasses.</span></button></div><p style="margin:7px 0 0;font-size:12px;color:#6B6B6B;line-height:1.5;">We compare your face to your document by eye. Nothing from this step appears on your public profile except the badge.</p><div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:30px;">
+      <a href="Apply4About.dc.html" style="font-size:13.5px;font-weight:600;color:#6B6B6B;">← Back</a>
+      <a href="Apply6Review.dc.html" style="background:{{accent}};color:#fff;font-size:14px;font-weight:600;padding:14px 36px;border-radius:26px;">Continue</a>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#305CDE","options":["#305CDE","#1A3FA0","#4B3FD9","#6B8EE8"]}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      accent: this.props.accent ?? '#305CDE'
+    };
+  }
+}
+</script>
+</body>
+</html>

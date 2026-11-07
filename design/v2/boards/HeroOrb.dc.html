@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hero orb concept</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; font-family:'Google Sans Flex','Google Sans',system-ui,-apple-system,sans-serif; }
+
+  @keyframes blobA {
+    0%, 100% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; transform: rotate(0deg) scale(1); }
+    33% { border-radius: 62% 38% 35% 65% / 55% 68% 32% 45%; transform: rotate(10deg) scale(1.05); }
+    66% { border-radius: 35% 65% 58% 42% / 40% 33% 67% 60%; transform: rotate(-8deg) scale(0.97); }
+  }
+  @keyframes blobB {
+    0%, 100% { border-radius: 58% 42% 33% 67% / 38% 58% 42% 62%; transform: rotate(0deg) scale(1); }
+    50% { border-radius: 38% 62% 62% 38% / 60% 40% 60% 40%; transform: rotate(-12deg) scale(1.06); }
+  }
+  @keyframes blobC {
+    0%, 100% { border-radius: 48% 52% 40% 60% / 55% 45% 55% 45%; transform: rotate(0deg) scale(1); }
+    40% { border-radius: 65% 35% 60% 40% / 42% 60% 40% 58%; transform: rotate(9deg) scale(0.96); }
+    75% { border-radius: 40% 60% 45% 55% / 65% 50% 50% 35%; transform: rotate(-6deg) scale(1.03); }
+  }
+  @keyframes glassDrift {
+    0%, 100% { border-radius: 46% 54% 52% 48% / 50% 48% 52% 50%; transform: rotate(0deg); }
+    50% { border-radius: 52% 48% 46% 54% / 48% 52% 48% 52%; transform: rotate(6deg); }
+  }
+  @keyframes sheen {
+    0% { background-position: -160% -60%; }
+    100% { background-position: 160% 60%; }
+  }
+
+  .blob { position:absolute; filter:blur(46px); }
+  .blobA { animation: blobA 16s ease-in-out infinite; }
+  .blobB { animation: blobB 21s ease-in-out infinite; }
+  .blobC { animation: blobC 13s ease-in-out infinite; }
+</style>
+</helmet>
+<div style="width:720px;height:720px;box-sizing:border-box;background:#FFFFFF;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+
+  <div style="position:relative;width:540px;height:540px;">
+
+    <div class="blob blobA" style="top:30px;right:10px;width:320px;height:320px;background:{{accent}};opacity:0.68;"></div>
+    <div class="blob blobB" style="top:-10px;left:40px;width:280px;height:280px;background:#6B8EE8;opacity:0.55;"></div>
+    <div class="blob blobC" style="bottom:10px;left:60px;width:260px;height:260px;background:#4B3FD9;opacity:0.5;"></div>
+
+    <div style="position:absolute;top:0;left:0;width:540px;height:540px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0) 0%,rgba(255,255,255,0.35) 62%,rgba(255,255,255,0.85) 82%,#FFFFFF 100%);pointer-events:none;"></div>
+
+    <div style="animation: glassDrift 24s ease-in-out infinite; position:absolute;top:70px;left:70px;width:400px;height:400px;background:rgba(255,255,255,0.42);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.7);box-shadow:0 8px 40px rgba(48,92,222,0.14), inset 0 1px 1px rgba(255,255,255,0.9);"></div>
+
+    <div style="position:absolute;top:70px;left:70px;width:400px;height:400px;border-radius:50%;overflow:hidden;pointer-events:none;">
+      <div style="animation: sheen 9s linear infinite; position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(115deg, rgba(255,255,255,0) 42%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 58%); background-size:60% 60%; background-repeat:no-repeat;"></div>
+    </div>
+
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#305CDE","options":["#305CDE","#1A3FA0","#4B3FD9","#6B8EE8"]},"$preview":{"width":720,"height":720}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      accent: this.props.accent ?? '#305CDE'
+    };
+  }
+}
+</script>
+</body>
+</html>

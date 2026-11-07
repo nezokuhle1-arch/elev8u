@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elev8U — Waitlist (Mobile)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; font-family:'Google Sans Flex','Google Sans',system-ui,-apple-system,sans-serif; background:#05070D; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  button { font-family:inherit; cursor:pointer; }
+  input:focus { outline:none; }
+  input::placeholder { color:rgba(255,255,255,0.5); }
+  .pill:focus-within { box-shadow:0 0 0 2px rgba(255,255,255,0.7); }
+  .nv:hover { background:rgba(255,255,255,0.1) !important; }
+  .ol:hover { opacity:0.6 !important; }
+  .cta:hover { background:rgba(255,255,255,0.9) !important; }
+  @keyframes blobA { 0%,100% { border-radius:42% 58% 70% 30% / 45% 45% 55% 55%; transform:rotate(0deg) scale(1); } 33% { border-radius:62% 38% 35% 65% / 55% 68% 32% 45%; transform:rotate(10deg) scale(1.05); } 66% { border-radius:35% 65% 58% 42% / 40% 33% 67% 60%; transform:rotate(-8deg) scale(0.97); } }
+  @keyframes blobB { 0%,100% { border-radius:58% 42% 33% 67% / 38% 58% 42% 62%; transform:rotate(0deg) scale(1); } 50% { border-radius:38% 62% 62% 38% / 60% 40% 60% 40%; transform:rotate(-12deg) scale(1.06); } }
+  @keyframes blobC { 0%,100% { border-radius:48% 52% 40% 60% / 55% 45% 55% 45%; transform:rotate(0deg) scale(1); } 40% { border-radius:65% 35% 60% 40% / 42% 60% 40% 58%; transform:rotate(9deg) scale(0.96); } 75% { border-radius:40% 60% 45% 55% / 65% 50% 50% 35%; transform:rotate(-6deg) scale(1.03); } }
+  @keyframes glassDrift { 0%,100% { border-radius:46% 54% 52% 48% / 50% 48% 52% 50%; transform:rotate(0deg); } 50% { border-radius:52% 48% 46% 54% / 48% 52% 48% 52%; transform:rotate(6deg); } }
+  @keyframes sheen { 0% { background-position:-160% -60%; } 100% { background-position:160% 60%; } }
+  @keyframes traceOn { from { stroke-dashoffset:1; } to { stroke-dashoffset:0; } }
+  @keyframes caretBlink { 0%,45% { opacity:1; } 50%,95% { opacity:0; } 100% { opacity:1; } }
+  .caret { display:inline-block; width:2px; height:1em; background:#9DB4FF; vertical-align:text-bottom; margin-left:2px; animation:caretBlink 0.9s step-end infinite; }
+  @keyframes dashRise { from { opacity:0; transform:translateY(90px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes twinkle { 0%,100% { opacity:0.25; transform:scale(0.8); } 50% { opacity:1; transform:scale(1.15); } }
+  .caretA { display:inline-block; width:2px; height:1em; background:#305CDE; vertical-align:text-bottom; margin-left:2px; animation:caretBlink 0.9s step-end infinite; }
+  .star { position:absolute; animation:twinkle 3.6s ease-in-out infinite; }
+  @supports (animation-timeline: view()) { .dashRise { animation:dashRise linear both; animation-timeline:view(); animation-range:entry 0% cover 32%; } }
+  .agrow:hover { background:rgba(255,255,255,0.08) !important; }
+  .blob { position:absolute; }
+  .blobA { animation:blobA 16s ease-in-out infinite; }
+  .blobB { animation:blobB 21s ease-in-out infinite; }
+  .blobC { animation:blobC 13s ease-in-out infinite; }
+  .trace { stroke-dasharray:1; stroke-dashoffset:1; animation:traceOn 4.5s ease-in-out 0.6s forwards; }
+  @media (prefers-reduced-motion: reduce) {
+    .blobA, .blobB, .blobC { animation:none; }
+    .trace { animation:none; stroke-dashoffset:0; }
+  }
+</style>
+</helmet>
+<div style="width:100%;background:#05070D;box-sizing:border-box;overflow-x:hidden;">
+  <div style="{{ navBarStyle }}"><div style="display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 24px;box-sizing:border-box;"><a href="#top" style="{{ logoStyle }}">Elev<span style="color:#7C9BF0;font-weight:700;">8</span>U</a><button type="button" aria-label="Toggle menu" aria-expanded="{{ menuOpen }}" onClick="{{ toggleMenu }}" style="{{ hamStyle }}"><span style="{{ bar1Style }}"></span><span style="{{ bar2Style }}"></span></button></div></div>
+  <div style="{{ overlayStyle }}"><sc-for list="{{ links }}" as="item" hint-placeholder-count="5"><a class="ol" href="{{ item.href }}" onClick="{{ item.close }}" style="{{ item.style }}">{{ item.label }}</a></sc-for></div>
+  <section id="top" style="position:relative;width:100%;height:100vh;min-height:780px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(ellipse at 50% 30%,#102B66 0%,#0A1628 42%,#05070D 100%);">
+    <div style="{{ bgStyle }}"><div style="position:absolute;left:50%;top:250px;width:430px;height:430px;transform:translate(-50%,-50%);">
+      <div class="blob blobA" style="top:24px;right:5px;width:254px;height:254px;background:{{accent}};opacity:0.85;filter:blur(45px);"></div>
+      <div class="blob blobB" style="top:-10px;left:29px;width:225px;height:225px;background:#6B8EE8;opacity:0.6;filter:blur(45px);"></div>
+      <div class="blob blobC" style="bottom:5px;left:44px;width:205px;height:205px;background:#4B3FD9;opacity:0.7;filter:blur(45px);"></div>
+      <div style="position:absolute;top:0;left:0;width:430px;height:430px;border-radius:50%;background:radial-gradient(circle,rgba(5,7,13,0) 0%,rgba(5,7,13,0) 58%,rgba(5,7,13,0.65) 80%,#05070D 100%);pointer-events:none;"></div>
+      <div style="animation:glassDrift 24s ease-in-out infinite;position:absolute;top:54px;left:54px;width:322px;height:322px;background:rgba(255,255,255,0.06);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.22);box-shadow:0 0 90px rgba(48,92,222,0.4), inset 0 1px 1px rgba(255,255,255,0.4);"></div>
+      <div style="position:absolute;top:54px;left:54px;width:322px;height:322px;border-radius:50%;overflow:hidden;pointer-events:none;"><div style="animation:sheen 9s linear infinite;position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(115deg,rgba(255,255,255,0) 42%,rgba(255,255,255,0.35) 50%,rgba(255,255,255,0) 58%);background-size:60% 60%;background-repeat:no-repeat;"></div></div>
+      <svg role="img" aria-label="Elev8U infinity mark" viewBox="0 0 120 60" width="166" height="83" fill="none" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+        <path d="M60 30 C48 12 14 12 14 30 C14 48 48 48 60 30 C72 12 106 12 106 30 C106 48 72 48 60 30 Z" stroke="#fff" stroke-opacity="0.14" stroke-width="2.6" stroke-linejoin="round"/>
+        <path class="trace" pathLength="1" d="M60 30 C48 12 14 12 14 30 C14 48 48 48 60 30 C72 12 106 12 106 30 C106 48 72 48 60 30 Z" stroke="#C7D6FF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:68%;background:linear-gradient(to top,rgba(5,7,13,0.92) 0%,rgba(5,7,13,0.55) 55%,rgba(5,7,13,0) 100%);pointer-events:none;"></div>
+    <div style="position:relative;z-index:10;text-align:center;padding:0 24px 64px;max-width:900px;margin:0 auto;box-sizing:border-box;width:100%;">
+      <h1 style="{{ h1Style }}"><span style="color:rgba(255,255,255,0.55);">The work is already here.</span><br><span style="color:#fff;font-weight:600;">V2 makes it effortless.</span></h1><p style="{{ subStyle }}">Elev8U freelancers are already getting booked. V2 brings AI agents that draft your replies, grow your leads and handle the admin.</p><div style="{{ ctaWrapStyle }}">
+      <sc-if value="{{ notJoined }}" hint-placeholder-val="{{ true }}">
+        <div class="pill" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.22);border-radius:30px;padding:7px 7px 7px 22px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);">
+          <label for="wl-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Email address</label>
+          <input id="wl-email" type="email" placeholder="Your email address" style="flex:1;min-width:0;border:none;font-size:14.5px;color:#fff;background:transparent;font-family:inherit;"/>
+          <button type="button" class="cta" onClick="{{ join }}" aria-label="Join the waitlist" style="flex-shrink:0;height:46px;width:46px;padding:0;border-radius:50%;border:none;background:#fff;color:#0A0A0A;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <p style="margin:14px 0 0;font-size:13px;color:rgba(255,255,255,0.6);">You&rsquo;ll be <strong style="color:#fff;">#48</strong> on the list.</p>
+        <p style="margin:10px 0 0;font-size:12px;color:rgba(255,255,255,0.45);line-height:1.5;">By joining you agree to get launch emails from Elev8U. See our <a href="#" style="color:rgba(255,255,255,0.7);text-decoration:underline;">Privacy Policy</a>.</p>
+      </sc-if>
+      <sc-if value="{{ joined }}" hint-placeholder-val="{{ false }}">
+        <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:24px;padding:22px 20px;">
+          <span style="width:44px;height:44px;border-radius:50%;border:2px solid #C7D6FF;display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C7D6FF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span>
+          <div style="font-size:22px;font-weight:700;letter-spacing:-0.5px;color:#fff;margin-bottom:8px;">You&rsquo;re #48 on the list.</div>
+          <p style="margin:0 0 12px;font-size:13.5px;color:rgba(255,255,255,0.7);line-height:1.6;">We&rsquo;ve sent a confirmation from hello@elev8u.co.za. We&rsquo;ll email you the moment V2 opens.</p>
+          <a href="#top" onClick="{{ reset }}" style="font-size:12.5px;font-weight:600;color:#C7D6FF;">Use a different email</a>
+        </div>
+      </sc-if>
+    </div>
+    </div>
+  </section>
+  <section id="preview" style="position:relative;background:#05070D;color:#fff;overflow:hidden;">
+      <div style="max-width:900px;margin:0 auto;padding:30px 20px 30px;text-align:center;box-sizing:border-box;position:relative;z-index:3;">
+        <span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#9DB4FF;">A first look &middot; sample data</span>
+        <h2 style="margin:12px 0 14px;font-size:30px;font-weight:500;letter-spacing:-1px;line-height:1.05;"><span style="color:rgba(255,255,255,0.55);">Every lead, booking and reply.</span><br><span style="font-weight:600;">One calm dashboard.</span></h2>
+        <p style="margin:0 auto;max-width:480px;font-size:14.5px;line-height:1.65;color:rgba(255,255,255,0.65);">A first look at the V2 dashboard. There&rsquo;s a lot more inside.</p>
+      </div>
+      <div style="position:relative;max-width:1180px;margin:0 auto;height:560px;overflow:hidden;padding:0 16px;box-sizing:border-box;">
+        <div style="position:absolute;left:50%;top:30px;transform:translateX(-50%);width:700px;height:500px;border-radius:50%;border-top:1px solid rgba(157,180,255,0.5);background:radial-gradient(ellipse at 50% 0%,rgba(48,92,222,0.34) 0%,rgba(48,92,222,0) 62%);pointer-events:none;"></div>
+        <svg class="star" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="left:12%;top:90px;animation-delay:0.4s;"><path d="M12 1l2.2 8.8L23 12l-8.8 2.2L12 23l-2.2-8.8L1 12l8.8-2.2z" fill="#C7D6FF"/></svg>
+        <svg class="star" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" style="right:10%;top:60px;animation-delay:1.6s;"><path d="M12 1l2.2 8.8L23 12l-8.8 2.2L12 23l-2.2-8.8L1 12l8.8-2.2z" fill="#fff"/></svg>
+        <svg class="star" width="10" height="10" viewBox="0 0 24 24" aria-hidden="true" style="right:18%;top:260px;animation-delay:2.4s;"><path d="M12 1l2.2 8.8L23 12l-8.8 2.2L12 23l-2.2-8.8L1 12l8.8-2.2z" fill="#9DB4FF"/></svg>
+        <div class="dashRise" style="position:relative;margin-top:20px;perspective:2200px;">
+          <div id="dash-peek" style="transform:rotateX(5deg);transform-origin:50% 100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.24);border-radius:26px;padding:8px;box-shadow:0 0 70px rgba(48,92,222,0.5),0 50px 90px -30px rgba(0,0,0,0.7),inset 0 1px 1px rgba(255,255,255,0.45);">
+            <div style="background:#F5F6F8;border-radius:20px;padding:18px 16px;text-align:left;color:#0A0A0A;"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px;"><div><div style="font-size:17px;font-weight:600;letter-spacing:-0.5px;line-height:1.2;">Hey, Thandi &mdash; here&rsquo;s your week at a glance</div><div style="font-size:12px;color:#6B6B6B;margin-top:5px;">Web designer &middot; Cape Town</div></div><div style="display:flex;gap:10px;flex-shrink:0;"><span style="width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:0 4px 12px -4px rgba(10,10,10,0.2);display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3A3A3E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></span><span style="width:34px;height:34px;border-radius:50%;background:{{accent}};color:#fff;font-size:11.5px;font-weight:600;display:flex;align-items:center;justify-content:center;">TM</span></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;"><div style="position:relative;background:linear-gradient(135deg,{{accent}} 0%,#1A3FA0 100%);box-shadow:0 18px 34px -18px rgba(26,63,160,0.6);border-radius:20px;padding:15px 17px;"><div style="font-size:11.5px;color:rgba(255,255,255,0.8);">New leads</div><span style="position:absolute;top:11px;right:12px;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span><div style="font-size:28px;font-weight:700;letter-spacing:-1px;color:#fff;margin-top:14px;line-height:1;">3</div><div style="font-size:11px;color:rgba(255,255,255,0.85);margin-top:6px;">+2 this week</div></div><div style="position:relative;background:#fff;border:1px solid rgba(10,10,10,0.05);box-shadow:0 14px 30px -20px rgba(10,10,10,0.2);border-radius:20px;padding:15px 17px;"><div style="font-size:11.5px;color:#6B6B6B;">Bookings</div><span style="position:absolute;top:11px;right:12px;width:24px;height:24px;border-radius:50%;background:#F1F1F3;display:flex;align-items:center;justify-content:center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#3A3A3E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span><div style="font-size:28px;font-weight:700;letter-spacing:-1px;color:#0A0A0A;margin-top:14px;line-height:1;">2</div><div style="font-size:11px;color:#6B6B6B;margin-top:6px;">1 upcoming</div></div><div style="position:relative;background:linear-gradient(135deg,{{accent}} 0%,#1A3FA0 100%);box-shadow:0 18px 34px -18px rgba(26,63,160,0.6);border-radius:20px;padding:15px 17px;"><div style="font-size:11.5px;color:rgba(255,255,255,0.8);">Rating</div><span style="position:absolute;top:11px;right:12px;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span><div style="font-size:28px;font-weight:700;letter-spacing:-1px;color:#fff;margin-top:14px;line-height:1;">4.9</div><div style="font-size:11px;color:rgba(255,255,255,0.85);margin-top:6px;">47 reviews</div></div><div style="position:relative;background:#fff;border:1px solid rgba(10,10,10,0.05);box-shadow:0 14px 30px -20px rgba(10,10,10,0.2);border-radius:20px;padding:15px 17px;"><div style="font-size:11.5px;color:#6B6B6B;">Profile views</div><span style="position:absolute;top:11px;right:12px;width:24px;height:24px;border-radius:50%;background:#F1F1F3;display:flex;align-items:center;justify-content:center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#3A3A3E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></span><div style="font-size:28px;font-weight:700;letter-spacing:-1px;color:#0A0A0A;margin-top:14px;line-height:1;">128</div><div style="font-size:11px;color:{{accent}};margin-top:6px;">&uarr; 18% this week</div></div></div><div><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:11px;"><span style="font-size:13.5px;font-weight:600;">New leads</span><span style="font-size:11.5px;font-weight:500;color:{{accent}};">View all &rsaquo;</span></div><div style="display:flex;flex-direction:column;gap:12px;"><div style="background:#fff;border:1px solid rgba(10,10,10,0.05);border-radius:16px;padding:15px 17px;box-shadow:0 14px 30px -22px rgba(10,10,10,0.2);"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:13px;font-weight:600;">Sipho Dlamini</span><span style="margin-left:auto;background:rgba(48,92,222,0.1);color:{{accent}};font-size:10px;font-weight:600;padding:2px 9px;border-radius:12px;">New</span><span style="font-size:10.5px;color:#6B6B6B;">2m ago</span></div><div style="font-size:12px;color:#3A3A3E;line-height:1.5;margin-top:6px;">Need a 5-page website for my accounting practice. Hoping to start next week.</div><div style="display:flex;gap:6px;margin-top:9px;"><span style="background:rgba(48,92,222,0.08);color:{{accent}};font-size:10.5px;font-weight:600;padding:3px 10px;border-radius:20px;">R8,000&ndash;R10,000</span><span style="background:#F1F1F3;color:#3A3A3E;font-size:10.5px;font-weight:500;padding:3px 10px;border-radius:20px;">Next week</span></div><div style="display:flex;gap:8px;margin-top:12px;"><span style="flex:1;text-align:center;background:{{accent}};color:#fff;font-size:12px;font-weight:600;padding:9px;border-radius:9px;">Accept</span><span style="border:1px solid rgba(10,10,10,0.1);color:#3A3A3E;font-size:12px;font-weight:500;padding:9px 18px;border-radius:9px;">Decline</span></div></div><div style="background:#fff;border:1px solid rgba(10,10,10,0.05);border-radius:16px;padding:15px 17px;box-shadow:0 14px 30px -22px rgba(10,10,10,0.2);"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:13px;font-weight:600;">Naledi Peters</span><span style="margin-left:auto;background:#F1F1F3;color:#3A3A3E;font-size:10px;font-weight:600;padding:2px 9px;border-radius:12px;">Reviewing</span><span style="font-size:10.5px;color:#6B6B6B;">1h ago</span></div><div style="font-size:12px;color:#3A3A3E;line-height:1.5;margin-top:6px;">Care plan and a refresh for our caf&eacute; site, mainly hosting and updates.</div><div style="display:flex;gap:6px;margin-top:9px;"><span style="background:rgba(48,92,222,0.08);color:{{accent}};font-size:10.5px;font-weight:600;padding:3px 10px;border-radius:20px;">R650/month</span><span style="background:#F1F1F3;color:#3A3A3E;font-size:10.5px;font-weight:500;padding:3px 10px;border-radius:20px;">This week</span></div></div></div></div><div style="height:12px;"></div><div style="background:#fff;border:1px solid rgba(10,10,10,0.05);border-radius:20px;padding:16px;box-shadow:0 18px 40px -26px rgba(10,10,10,0.25);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><span style="width:28px;height:28px;border-radius:9px;background:rgba(48,92,222,0.1);display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></span><div><div style="font-size:12.5px;font-weight:600;">Response Agent</div><div style="font-size:10.5px;color:#6B6B6B;">Drafted for Sipho&rsquo;s lead</div></div></div>
+      <div style="background:#F5F6F8;border-radius:12px;padding:12px 13px;font-size:11.5px;line-height:1.6;color:#3A3A3E;min-height:84px;box-sizing:border-box;">&ldquo;{{ dashTyped }}<span class="caretA"></span></div>
+      <div style="display:flex;gap:6px;margin-top:11px;flex-wrap:wrap;"><span style="border:1px solid rgba(10,10,10,0.1);font-size:10.5px;padding:5px 11px;border-radius:16px;color:#3A3A3E;">Rephrase</span><span style="border:1px solid rgba(10,10,10,0.1);font-size:10.5px;padding:5px 11px;border-radius:16px;color:#3A3A3E;">Shorten</span><span style="border:1px solid rgba(10,10,10,0.1);font-size:10.5px;padding:5px 11px;border-radius:16px;color:#3A3A3E;">Add price</span></div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:11px;"><div style="flex:1;border:1px solid rgba(10,10,10,0.1);border-radius:12px;padding:10px 12px;font-size:11px;color:#9A9A9A;">Ask AI to adjust the reply&hellip;</div><span style="width:32px;height:32px;border-radius:50%;background:{{accent}};display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M7.5 12V3M7.5 3L3.5 7M7.5 3L11.5 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    </div></div>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:58%;background:linear-gradient(to top,#05070D 6%,rgba(5,7,13,0.85) 40%,rgba(5,7,13,0) 100%);pointer-events:none;"></div>
+        <div style="position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:999px;padding:9px 20px;font-size:13px;font-weight:500;color:#fff;white-space:nowrap;">More inside<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+    </section><section id="coming" style="background:#05070D;color:#fff;padding-bottom:70px;">
+      <div style="max-width:1280px;margin:0 auto;padding:60px 20px 0;box-sizing:border-box;">
+        <div style="text-align:center;margin-bottom:30px;">
+          <span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#9DB4FF;">Meet your AI team</span>
+          <h2 style="margin:12px 0 14px;font-size:30px;font-weight:500;letter-spacing:-1px;line-height:1.05;"><span style="color:rgba(255,255,255,0.55);">Your best work shouldn&rsquo;t wait on admin.</span><br><span style="font-weight:600;">Four agents that never clock out.</span></h2>
+          <p style="margin:0 auto;max-width:520px;font-size:14.5px;line-height:1.65;color:rgba(255,255,255,0.65);">Built into your dashboard. They handle the replies, the fixes, the planning and the numbers, so you can get back to the work.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr;gap:0px;align-items:start;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;"><button type="button" onClick="{{ pick0 }}" style="{{ row0Style }}"><span style="display:flex;align-items:center;gap:10px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span style="font-size:13px;font-weight:600;color:#fff;text-align:left;line-height:1.2;">Response Agent</span></span><span style="{{ prog0Style }}"></span></button><button type="button" onClick="{{ pick1 }}" style="{{ row1Style }}"><span style="display:flex;align-items:center;gap:10px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><span style="font-size:13px;font-weight:600;color:#fff;text-align:left;line-height:1.2;">Profile Optimiser</span></span><span style="{{ prog1Style }}"></span></button><button type="button" onClick="{{ pick2 }}" style="{{ row2Style }}"><span style="display:flex;align-items:center;gap:10px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;"><path d="M5 20V10"/><path d="M12 20V4"/><path d="M19 20v-7"/></svg><span style="font-size:13px;font-weight:600;color:#fff;text-align:left;line-height:1.2;">Growth Agent</span></span><span style="{{ prog2Style }}"></span></button><button type="button" onClick="{{ pick3 }}" style="{{ row3Style }}"><span style="display:flex;align-items:center;gap:10px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;"><path d="M4 7h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a1 1 0 0 1-1-1V7z"/><path d="M4 7a2 2 0 0 1 2-2h10"/><circle cx="16" cy="13.5" r="1.2"/></svg><span style="font-size:13px;font-weight:600;color:#fff;text-align:left;line-height:1.2;">Financial Analysis Agent</span></span><span style="{{ prog3Style }}"></span></button></div>
+          <div style="position:relative;"><div style="position:absolute;top:10%;left:10%;right:10%;bottom:10%;background:radial-gradient(ellipse,rgba(48,92,222,0.45) 0%,rgba(48,92,222,0) 70%);filter:blur(40px);pointer-events:none;"></div>
+        <div style="position:relative;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);border-radius:28px;padding:20px;min-height:440px;box-sizing:border-box;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 40px 80px -40px rgba(48,92,222,0.5),inset 0 1px 1px rgba(255,255,255,0.18);"><sc-if value="{{ s0 }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.5);">New lead &middot; Sipho D. &middot; just now</div>
+      <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:16px;border-radius:18px 18px 18px 4px;padding:16px 18px;font-size:14.5px;line-height:1.55;color:#fff;max-width:100%;box-sizing:border-box;">Hi, I need a 5-page website for my accounting practice. Can you start next week?</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:#9DB4FF;margin-top:6px;"><span style="width:7px;height:7px;border-radius:50%;background:#9DB4FF;box-shadow:0 0 10px #9DB4FF;"></span>Response Agent is drafting</div>
+      <div style="border:1px solid rgba(157,180,255,0.5);background:rgba(48,92,222,0.16);border-radius:18px 18px 4px 18px;padding:16px 18px;font-size:14.5px;line-height:1.6;color:#fff;min-height:110px;box-sizing:border-box;">{{ replyTyped }}<span class="caret"></span></div>
+      <div style="display:flex;justify-content:flex-end;gap:10px;"><span style="border:1px solid rgba(255,255,255,0.25);color:#fff;font-size:13px;font-weight:600;padding:9px 20px;border-radius:22px;">Edit</span><span style="{{ sendStyle }}">Send</span></div>
+    </div></sc-if><sc-if value="{{ s1 }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:22px;">
+      <div style="display:flex;gap:20px;align-items:center;flex-direction:column;align-items:flex-start;">
+        <div style="position:relative;width:150px;height:150px;flex-shrink:0;">
+          <svg width="150" height="150" viewBox="0 0 150 150" aria-hidden="true" style="transform:rotate(-90deg);"><circle cx="75" cy="75" r="60" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="12"/><circle cx="75" cy="75" r="60" fill="none" stroke="#9DB4FF" stroke-width="12" stroke-linecap="round" stroke-dasharray="377" stroke-dashoffset="{{ ringOffset }}"/></svg>
+          <div style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span style="font-size:34px;font-weight:700;letter-spacing:-1px;color:#fff;line-height:1;">{{ ringPct }}%</span><span style="font-size:11px;color:rgba(255,255,255,0.55);margin-top:4px;">Profile strength</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;"><div style="display:flex;align-items:center;gap:12px;"><span style="{{ c1Style }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#05070D" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{ m1Style }}"><path d="M5 12l5 5 9-10"/></svg></span><span style="font-size:14px;color:#fff;line-height:1.4;">Add a second portfolio piece</span></div><div style="display:flex;align-items:center;gap:12px;"><span style="{{ c2Style }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#05070D" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{ m2Style }}"><path d="M5 12l5 5 9-10"/></svg></span><span style="font-size:14px;color:#fff;line-height:1.4;">Say who you help in your bio</span></div><div style="display:flex;align-items:center;gap:12px;"><span style="{{ c3Style }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#05070D" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{ m3Style }}"><path d="M5 12l5 5 9-10"/></svg></span><span style="font-size:14px;color:#fff;line-height:1.4;">Price your ongoing care plan</span></div></div>
+      </div>
+      <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:16px 18px;{{ sugStyle }}"><div style="font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.5);color:#9DB4FF;margin-bottom:8px;">Suggested bio</div><div style="font-size:14px;line-height:1.6;color:#fff;">Web designer in Cape Town building fast, bookable websites for accountants and IT firms.</div></div>
+    </div></sc-if><sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:20px;">
+      <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px 22px;">
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.5);color:#9DB4FF;margin-bottom:10px;">This week&rsquo;s priority</div>
+        <div style="font-size:20px;font-weight:600;letter-spacing:-0.5px;color:#fff;line-height:1.25;margin-bottom:8px;">Reply to new leads within 2 hours</div>
+        <div style="font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.55;">Your fastest replies turn into bookings. This is the one move that matters most this week.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:18px 22px;">
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:10px;"><span>Weekly goal &middot; 3 bookings</span><span style="color:#fff;font-weight:600;">{{ goalLabel }}</span></div>
+        <div style="height:10px;border-radius:10px;background:rgba(255,255,255,0.12);overflow:hidden;"><div style="{{ goalFillStyle }}"></div></div>
+        <div style="display:flex;gap:10px;margin-top:20px;align-items:flex-end;"><div style="flex:1;display:flex;align-items:flex-end;height:90px;"><div style="{{ g1Style }}"></div></div><div style="flex:1;display:flex;align-items:flex-end;height:90px;"><div style="{{ g2Style }}"></div></div><div style="flex:1;display:flex;align-items:flex-end;height:90px;"><div style="{{ g3Style }}"></div></div><div style="flex:1;display:flex;align-items:flex-end;height:90px;"><div style="{{ g4Style }}"></div></div><div style="flex:1;display:flex;align-items:flex-end;height:90px;"><div style="{{ g5Style }}"></div></div><div style="flex:1;display:flex;align-items:flex-end;height:90px;"><div style="{{ g6Style }}"></div></div><div style="flex:1;display:flex;align-items:flex-end;height:90px;"><div style="{{ g7Style }}"></div></div></div>
+        <div style="display:flex;gap:10px;margin-top:8px;font-size:10.5px;color:rgba(255,255,255,0.45);"><span style="flex:1;text-align:center;">M</span><span style="flex:1;text-align:center;">T</span><span style="flex:1;text-align:center;">W</span><span style="flex:1;text-align:center;">T</span><span style="flex:1;text-align:center;">F</span><span style="flex:1;text-align:center;">S</span><span style="flex:1;text-align:center;">S</span></div>
+      </div>
+    </div></sc-if><sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+        <div><div style="font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;">Income this month</div><div style="font-size:38px;font-weight:700;letter-spacing:-1.5px;color:#fff;line-height:1;">{{ income }}</div></div>
+        <span style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:5px 12px;white-space:nowrap;">Later in V2</span>
+      </div>
+      <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px 22px;">
+        <div style="display:flex;gap:12px;align-items:flex-end;"><div style="flex:1;display:flex;align-items:flex-end;height:130px;"><div style="{{ f1Style }}"></div></div><div style="flex:1;display:flex;align-items:flex-end;height:130px;"><div style="{{ f2Style }}"></div></div><div style="flex:1;display:flex;align-items:flex-end;height:130px;"><div style="{{ f3Style }}"></div></div><div style="flex:1;display:flex;align-items:flex-end;height:130px;"><div style="{{ f4Style }}"></div></div><div style="flex:1;display:flex;align-items:flex-end;height:130px;"><div style="{{ f5Style }}"></div></div><div style="flex:1;display:flex;align-items:flex-end;height:130px;"><div style="{{ f6Style }}"></div></div></div>
+        <div style="display:flex;gap:12px;margin-top:8px;font-size:10.5px;color:rgba(255,255,255,0.45);"><span style="flex:1;text-align:center;">Jun</span><span style="flex:1;text-align:center;">Jul</span><span style="flex:1;text-align:center;">Aug</span><span style="flex:1;text-align:center;">Sep</span><span style="flex:1;text-align:center;">Oct</span><span style="flex:1;text-align:center;">Nov</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#fff;"><span style="width:8px;height:8px;border-radius:50%;background:#9DB4FF;box-shadow:0 0 10px #9DB4FF;"></span>Pricing health: <strong>Healthy</strong></div>
+    </div></sc-if></div>
+        <div style="display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px;">
+        <div style="padding:2px 4px;"><div style="font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;">Without it</div><p style="margin:0;font-size:14px;line-height:1.6;color:rgba(255,255,255,0.55);">{{ withoutText }}</p></div>
+        <div style="padding:2px 4px;"><div style="font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.5);color:#9DB4FF;margin-bottom:8px;">With it</div><p style="margin:0;font-size:14px;line-height:1.6;color:#fff;">{{ withText }}</p></div>
+      </div></div>
+        </div>
+        <div style="text-align:center;margin-top:40px;"><a href="#top" class="cta" style="display:inline-block;background:#fff;color:#0A0A0A;font-size:14.5px;font-weight:600;padding:15px 34px;border-radius:30px;">Be first in line</a></div>
+      </div>
+    </section><div style="position:relative;z-index:2;margin-top:-36px;background:#FFFFFF;border-radius:36px 36px 0 0;color:#0A0A0A;padding-top:44px;"><div id="trust" style="max-width:900px;margin:0 auto;padding:0 20px 56px;text-align:center;box-sizing:border-box;">
+      <div style="border-top:1px solid rgba(10,10,10,0.08);border-bottom:1px solid rgba(10,10,10,0.08);padding:36px 0;">
+        <h3 style="margin:0 0 12px;font-size:22px;font-weight:500;letter-spacing:-0.7px;line-height:1.2;"><span style="color:#6B6B6B;">Built in South Africa,</span> <span style="font-weight:700;">for South African freelancers.</span></h3>
+        <p style="margin:0 auto;max-width:480px;font-size:14.5px;color:#6B6B6B;line-height:1.65;">Vetted professionals across the trades, tech and finance are already on the platform.</p>
+      </div>
+    </div><div style="max-width:1280px;margin:0 auto;padding:0 20px 32px;box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-start;gap:14px;">
+      <p style="margin:0;font-size:12px;color:#9A9A9A;">© 2026 Elev8U. A Nexarc Technologies company.</p>
+      <div style="display:flex;gap:24px;"><a href="#" style="font-size:12.5px;color:#6B6B6B;">Privacy</a><a href="mailto:hello@elev8u.co.za" style="font-size:12.5px;color:#6B6B6B;">hello@elev8u.co.za</a></div>
+    </div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#305CDE","options":["#305CDE","#1A3FA0","#4B3FD9","#6B8EE8"]}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this._t1 = setTimeout(() => this.setState({ navIn: true }), 100);
+    this._t2 = setTimeout(() => this.setState({ heroIn: true }), 300);
+    this._tick = setInterval(() => {
+      let seen = !!(this.state && this.state.dashIn);
+      if (!seen) {
+        const el = document.getElementById('dash-peek');
+        if (el) { const r = el.getBoundingClientRect(); seen = r.top < (window.innerHeight || 800) * 0.85 && r.bottom > 0; }
+      }
+      this.setState((st) => {
+        let t = (st.t ?? 0) + 1;
+        let agent = st.agent ?? 0;
+        if (t >= 150) { t = 0; agent = (agent + 1) % 4; }
+        return { t: t, agent: agent, dashIn: seen || !!st.dashIn, dc: (seen || st.dashIn) ? Math.min(400, (st.dc ?? 0) + 1) : 0 };
+      });
+    }, 40);
+    this._onScroll = (e) => {
+      const t = e && e.target;
+      const y = t && t.scrollTop != null && t !== document ? t.scrollTop : (window.scrollY || 0);
+      const s = y > 40;
+      if (s !== (this.state && this.state.scrolled)) this.setState({ scrolled: s });
+    };
+    window.addEventListener('scroll', this._onScroll, true);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._t1);
+    clearTimeout(this._t2);
+    clearInterval(this._tick);
+    window.removeEventListener('scroll', this._onScroll, true);
+    try { document.body.style.overflow = ''; } catch (e) {}
+  }
+
+  setOpen(open) {
+    this.setState({ menuOpen: open });
+    try { document.body.style.overflow = open ? 'hidden' : ''; } catch (e) {}
+  }
+
+  renderVals() {
+    const s = this.state || {};
+    const navIn = !!s.navIn, heroIn = !!s.heroIn, scrolled = !!s.scrolled, open = !!s.menuOpen, joined = !!s.joined;
+    const EI = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    const EO = 'cubic-bezier(0.76, 0, 0.24, 1)';
+    const navEnt = (delay) => 'opacity:' + (navIn ? 1 : 0) + ';transform:translateY(' + (navIn ? 0 : -16) + 'px);transition:opacity 700ms ' + EI + ' ' + (navIn ? delay : 0) + 'ms,transform 700ms ' + EI + ' ' + (navIn ? delay : 0) + 'ms;';
+    const heroEnt = (delay) => 'opacity:' + (heroIn ? 1 : 0) + ';transform:translateY(' + (heroIn ? 0 : 32) + 'px);transition:opacity 900ms ' + EI + ' ' + (heroIn ? delay : 0) + 'ms,transform 900ms ' + EI + ' ' + (heroIn ? delay : 0) + 'ms;';
+    const ag = s.agent ?? 0;
+    const t = s.t ?? 0;
+    const ease = (x) => 1 - Math.pow(1 - x, 3);
+    const prog = (a, b) => Math.min(1, Math.max(0, (t - a) / (b - a)));
+    const fmt = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    const reply = 'Hi Sipho, yes I can start Monday. A 5-page site is R8,500 with a 3-week delivery. Want a quick call tomorrow?';
+    const rc = Math.floor(prog(14, 104) * reply.length);
+    const replyDone = rc >= reply.length;
+    const ring = ease(prog(6, 110));
+    const pct = Math.round(58 + 34 * ring);
+    const chk = (at) => t >= at;
+    const cStyle = (at) => 'width:20px;height:20px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-sizing:border-box;transition:background 300ms,border-color 300ms;' + (chk(at) ? 'background:#9DB4FF;border:2px solid #9DB4FF;' : 'background:transparent;border:2px solid rgba(255,255,255,0.3);');
+    const mStyle = (at) => 'transition:opacity 300ms;opacity:' + (chk(at) ? 1 : 0) + ';';
+    const dayT = [30, 46, 38, 62, 54, 72, 84];
+    const monT = [34, 44, 40, 56, 66, 80];
+    const bar = (target, i, start) => 'width:100%;border-radius:8px 8px 3px 3px;background:linear-gradient(to top,#305CDE,#9DB4FF);height:' + Math.round(target * ease(prog(start + i * 6, start + 44 + i * 6))) + '%;';
+    const rowStyle = (i, m) => 'display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;overflow:hidden;box-sizing:border-box;width:100%;font-family:inherit;color:#fff;cursor:pointer;padding:' + (m ? '14px 16px' : '20px 22px') + ';border-radius:20px;transition:background 300ms,border-color 300ms,opacity 300ms;' + (ag === i ? 'background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.28);opacity:1;' : 'background:transparent;border:1px solid rgba(255,255,255,0.1);opacity:0.62;');
+    const progStyle = (i) => 'position:absolute;left:0;bottom:0;height:2px;background:#9DB4FF;width:' + (ag === i ? (t / 150 * 100).toFixed(1) : 0) + '%;';
+    const without = [
+      'Leads go cold while you are on the job. By the time you reply, they have booked someone else.',
+      'A thin bio and missing prices quietly turn visitors away, and you never find out why.',
+      'You work hard, but never know the one thing to do next to get more bookings.',
+      'Income and costs live in your head and a messy spreadsheet.'
+    ];
+    const withIt = [
+      'A reply is drafted the moment a lead lands. You review it, tap send, and stay first in line.',
+      'One clear list of what to fix: bio, pricing and portfolio gaps.',
+      'One priority action every week, based on your real numbers.',
+      'Income, expenses and pricing health at a glance, so you charge what you are worth.'
+    ];
+    const dashReply = 'Hi Sipho, yes I can start Monday. A 5-page site is R8,500 with a 3-week delivery. Want a quick call tomorrow?';
+    const dashN = Math.floor(Math.max(0, (s.dc ?? 0) - 8) * 1.2);
+    const items = [
+      { label: 'Home', href: '#top' },
+      { label: 'What\u2019s coming', href: '#coming' },
+      { label: 'First look', href: '#preview' },
+      { label: 'Why Elev8U', href: '#trust' },
+      { label: 'Current site', href: 'https://elev8u.co.za' }
+    ].map((x, i) => ({
+      label: x.label,
+      href: x.href,
+      close: () => this.setOpen(false),
+      style: 'color:#fff;font-size:40px;font-weight:500;letter-spacing:-1.5px;line-height:1.05;opacity:' + (open ? 1 : 0) + ';transform:translateY(' + (open ? 0 : 24) + 'px);transition:opacity 600ms ' + EO + ' ' + (open ? 150 + i * 80 : 0) + 'ms,transform 600ms ' + EO + ' ' + (open ? 150 + i * 80 : 0) + 'ms;'
+    }));
+    return {
+      accent: this.props.accent ?? '#305CDE',
+      dashTyped: dashReply.slice(0, dashN),
+      s0: ag === 0, s1: ag === 1, s2: ag === 2, s3: ag === 3,
+      replyTyped: reply.slice(0, rc),
+      sendStyle: 'font-size:13px;font-weight:600;padding:9px 22px;border-radius:22px;transition:all 300ms;' + (replyDone ? 'background:#fff;color:#0A0A0A;box-shadow:0 0 24px rgba(157,180,255,0.7);' : 'background:rgba(255,255,255,0.18);color:rgba(255,255,255,0.6);'),
+      ringOffset: (377 * (1 - pct / 100)).toFixed(1),
+      ringPct: pct,
+      c1Style: cStyle(40), c2Style: cStyle(70), c3Style: cStyle(100),
+      m1Style: mStyle(40), m2Style: mStyle(70), m3Style: mStyle(100),
+      sugStyle: 'transition:opacity 500ms;opacity:' + (t >= 24 ? 1 : 0) + ';',
+      goalLabel: (Math.min(3, Math.floor(prog(10, 100) * 3 + 0.2))) + ' of 3',
+      goalFillStyle: 'height:100%;border-radius:10px;background:linear-gradient(to right,#305CDE,#9DB4FF);width:' + (78 * ease(prog(10, 100))).toFixed(1) + '%;',
+      g1Style: bar(dayT[0], 0, 8), g2Style: bar(dayT[1], 1, 8), g3Style: bar(dayT[2], 2, 8), g4Style: bar(dayT[3], 3, 8), g5Style: bar(dayT[4], 4, 8), g6Style: bar(dayT[5], 5, 8), g7Style: bar(dayT[6], 6, 8),
+      f1Style: bar(monT[0], 0, 6), f2Style: bar(monT[1], 1, 6), f3Style: bar(monT[2], 2, 6), f4Style: bar(monT[3], 3, 6), f5Style: bar(monT[4], 4, 6), f6Style: bar(monT[5], 5, 6),
+      income: 'R' + fmt(Math.round(18400 * ease(prog(6, 90)))),
+      withoutText: without[ag],
+      withText: withIt[ag],
+      row0Style: rowStyle(0, true), row1Style: rowStyle(1, true), row2Style: rowStyle(2, true), row3Style: rowStyle(3, true),
+      prog0Style: progStyle(0), prog1Style: progStyle(1), prog2Style: progStyle(2), prog3Style: progStyle(3),
+      pick0: () => this.setState({ agent: 0, t: 0 }), pick1: () => this.setState({ agent: 1, t: 0 }), pick2: () => this.setState({ agent: 2, t: 0 }), pick3: () => this.setState({ agent: 3, t: 0 }),
+      joined: joined,
+      notJoined: !joined,
+      join: () => this.setState({ joined: true }),
+      reset: () => this.setState({ joined: false }),
+      menuOpen: open,
+      toggleMenu: () => this.setOpen(!open),
+      pillLabel: open ? 'Close' : 'Navigate',
+      links: items,
+      navBarStyle: 'position:fixed;top:0;left:0;width:100%;z-index:50;box-sizing:border-box;transition:background 500ms,backdrop-filter 500ms;background:' + (scrolled ? 'rgba(5,7,13,0.8)' : 'transparent') + ';' + (scrolled ? 'backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);' : ''),
+      logoStyle: 'position:relative;z-index:50;color:#fff;font-size:20px;font-weight:600;letter-spacing:-0.5px;' + navEnt(0),
+      pillStyle: 'justify-self:center;display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.9);font-size:14px;padding:8px 20px;border-radius:999px;position:relative;z-index:50;' + navEnt(200),
+      markStyle: 'justify-self:end;display:flex;' + navEnt(400),
+      hamStyle: 'width:32px;height:32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:transparent;border:0;padding:0;position:relative;z-index:50;' + navEnt(200),
+      bar1Style: 'display:block;width:24px;height:2px;background:#fff;transition:transform 500ms ' + EO + ';transform:' + (open ? 'translateY(4px) rotate(45deg)' : 'none') + ';',
+      bar2Style: 'display:block;width:24px;height:2px;background:#fff;transition:transform 500ms ' + EO + ';transform:' + (open ? 'translateY(-4px) rotate(-45deg)' : 'none') + ';',
+      overlayStyle: 'position:fixed;top:0;right:0;bottom:0;left:0;z-index:40;background:#05070D;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;transition:opacity 700ms ' + EO + ',visibility 700ms ' + EO + ';opacity:' + (open ? 1 : 0) + ';visibility:' + (open ? 'visible' : 'hidden') + ';',
+      bgStyle: 'position:absolute;top:0;right:0;bottom:0;left:0;transform:scale(' + (heroIn ? 1 : 1.05) + ');opacity:' + (heroIn ? 1 : 0) + ';transition:transform 1400ms ' + EI + ',opacity 1400ms ' + EI + ';',
+      h1Style: 'margin:0 0 20px;font-size:40px;line-height:0.95;letter-spacing:-1.2px;font-weight:500;' + heroEnt(400),
+      subStyle: 'margin:0 auto 28px;font-size:15px;line-height:1.6;color:rgba(255,255,255,0.7);max-width:520px;' + heroEnt(600),
+      ctaWrapStyle: 'max-width:520px;margin:0 auto;' + heroEnt(800)
+    };
+  }
+}
+</script>
+</body>
+</html>
