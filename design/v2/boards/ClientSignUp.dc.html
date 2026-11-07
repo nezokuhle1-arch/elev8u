@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elev8U — Join as a client</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; font-family:'Google Sans Flex','Google Sans',system-ui,-apple-system,sans-serif; background:#FFFFFF; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  button { font-family:inherit; cursor:pointer; }
+  input, select, textarea { font-family:inherit; }
+  input:focus, select:focus, textarea:focus { outline:2px solid #305CDE; outline-offset:1px; }
+</style>
+</helmet>
+<div style="width:100%;min-height:900px;background:#FFFFFF;color:#0A0A0A;box-sizing:border-box;display:flex;flex-direction:column;">
+  <div style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1280px;margin:0 auto;padding:28px 40px;box-sizing:border-box;"><span style="font-size:21px;letter-spacing:-0.4px;"><span style="color:#0A0A0A;font-weight:500;">Elev</span><span style="color:{{accent}};font-weight:700;">8</span><span style="color:#0A0A0A;font-weight:500;">U</span></span><a href="Home.dc.html" style="font-size:13px;font-weight:500;color:#6B6B6B;">← Back to site</a></div>
+  <div style="flex:1;max-width:1200px;width:100%;margin:0 auto;padding:10px 40px 60px;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:72px;align-items:center;">
+    <div style="max-width:420px;width:100%;margin:0 auto;"><h1 style="margin:0 0 8px;font-size:36px;font-weight:700;letter-spacing:-0.9px;">Create your account</h1>
+      <p style="margin:0 0 30px;font-size:14.5px;color:#6B6B6B;line-height:1.6;">Tell Evolute what you need and get matched in minutes.</p>
+      <a href="#" style="display:flex;align-items:center;justify-content:center;gap:10px;height:48px;border:1px solid rgba(10,10,10,0.15);border-radius:24px;font-size:13.5px;font-weight:600;color:#0A0A0A;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12h-8"/><path d="M20 12a8 8 0 1 1-2.3-5.6"/></svg>Continue with Google</a><div style="display:flex;align-items:center;gap:14px;margin:20px 0;"><div style="flex:1;height:1px;background:rgba(10,10,10,0.08);"></div><span style="font-size:12px;color:#9A9A9A;">or</span><div style="flex:1;height:1px;background:rgba(10,10,10,0.08);"></div></div><div style="margin-bottom:18px;"><label for="cname" style="display:block;font-size:12.5px;font-weight:600;margin-bottom:7px;">Full name</label><input id="cname" type="text" placeholder="Sipho Dlamini" style="width:100%;box-sizing:border-box;height:48px;border:1px solid rgba(10,10,10,0.12);border-radius:14px;padding:0 16px;font-size:14px;color:#0A0A0A;background:#fff;"></div><div style="margin-bottom:18px;"><label for="cemail" style="display:block;font-size:12.5px;font-weight:600;margin-bottom:7px;">Email</label><input id="cemail" type="email" placeholder="you@example.com" style="width:100%;box-sizing:border-box;height:48px;border:1px solid rgba(10,10,10,0.12);border-radius:14px;padding:0 16px;font-size:14px;color:#0A0A0A;background:#fff;"></div><div style="margin-bottom:18px;"><label for="cpw" style="display:block;font-size:12.5px;font-weight:600;margin-bottom:7px;">Password</label><input id="cpw" type="password" placeholder="At least 8 characters" style="width:100%;box-sizing:border-box;height:48px;border:1px solid rgba(10,10,10,0.12);border-radius:14px;padding:0 16px;font-size:14px;color:#0A0A0A;background:#fff;"></div><div style="margin-bottom:18px;"><label for="cloc" style="display:block;font-size:12.5px;font-weight:600;margin-bottom:7px;">Where are you based?</label><input id="cloc" type="text" placeholder="Cape Town, Western Cape" style="width:100%;box-sizing:border-box;height:48px;border:1px solid rgba(10,10,10,0.12);border-radius:14px;padding:0 16px;font-size:14px;color:#0A0A0A;background:#fff;"><p style="margin:7px 0 0;font-size:12px;color:#6B6B6B;line-height:1.5;">So we match you with people nearby.</p></div>
+      <a href="#" style="display:block;text-align:center;background:{{accent}};color:#fff;font-size:14px;font-weight:600;padding:14px;border-radius:26px;margin-top:6px;">Create account</a>
+      <p style="margin:16px 0 0;text-align:center;font-size:12px;color:#9A9A9A;line-height:1.6;">You&rsquo;ll confirm your email when you send your first enquiry. By joining you agree to the <a href="#" style="font-weight:600;color:#6B6B6B;">Terms</a> and <a href="#" style="font-weight:600;color:#6B6B6B;">Privacy Policy</a>.</p>
+      <p style="margin:20px 0 0;text-align:center;font-size:13px;color:#6B6B6B;">Already have an account? <a href="SignIn.dc.html" style="font-weight:600;color:{{accent}};">Sign in</a></p></div>
+    <div style="height:700px;border-radius:32px;background:linear-gradient(145deg,#F6F7F9 0%,#E4E6EB 100%);box-shadow:0 30px 60px -34px rgba(10,10,10,0.25);"></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#305CDE","options":["#305CDE","#1A3FA0","#4B3FD9","#6B8EE8"]}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      accent: this.props.accent ?? '#305CDE'
+    };
+  }
+}
+</script>
+</body>
+</html>

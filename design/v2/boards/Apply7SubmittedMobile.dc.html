@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elev8U — Apply: Application received (Mobile)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; font-family:'Google Sans Flex','Google Sans',system-ui,-apple-system,sans-serif; background:#FFFFFF; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  button { font-family:inherit; cursor:pointer; }
+  input, select, textarea { font-family:inherit; }
+  input:focus, select:focus, textarea:focus { outline:2px solid #305CDE; outline-offset:1px; }
+</style>
+</helmet>
+<div style="width:100%;min-height:844px;background:#FFFFFF;color:#0A0A0A;box-sizing:border-box;">
+  <div style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:18px 20px;box-sizing:border-box;"><span style="font-size:19px;letter-spacing:-0.4px;"><span style="color:#0A0A0A;font-weight:500;">Elev</span><span style="color:{{accent}};font-weight:700;">8</span><span style="color:#0A0A0A;font-weight:500;">U</span></span><a href="Home.dc.html" style="font-size:13px;font-weight:500;color:#6B6B6B;">← Back to site</a></div>
+  <div style="max-width:100%;margin:0 auto;padding:12px 20px 48px;box-sizing:border-box;">
+    <div style="text-align:center;margin:10px 0 30px;"><span style="width:60px;height:60px;border-radius:50%;border:2px solid {{accent}};display:inline-flex;align-items:center;justify-content:center;margin-bottom:22px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span><h1 style="margin:0 0 10px;font-size:26px;font-weight:700;letter-spacing:-0.9px;line-height:1.15;">Application received</h1><p style="margin:0 auto;max-width:400px;font-size:14.5px;color:#6B6B6B;line-height:1.65;">We review every application within 48 hours. We&rsquo;ll email you as soon as there&rsquo;s an update.</p></div>
+    <div style="background:#F5F6F8;border-radius:24px;padding:22px;box-shadow:0 26px 55px -34px rgba(10,10,10,0.22);">
+      <div style="display:flex;gap:16px;align-items:flex-start;"><span style="width:28px;height:28px;border-radius:50%;background:{{accent}};display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></span><div style="padding-top:3px;"><div style="font-size:14.5px;font-weight:600;color:#0A0A0A;">Submitted</div><div style="font-size:12.5px;color:#6B6B6B;margin-top:2px;line-height:1.5;">Today, we have everything we need.</div></div></div><div style="width:2px;height:22px;background:#E0E2E7;margin:4px 0 4px 13px;"></div><div style="display:flex;gap:16px;align-items:flex-start;"><span style="width:28px;height:28px;border-radius:50%;border:2px solid {{accent}};display:flex;align-items:center;justify-content:center;flex-shrink:0;background:#fff;"><span style="width:10px;height:10px;border-radius:50%;background:{{accent}};"></span></span><div style="padding-top:3px;"><div style="font-size:14.5px;font-weight:600;color:#0A0A0A;">In review</div><div style="font-size:12.5px;color:#6B6B6B;margin-top:2px;line-height:1.5;">Our team checks your work and identity.</div></div></div><div style="width:2px;height:22px;background:#E0E2E7;margin:4px 0 4px 13px;"></div><div style="display:flex;gap:16px;align-items:flex-start;"><span style="width:28px;height:28px;border-radius:50%;border:2px solid #E0E2E7;flex-shrink:0;background:#fff;"></span><div style="padding-top:3px;"><div style="font-size:14.5px;font-weight:600;color:#9A9A9A;">Approved</div><div style="font-size:12.5px;color:#6B6B6B;margin-top:2px;line-height:1.5;">Your profile goes live and leads start arriving.</div></div></div>
+    </div>
+    <p style="margin:20px 0 0;font-size:13px;color:#6B6B6B;line-height:1.65;text-align:center;">If we need more information, such as a stronger portfolio piece, we&rsquo;ll ask you directly rather than decline.</p>
+    <div style="text-align:center;margin-top:26px;"><a href="Home.dc.html" style="display:inline-block;border:1px solid rgba(10,10,10,0.15);color:#0A0A0A;font-size:13.5px;font-weight:600;padding:12px 26px;border-radius:24px;">Back to site</a></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#305CDE","options":["#305CDE","#1A3FA0","#4B3FD9","#6B8EE8"]}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      accent: this.props.accent ?? '#305CDE'
+    };
+  }
+}
+</script>
+</body>
+</html>

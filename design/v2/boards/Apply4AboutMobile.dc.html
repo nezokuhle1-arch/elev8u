@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elev8U — Apply: About you (Mobile)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; font-family:'Google Sans Flex','Google Sans',system-ui,-apple-system,sans-serif; background:#FFFFFF; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  button { font-family:inherit; cursor:pointer; }
+  input, select, textarea { font-family:inherit; }
+  input:focus, select:focus, textarea:focus { outline:2px solid #305CDE; outline-offset:1px; }
+</style>
+</helmet>
+<div style="width:100%;min-height:844px;background:#FFFFFF;color:#0A0A0A;box-sizing:border-box;">
+  <div style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:18px 20px;box-sizing:border-box;"><span style="font-size:19px;letter-spacing:-0.4px;"><span style="color:#0A0A0A;font-weight:500;">Elev</span><span style="color:{{accent}};font-weight:700;">8</span><span style="color:#0A0A0A;font-weight:500;">U</span></span><a href="Home.dc.html" style="font-size:13px;font-weight:500;color:#6B6B6B;">Save &amp; exit</a></div>
+  <div style="max-width:100%;margin:0 auto;padding:12px 20px 48px;box-sizing:border-box;">
+    <div style="display:flex;gap:6px;margin-bottom:14px;"><div style="flex:1;height:4px;border-radius:4px;background:{{accent}};"></div><div style="flex:1;height:4px;border-radius:4px;background:{{accent}};"></div><div style="flex:1;height:4px;border-radius:4px;background:{{accent}};"></div><div style="flex:1;height:4px;border-radius:4px;background:{{accent}};"></div><div style="flex:1;height:4px;border-radius:4px;background:#E6E7EB;"></div><div style="flex:1;height:4px;border-radius:4px;background:#E6E7EB;"></div></div><div style="font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:{{accent}};margin-bottom:10px;">Step 4 of 6</div><h1 style="margin:0 0 8px;font-size:26px;font-weight:700;letter-spacing:-0.8px;line-height:1.15;">Show who you are</h1><p style="margin:0 0 24px;font-size:14.5px;color:#6B6B6B;line-height:1.6;">A photo, a short bio and a few pieces of your work.</p><div style="display:flex;align-items:center;gap:18px;margin-bottom:26px;"><div style="width:84px;height:84px;border-radius:50%;background:linear-gradient(145deg,#F3F4F7 0%,#DEE0E6 100%);flex-shrink:0;"></div><div><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Profile photo</div><p style="margin:0 0 10px;font-size:12px;color:#6B6B6B;line-height:1.5;">A clear photo of your face. Clients book people they can see.</p><button type="button" style="border:1px solid rgba(10,10,10,0.15);background:#fff;color:#0A0A0A;font-size:12.5px;font-weight:600;padding:8px 16px;border-radius:20px;">Upload photo</button></div></div><div style="margin-bottom:22px;"><label for="bio" style="display:block;font-size:12.5px;font-weight:600;margin-bottom:7px;">Short bio</label><textarea id="bio" rows="4" placeholder="What do you do, who do you do it for, and what makes you different?" style="width:100%;box-sizing:border-box;border:1px solid rgba(10,10,10,0.12);border-radius:14px;padding:14px 16px;font-size:14px;line-height:1.6;color:#0A0A0A;resize:vertical;"></textarea><p style="margin:7px 0 0;font-size:12px;color:#6B6B6B;line-height:1.5;">300 characters max.</p></div><div style="display:block;font-size:12.5px;font-weight:600;margin-bottom:7px;">Portfolio <span style="font-weight:500;color:#9A9A9A;">(at least 1, up to 3)</span></div><div style="display:flex;gap:14px;align-items:stretch;padding:14px;border:1px solid rgba(10,10,10,0.08);border-radius:18px;margin-bottom:12px;"><div style="width:96px;height:96px;border-radius:14px;background:linear-gradient(145deg,#F3F4F7 0%,#E3E5EA 100%);flex-shrink:0;"></div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:10px;justify-content:center;"><input aria-label="Title for piece 1" type="text" placeholder="Title" value="Karoo Lodge booking site" style="width:100%;box-sizing:border-box;height:48px;border:1px solid rgba(10,10,10,0.12);border-radius:14px;padding:0 16px;font-size:14px;color:#0A0A0A;background:#fff;height:42px;"><input aria-label="One line about piece 1" type="text" placeholder="One line about the job, or a link" value="Rebuilt the lodge website with online booking." style="width:100%;box-sizing:border-box;height:48px;border:1px solid rgba(10,10,10,0.12);border-radius:14px;padding:0 16px;font-size:14px;color:#0A0A0A;background:#fff;height:42px;"></div></div><div style="display:flex;gap:14px;align-items:stretch;padding:14px;border:1px solid rgba(10,10,10,0.08);border-radius:18px;margin-bottom:12px;"><button type="button" aria-label="Add image for piece 2" style="width:96px;height:96px;border-radius:14px;border:1.5px dashed rgba(10,10,10,0.18);background:#FAFAFB;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6B6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/></svg></button><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:10px;justify-content:center;"><input aria-label="Title for piece 2" type="text" placeholder="Title" value="" style="width:100%;box-sizing:border-box;height:48px;border:1px solid rgba(10,10,10,0.12);border-radius:14px;padding:0 16px;font-size:14px;color:#0A0A0A;background:#fff;height:42px;"><input aria-label="One line about piece 2" type="text" placeholder="One line about the job, or a link" value="" style="width:100%;box-sizing:border-box;height:48px;border:1px solid rgba(10,10,10,0.12);border-radius:14px;padding:0 16px;font-size:14px;color:#0A0A0A;background:#fff;height:42px;"></div></div><div style="display:flex;gap:14px;align-items:stretch;padding:14px;border:1px solid rgba(10,10,10,0.08);border-radius:18px;margin-bottom:12px;"><button type="button" aria-label="Add image for piece 3" style="width:96px;height:96px;border-radius:14px;border:1.5px dashed rgba(10,10,10,0.18);background:#FAFAFB;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6B6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/></svg></button><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:10px;justify-content:center;"><input aria-label="Title for piece 3" type="text" placeholder="Title" value="" style="width:100%;box-sizing:border-box;height:48px;border:1px solid rgba(10,10,10,0.12);border-radius:14px;padding:0 16px;font-size:14px;color:#0A0A0A;background:#fff;height:42px;"><input aria-label="One line about piece 3" type="text" placeholder="One line about the job, or a link" value="" style="width:100%;box-sizing:border-box;height:48px;border:1px solid rgba(10,10,10,0.12);border-radius:14px;padding:0 16px;font-size:14px;color:#0A0A0A;background:#fff;height:42px;"></div></div><div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:30px;">
+      <a href="Apply3Skills.dc.html" style="font-size:13.5px;font-weight:600;color:#6B6B6B;">← Back</a>
+      <a href="Apply5Identity.dc.html" style="background:{{accent}};color:#fff;font-size:14px;font-weight:600;padding:14px 28px;border-radius:26px;">Continue</a>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#305CDE","options":["#305CDE","#1A3FA0","#4B3FD9","#6B8EE8"]}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      accent: this.props.accent ?? '#305CDE'
+    };
+  }
+}
+</script>
+</body>
+</html>

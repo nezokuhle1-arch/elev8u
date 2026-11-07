@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elev8U — For Clients</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; font-family:'Google Sans Flex','Google Sans',system-ui,-apple-system,sans-serif; background:#FFFFFF; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  button { font-family:inherit; cursor:pointer; }
+</style>
+</helmet>
+<div style="width:100%;background:#FFFFFF;color:#0A0A0A;box-sizing:border-box;">
+
+  <!-- NAV -->
+  <div style="display:flex;align-items:center;justify-content:space-between;max-width:1280px;margin:0 auto;padding:28px 40px;">
+    <span style="font-size:21px;letter-spacing:-0.4px;">
+      <span style="color:#0A0A0A;font-weight:500;">Elev</span><span style="color:{{accent}};font-weight:700;">8</span><span style="color:#0A0A0A;font-weight:500;">U</span>
+    </span>
+    <div style="display:flex;align-items:center;gap:36px;">
+      <a href="ForFreelancers.dc.html" style="font-size:13.5px;font-weight:500;color:#3A3A3E;">For Freelancers</a>
+      <a href="ForClients.dc.html" style="font-size:13.5px;font-weight:600;color:{{accent}};">For Clients</a>
+      <a href="Pricing.dc.html" style="font-size:13.5px;font-weight:500;color:#3A3A3E;">Pricing</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="SignIn.dc.html" style="font-size:13.5px;font-weight:500;color:#3A3A3E;">Sign in</a>
+      <a href="Join.dc.html" style="background:{{accent}};color:#fff;font-size:13px;font-weight:600;padding:10px 20px;border-radius:20px;">Get started</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div style="max-width:700px;margin:0 auto;padding:50px 40px 30px;text-align:center;">
+    <h1 style="margin:0 0 18px;font-size:48px;line-height:1.1;letter-spacing:-1.1px;">
+      <span style="font-weight:400;color:#6B6B6B;">Need something done?</span><br>
+      <span style="font-weight:700;color:#0A0A0A;">Get matched in minutes.</span>
+    </h1>
+    <p style="margin:0 0 30px;font-size:15px;color:#6B6B6B;line-height:1.6;max-width:480px;margin-left:auto;margin-right:auto;">Tell Evolute what you need — get matched with vetted, reviewed professionals near you. No calling around, no guessing on quality.</p>
+
+    <div style="display:flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(10,10,10,0.1);border-radius:16px;padding:8px 8px 8px 18px;box-shadow:0 20px 45px -20px rgba(10,10,10,0.18);max-width:460px;margin:0 auto;">
+      <label for="evo-input" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">What do you need help with?</label>
+      <input id="evo-input" type="text" placeholder="What do you need help with today?" style="flex:1;border:none;outline:none;font-size:14px;color:#0A0A0A;background:transparent;"/>
+      <button type="button" aria-label="Ask Evolute" style="flex-shrink:0;width:38px;height:38px;border-radius:50%;border:none;background:{{accent}};display:flex;align-items:center;justify-content:center;">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 12V3M7.5 3L3.5 7M7.5 3L11.5 7" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div style="max-width:1000px;margin:0 auto;padding:70px 40px 30px;">
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;">
+      <div>
+        <div style="width:34px;height:34px;border-radius:50%;background:#0A0A0A;color:#fff;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">1</div>
+        <div style="font-size:16px;font-weight:600;margin-bottom:8px;">Describe your need</div>
+        <p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">Tell Evolute what you need, where, and when — takes seconds.</p>
+      </div>
+      <div>
+        <div style="width:34px;height:34px;border-radius:50%;background:#0A0A0A;color:#fff;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">2</div>
+        <div style="font-size:16px;font-weight:600;margin-bottom:8px;">Get matched instantly</div>
+        <p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">AI matches you with vetted professionals who actually fit — not just whoever's cheapest.</p>
+      </div>
+      <div>
+        <div style="width:34px;height:34px;border-radius:50%;background:#0A0A0A;color:#fff;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">3</div>
+        <div style="font-size:16px;font-weight:600;margin-bottom:8px;">Book with confidence</div>
+        <p style="margin:0;font-size:13.5px;color:#6B6B6B;line-height:1.6;">Real reviews, transparent pricing, no guesswork.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div style="max-width:1080px;margin:0 auto;padding:70px 40px 30px;">
+    <div style="text-align:center;margin-bottom:40px;">
+      <span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:{{accent}};">Browse by category</span>
+      <h2 style="margin:10px 0 0;font-size:32px;font-weight:500;letter-spacing:-0.6px;">Whatever you need, someone here does it well.</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;">
+
+      <a href="#" style="background:#fff;border:1px solid rgba(10,10,10,0.08);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:12px;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 12L5.5 7.5C5.8 6.6 6.6 6 7.5 6H12.5C13.4 6 14.2 6.6 14.5 7.5L16 12" stroke="#5C5C5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><rect x="2.5" y="12" width="15" height="4.5" rx="1.5" stroke="#5C5C5C" stroke-width="1.5"></rect><circle cx="6" cy="16.5" r="1.3" fill="#5C5C5C"></circle><circle cx="14" cy="16.5" r="1.3" fill="#5C5C5C"></circle></svg>
+        <span style="font-size:13px;font-weight:600;">Automotive</span>
+      </a>
+
+      <a href="#" style="background:#fff;border:1px solid rgba(10,10,10,0.08);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:12px;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 17L7 16L15.5 7.5C16.2 6.8 16.2 5.7 15.5 5L15 4.5C14.3 3.8 13.2 3.8 12.5 4.5L4 13L3 17Z" stroke="#5C5C5C" stroke-width="1.5" stroke-linejoin="round"></path><line x1="11" y1="6" x2="14" y2="9" stroke="#5C5C5C" stroke-width="1.5"></line></svg>
+        <span style="font-size:13px;font-weight:600;">Graphic Design</span>
+      </a>
+
+      <a href="#" style="background:#fff;border:1px solid rgba(10,10,10,0.08);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:12px;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3C10 3 5.5 8.5 5.5 12C5.5 14.5 7.5 16.5 10 16.5C12.5 16.5 14.5 14.5 14.5 12C14.5 8.5 10 3 10 3Z" stroke="#5C5C5C" stroke-width="1.5" stroke-linejoin="round"></path></svg>
+        <span style="font-size:13px;font-weight:600;">Plumbing</span>
+      </a>
+
+      <a href="#" style="background:#fff;border:1px solid rgba(10,10,10,0.08);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:12px;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M11 2.5L4.5 11.5H9.5L8.5 17.5L15.5 8H10.5L11 2.5Z" stroke="#5C5C5C" stroke-width="1.5" stroke-linejoin="round"></path></svg>
+        <span style="font-size:13px;font-weight:600;">Electrical</span>
+      </a>
+
+      <a href="#" style="background:#fff;border:1px solid rgba(10,10,10,0.08);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:12px;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 6L4 8M14 6L16 8" stroke="#5C5C5C" stroke-width="1.5" stroke-linecap="round"></path><rect x="3.5" y="8" width="13" height="9" rx="2" stroke="#5C5C5C" stroke-width="1.5"></rect><path d="M8 8V6.5C8 5.7 8.7 5 9.5 5H10.5C11.3 5 12 5.7 12 6.5V8" stroke="#5C5C5C" stroke-width="1.5"></path></svg>
+        <span style="font-size:13px;font-weight:600;">Web Development</span>
+      </a>
+
+      <a href="#" style="background:#fff;border:1px solid rgba(10,10,10,0.08);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:12px;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="6" width="15" height="10.5" rx="2" stroke="#5C5C5C" stroke-width="1.5"></rect><circle cx="10" cy="11.2" r="3" stroke="#5C5C5C" stroke-width="1.5"></circle><path d="M7 6L8 4H12L13 6" stroke="#5C5C5C" stroke-width="1.5" stroke-linejoin="round"></path></svg>
+        <span style="font-size:13px;font-weight:600;">Photography</span>
+      </a>
+
+      <a href="#" style="background:#fff;border:1px solid rgba(10,10,10,0.08);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:12px;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 16L16 4M4 4L16 16" stroke="#5C5C5C" stroke-width="1.5" stroke-linecap="round"></path><circle cx="10" cy="10" r="2" stroke="#5C5C5C" stroke-width="1.5"></circle></svg>
+        <span style="font-size:13px;font-weight:600;">Cleaning</span>
+      </a>
+
+      <a href="#" style="background:#fff;border:1px solid rgba(10,10,10,0.08);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:12px;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="6" cy="6" r="2.2" stroke="#5C5C5C" stroke-width="1.5"></circle><circle cx="6" cy="14" r="2.2" stroke="#5C5C5C" stroke-width="1.5"></circle><line x1="16" y1="5" x2="7.6" y2="7.5" stroke="#5C5C5C" stroke-width="1.5" stroke-linecap="round"></line><line x1="16" y1="15" x2="7.6" y2="12.5" stroke="#5C5C5C" stroke-width="1.5" stroke-linecap="round"></line></svg>
+        <span style="font-size:13px;font-weight:600;">Hair &amp; Beauty</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- MATCHING SHOWCASE -->
+  <div style="max-width:900px;margin:0 auto;padding:70px 40px 30px;">
+    <div style="text-align:center;margin-bottom:36px;">
+      <span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:{{accent}};">See it in action</span>
+      <h2 style="margin:10px 0 0;font-size:32px;font-weight:500;letter-spacing:-0.6px;">Real matches, in real time.</h2>
+    </div>
+
+    <div style="background:#F5F6F8;border-radius:24px;padding:20px;box-shadow:0 26px 55px -30px rgba(10,10,10,0.22);">
+      <div style="background:#fff;border-radius:16px;padding:22px;box-shadow:0 20px 45px -22px rgba(10,10,10,0.25);">
+        <div style="background:#F5F6F8;border-radius:12px;padding:12px 16px;font-size:13px;color:#3A3A3E;margin-bottom:16px;">"Need a web designer for my accounting practice, Cape Town"</div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="Profile.dc.html" style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid rgba(10,10,10,0.06);border-radius:14px;">
+            <span style="flex-shrink:0;width:38px;height:38px;border-radius:50%;background:{{accent}};color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;">TM</span>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:13.5px;font-weight:600;">Thandi M.</div>
+              <div style="font-size:11.5px;color:#6B6B6B;">Web design · 4.9 rating · 47 reviews</div>
+            </div>
+            <span style="background:rgba(48,92,222,0.08);color:{{accent}};font-size:10.5px;font-weight:600;padding:4px 10px;border-radius:20px;flex-shrink:0;">Available now</span>
+          </a>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid rgba(10,10,10,0.06);border-radius:14px;">
+            <span style="flex-shrink:0;width:38px;height:38px;border-radius:50%;background:{{accent}};color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;">LN</span>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:13.5px;font-weight:600;">Lindiwe N.</div>
+              <div style="font-size:11.5px;color:#6B6B6B;">Web design · 4.8 rating · 22 reviews</div>
+            </div>
+            <span style="background:rgba(48,92,222,0.08);color:{{accent}};font-size:10.5px;font-weight:600;padding:4px 10px;border-radius:20px;flex-shrink:0;">Available now</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid rgba(10,10,10,0.06);border-radius:14px;">
+            <span style="flex-shrink:0;width:38px;height:38px;border-radius:50%;background:{{accent}};color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;">BK</span>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:13.5px;font-weight:600;">Bongani K.</div>
+              <div style="font-size:11.5px;color:#6B6B6B;">Web design · 4.7 rating · 18 reviews</div>
+            </div>
+            <span style="background:#F1F1F3;color:#6B6B6B;font-size:10.5px;font-weight:600;padding:4px 10px;border-radius:20px;flex-shrink:0;">Tomorrow</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUST -->
+  <div style="max-width:820px;margin:0 auto;padding:70px 40px;text-align:center;">
+    <span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:{{accent}};">Why you can trust the match</span>
+    <h2 style="margin:10px 0 16px;font-size:28px;font-weight:500;letter-spacing:-0.5px;">Vetted before you ever see them.</h2>
+    <p style="margin:0;font-size:14.5px;color:#6B6B6B;line-height:1.65;">Every professional is reviewed before going live — portfolio, certifications, identity. Every rating comes from a completed, verified booking, never a paid placement.</p>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px 100px;">
+    <div style="background:linear-gradient(135deg,{{accent}} 0%,#1A3FA0 100%);border-radius:28px;padding:64px 40px;text-align:center;">
+      <h2 style="margin:0 0 28px;font-size:28px;font-weight:500;color:#fff;letter-spacing:-0.5px;">Whatever it is, describe it to Evolute.</h2>
+      <a href="#" style="display:inline-block;background:#fff;color:{{accent}};font-size:13.5px;font-weight:600;padding:13px 30px;border-radius:24px;">Find a professional</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px 48px;">
+    <div style="display:flex;justify-content:space-between;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(10,10,10,0.08);flex-wrap:wrap;">
+
+      <div style="max-width:260px;">
+        <span style="font-size:18px;letter-spacing:-0.4px;">
+          <span style="color:#0A0A0A;font-weight:500;">Elev</span><span style="color:{{accent}};font-weight:700;">8</span><span style="color:#0A0A0A;font-weight:500;">U</span>
+        </span>
+        <p style="margin:12px 0 0;font-size:12.5px;color:#6B6B6B;line-height:1.6;">Matching skilled South Africans with the people who need them — powered by AI.</p>
+      </div>
+
+      <div style="display:flex;gap:60px;">
+        <div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#9A9A9A;margin-bottom:14px;">Product</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="ForFreelancers.dc.html" style="font-size:13px;color:#3A3A3E;">For Freelancers</a>
+            <a href="ForClients.dc.html" style="font-size:13px;color:#3A3A3E;">For Clients</a>
+            <a href="Pricing.dc.html" style="font-size:13px;color:#3A3A3E;">Pricing</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#9A9A9A;margin-bottom:14px;">Company</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="#" style="font-size:13px;color:#3A3A3E;">About</a>
+            <a href="#" style="font-size:13px;color:#3A3A3E;">Contact</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#9A9A9A;margin-bottom:14px;">Legal</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="#" style="font-size:13px;color:#3A3A3E;">Privacy</a>
+            <a href="#" style="font-size:13px;color:#3A3A3E;">Terms</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p style="margin:24px 0 0;font-size:12px;color:#9A9A9A;">© 2026 Elev8U. A Nexarc Technologies company.</p>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#305CDE","options":["#305CDE","#1A3FA0","#4B3FD9","#6B8EE8"]}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      accent: this.props.accent ?? '#305CDE'
+    };
+  }
+}
+</script>
+</body>
+</html>
