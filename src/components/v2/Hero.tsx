@@ -4,6 +4,7 @@ import { useEffect, useState, type CSSProperties } from "react";
 import { Nav } from "./Nav";
 import { Orb } from "./Orb";
 import { WaitlistForm } from "./WaitlistForm";
+import styles from "@/app/v2/v2.module.css";
 
 const EASE_IN = "cubic-bezier(0.16, 1, 0.3, 1)";
 
@@ -37,12 +38,12 @@ export function Hero({
       <Nav navIn={navIn} />
       <section
         id="top"
+        className={styles.heroSection}
         style={{
           position: "relative",
           width: "100%",
           // Column layout: the orb lives in the free space above the content,
           // so the mark can never collide with the headline at any viewport height.
-          minHeight: "max(100vh, 880px)",
           paddingTop: 80, // clears the fixed nav (80px tall)
           boxSizing: "border-box",
           overflow: "hidden",
@@ -52,7 +53,7 @@ export function Hero({
           background: "radial-gradient(ellipse at 50% 30%, #102B66 0%, #0A1628 42%, #05070D 100%)",
         }}
       >
-        <div style={{ position: "relative", flex: 1, minHeight: 0 }}>
+        <div className={styles.heroOrbArea} style={{ position: "relative", flex: 1 }}>
           <Orb heroIn={heroIn} />
         </div>
         <div
@@ -67,11 +68,13 @@ export function Hero({
           }}
         />
         <div
+          className={styles.heroContent}
           style={{
             position: "relative",
             zIndex: 10,
             textAlign: "center",
-            padding: "0 24px 120px",
+            paddingLeft: 24,
+            paddingRight: 24,
             maxWidth: 900,
             margin: "0 auto",
             boxSizing: "border-box",
@@ -79,8 +82,8 @@ export function Hero({
           }}
         >
           <h1
+            className={styles.heroH1}
             style={{
-              margin: "0 0 32px",
               fontSize: "clamp(40px, 8vw, 72px)",
               lineHeight: 0.95,
               letterSpacing: "-2.2px",
@@ -93,8 +96,8 @@ export function Hero({
             <span style={{ color: "#fff", fontWeight: 600 }}>V2 makes it effortless.</span>
           </h1>
           <p
+            className={styles.heroSub}
             style={{
-              margin: "0 auto 48px",
               fontSize: 18,
               lineHeight: 1.6,
               color: "rgba(255,255,255,0.7)",

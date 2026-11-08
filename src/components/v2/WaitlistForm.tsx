@@ -219,11 +219,11 @@ export function WaitlistForm({ nextPosition }: { nextPosition: number }) {
       ) : null}
 
       {!hasAlertBorder ? (
-        <p style={{ margin: "20px 0 0", fontSize: 13, color: "rgba(255,255,255,0.6)" }}>
+        <p className={styles.formCount} style={{ fontSize: 13, color: "rgba(255,255,255,0.6)" }}>
           You&rsquo;ll be <strong style={{ color: "#fff" }}>#{nextPosition}</strong> on the list.
         </p>
       ) : null}
-      <p style={{ margin: "16px 0 0", fontSize: 12, color: "rgba(255,255,255,0.45)", lineHeight: 1.5 }}>
+      <p className={styles.formPrivacy} style={{ fontSize: 12, color: "rgba(255,255,255,0.45)", lineHeight: 1.5 }}>
         By joining you agree to get launch emails from Elev8U. See our{" "}
         <a href="/privacy" style={{ color: "rgba(255,255,255,0.7)", textDecoration: "underline" }}>
           Privacy Policy

@@ -164,36 +164,21 @@ export function Nav({ navIn }: { navIn: boolean }) {
       </div>
 
       <div
+        className={styles.menuOverlay}
         style={{
-          position: "fixed",
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          zIndex: 40,
-          background: "#05070D",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 32,
           transition: `opacity 700ms ${EASE_OUT}, visibility 700ms ${EASE_OUT}`,
           opacity: open ? 1 : 0,
           visibility: open ? "visible" : "hidden",
         }}
       >
+        <div className={styles.menuList}>
         {LINKS.map((item, i) => (
           <a
             key={item.href}
-            className={styles.ol}
+            className={`${styles.ol} ${styles.menuLink}`}
             href={item.href}
             onClick={() => setOpen(false)}
             style={{
-              color: "#fff",
-              fontSize: 64,
-              fontWeight: 500,
-              letterSpacing: "-1.5px",
-              lineHeight: 1.05,
               opacity: open ? 1 : 0,
               transform: `translateY(${open ? 0 : 24}px)`,
               transition: `opacity 600ms ${EASE_OUT} ${open ? 150 + i * 80 : 0}ms, transform 600ms ${EASE_OUT} ${open ? 150 + i * 80 : 0}ms`,
@@ -202,6 +187,7 @@ export function Nav({ navIn }: { navIn: boolean }) {
             {item.label}
           </a>
         ))}
+        </div>
       </div>
     </>
   );

@@ -136,7 +136,7 @@ export function DashboardPreview() {
         <span style={{ fontSize: 12, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#9DB4FF" }}>
           A first look &middot; sample data
         </span>
-        <h2 style={{ margin: "12px 0 14px", fontSize: "clamp(30px, 5vw, 52px)", fontWeight: 500, letterSpacing: "-1.6px", lineHeight: 1.05 }}>
+        <h2 className={styles.balance} style={{ margin: "12px 0 14px", fontSize: "clamp(30px, 5vw, 52px)", fontWeight: 500, letterSpacing: "-1.6px", lineHeight: 1.05 }}>
           <span style={{ color: "rgba(255,255,255,0.55)" }}>Every lead, booking and reply.</span>
           <br />
           <span style={{ fontWeight: 600 }}>One calm dashboard.</span>

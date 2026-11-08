@@ -293,3 +293,62 @@
 @media (min-width: 768px) {
   .agSection { padding-bottom: 130px; }
 }
+
+/* ---- Mobile menu overlay ---- */
+.menuOverlay {
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 40;
+  background: #05070d;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 96px 24px; /* symmetric: clears the 80px fixed nav and keeps the list centred */
+  box-sizing: border-box;
+}
+.menuList {
+  margin: auto; /* centres when it fits, scrolls from the top when it doesn't */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(14px, 3.5svh, 32px);
+  max-width: 100%;
+}
+.menuLink {
+  color: #fff;
+  font-size: clamp(32px, 10vw, 44px);
+  font-weight: 500;
+  letter-spacing: -1.5px;
+  line-height: 1.05;
+  text-align: center;
+  white-space: nowrap;
+}
+@media (min-width: 640px) {
+  .menuOverlay { padding: 0 24px; }
+  .menuList { gap: 32px; }
+  .menuLink { font-size: 64px; }
+}
+
+/* ---- Hero spacing (defaults == previous inline values) ---- */
+.heroSection { min-height: max(100vh, 880px); }
+.heroContent { padding-bottom: 120px; }
+.heroH1 { margin: 0 0 32px; text-wrap: balance; }
+.heroSub { margin: 0 auto 48px; }
+.heroOrbArea { min-height: 140px; }
+.formCount { margin: 20px 0 0; }
+.formPrivacy { margin: 16px 0 0; }
+
+/* Short viewports (laptop browsers): compress spacing only, no size changes */
+@media (max-height: 799px) {
+  .heroSection { min-height: 100vh; min-height: 100svh; }
+  .heroContent { padding-bottom: clamp(12px, 2.5svh, 120px); }
+  .heroH1 { margin-bottom: clamp(12px, 2.5svh, 32px); }
+  .heroSub { margin-bottom: clamp(20px, 3.7svh, 48px); }
+  .formCount { margin-top: clamp(10px, 1.9svh, 20px); }
+  .formPrivacy { margin-top: clamp(6px, 1.3svh, 16px); }
+}
+
+.balance { text-wrap: balance; }
