@@ -18,6 +18,7 @@ const CATEGORIES = [
   "Plumbing",
   "Electrical",
   "Web Development",
+  "AI & Automation",
   "Photography",
   "Cleaning",
   "Carpentry",
@@ -41,6 +42,12 @@ const CATEGORY_SKILLS: Record<string, string[]> = {
     "Print design",
   ],
   "Web Development": ["React", "Next.js", "UI design", "API integration"],
+  "AI & Automation": [
+    "Workflow automation",
+    "AI tool adoption",
+    "Process design",
+    "Strategy consulting",
+  ],
 };
 
 const GENERIC_SKILLS = [
@@ -69,6 +76,10 @@ const PRICING_HINTS: Record<string, { oneTime: string; subscription: string }> =
   "Web Development": {
     oneTime: "R2,500 – R15,000 per project",
     subscription: "R3,500 – R12,000 / month",
+  },
+  "AI & Automation": {
+    oneTime: "R3,000 – R18,000 per project",
+    subscription: "R4,000 – R15,000 / month",
   },
   Photography: {
     oneTime: "R800 – R4,500 per shoot",
