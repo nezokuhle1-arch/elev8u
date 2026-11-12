@@ -61,6 +61,11 @@ export function WaitlistForm({ nextPosition }: { nextPosition: number }) {
             You&rsquo;re <strong style={{ color: "#fff" }}>#{position}</strong>. We&rsquo;ve kept your spot, so there&rsquo;s nothing more to do.
           </p>
         ) : null}
+        {state.status === "success" && state.emailSent ? (
+          <p style={{ margin: "0 0 12px", fontSize: 13.5, color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>
+            We&rsquo;ve sent a confirmation from hello@elev8u.co.za. We&rsquo;ll email you the moment V2 opens.
+          </p>
+        ) : null}
         {resendMessage ? (
           <p style={{ margin: "0 0 12px", fontSize: 12.5, color: "rgba(255,255,255,0.6)" }}>{resendMessage}</p>
         ) : null}
@@ -74,9 +79,11 @@ export function WaitlistForm({ nextPosition }: { nextPosition: number }) {
                 startResend(async () => {
                   const result = await resendConfirmationAction(email);
                   setResendMessage(
-                    result.allowed
-                      ? "Confirmation email on its way."
-                      : "You already asked recently — try again in a few minutes."
+                    !result.allowed
+                      ? "You already asked recently — try again in a few minutes."
+                      : result.emailSent
+                        ? "Confirmation email on its way."
+                        : "We couldn't send it just now — try again in a few minutes."
                   );
                 });
               }}
