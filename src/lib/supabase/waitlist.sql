@@ -62,7 +62,7 @@ $$;
 
 -- Server-only (service_role). Atomic, gap-free position assignment.
 create or replace function public.join_waitlist(p_email text, p_consent_source text)
-returns table(position int, already_existed boolean)
+returns table("position" int, already_existed boolean)
 language plpgsql
 security definer
 set search_path = ''
@@ -134,3 +134,6 @@ grant execute on function public.join_waitlist(text, text) to service_role;
 grant execute on function public.touch_resend(text) to service_role;
 
 grant execute on function public.get_waitlist_count() to anon, authenticated;
+
+revoke all on public.waitlist_signups from anon, authenticated;
+revoke all on public.waitlist_counter from anon, authenticated;
