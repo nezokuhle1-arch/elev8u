@@ -20,19 +20,24 @@ export type MatchedFreelancer = {
   priceMax: number | null;
 };
 
-const CATEGORY_KEYWORDS: Record<string, string[]> = {
-  Automotive: ["mechanic", "automotive", "car", "vehicle", "brake", "engine"],
-  "Graphic Design": ["graphic", "design", "logo", "brand", "poster"],
-  Plumbing: ["plumber", "plumbing", "pipe", "leak", "drain"],
-  Electrical: ["electrician", "electrical", "wiring", "power"],
-  "Web Development": ["web", "website", "developer", "react", "next.js", "app"],
-  Photography: ["photographer", "photography", "photo", "shoot"],
-  Cleaning: ["cleaning", "cleaner", "housekeeping"],
-  "Hair & Beauty": ["hair", "beauty", "salon", "barber", "makeup"],
-  Carpentry: ["carpenter", "carpentry", "wood"],
-  Tutoring: ["tutor", "tutoring", "teach"],
-  Other: [],
-};
+// Order matters: more specific categories first ("web design" must not fall
+// through to the generic "design" keyword of Graphic Design).
+const CATEGORY_KEYWORDS: [string, RegExp][] = [
+  [
+    "Web Development",
+    /\b(web ?design|web ?site|web ?developer|web ?development|web ?app|web|react|next\.?js)\b/i,
+  ],
+  ["Graphic Design", /\b(logo|graphic|design|designer|brand|poster)\b/i],
+  ["Automotive", /\b(car|mechanic|vehicle|automotive|brake|engine)\b/i],
+  ["Copywriting", /\b(writer|writing|content|copy|copywriter|copywriting)\b/i],
+  ["Photography", /\b(photo|photos|photographer|photography|shoot)\b/i],
+  ["Cleaning", /\b(clean|cleaner|cleaning|housekeeping)\b/i],
+  ["Hair & Beauty", /\b(hair|beauty|salon|barber|makeup)\b/i],
+  ["Plumbing", /\b(plumber|plumbing|pipe|leak|drain)\b/i],
+  ["Electrical", /\b(electrician|electrical|wiring)\b/i],
+  ["Carpentry", /\b(carpenter|carpentry|wood)\b/i],
+  ["Tutoring", /\b(tutor|tutoring|teach)\b/i],
+];
 
 export function parseMatchReady(text: string): MatchData | null {
   if (!text.includes("MATCH_READY")) return null;
@@ -47,15 +52,21 @@ export function parseMatchReady(text: string): MatchData | null {
   return { what, where, budget, timeline };
 }
 
-export function inferCategory(serviceDescription: string): string | null {
-  const lower = serviceDescription.toLowerCase();
-
-  for (const [category, keywords] of Object.entries(CATEGORY_KEYWORDS)) {
-    if (category === "Other") continue;
-    if (keywords.some((kw) => lower.includes(kw))) return category;
+export function inferCategory(text: string): string | null {
+  for (const [category, pattern] of CATEGORY_KEYWORDS) {
+    if (pattern.test(text)) return category;
   }
-
   return null;
+}
+
+/** Case-insensitive map of a category name or client phrase to a canonical category. */
+export function normalizeCategory(input: string | null | undefined): string | null {
+  const value = (input ?? "").trim();
+  if (!value || value === "undefined") return null;
+  const exact = CATEGORY_KEYWORDS.find(
+    ([name]) => name.toLowerCase() === value.toLowerCase()
+  );
+  return exact ? exact[0] : inferCategory(value);
 }
 
 export function parseBudgetRange(budget: string): {

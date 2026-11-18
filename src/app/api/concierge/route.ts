@@ -1,5 +1,6 @@
 import {
   inferCategory,
+  normalizeCategory,
   parseMatchReady,
   stripMatchReadyBlock,
   type ConciergeMessage,
@@ -93,75 +94,78 @@ async function fetchFreelancerById(
   return mapFreelancers([data as FreelancerRow])[0] ?? null;
 }
 
-async function fetchMatchedFreelancers(
-  matchData: ReturnType<typeof parseMatchReady>,
-  categoryHint: string
-): Promise<MatchedFreelancer[]> {
-  if (!matchData) return [];
-
-  const supabase = await createClient();
-  const inferred = inferCategory(matchData.what);
-  const category =
-    categoryHint && categoryHint !== "undefined" ? categoryHint : inferred;
-
-  let query = supabase
-    .from("freelancer_profiles")
-    .select(
-      `
+const FREELANCER_SELECT = `
       id,
       category,
       location,
       rating,
       profiles!freelancer_profiles_user_id_fkey(full_name),
       service_tiers(price)
-    `
-    )
-    .eq("is_vetted", true)
-    .order("rating", { ascending: false })
-    .limit(3);
+    `;
 
-  if (category) {
-    query = query.eq("category", category);
-  }
+const FALLBACK_NOTICE =
+  "I couldn't find an exact match in your category yet — here are professionals who may be able to help:";
 
-  const locationTerm = matchData.where.split(",")[0]?.trim();
-  if (locationTerm) {
-    query = query.ilike("location", `%${locationTerm}%`);
-  }
+async function fetchMatchedFreelancers(
+  matchData: ReturnType<typeof parseMatchReady>,
+  categoryHint: string,
+  conversationText: string
+): Promise<{ freelancers: MatchedFreelancer[]; categoryFallback: boolean }> {
+  if (!matchData) return { freelancers: [], categoryFallback: false };
 
-  const { data, error } = await query;
+  const supabase = await createClient();
+  const category =
+    normalizeCategory(categoryHint) ??
+    inferCategory(matchData.what) ??
+    inferCategory(conversationText);
 
-  if (error) {
-    console.error("[concierge] freelancer query error:", error.message);
-  }
-
-  if (error || !data?.length) {
-    const { data: fallback, error: fallbackError } = await supabase
+  const base = () => {
+    let q = supabase
       .from("freelancer_profiles")
-      .select(
-        `
-        id,
-        category,
-        location,
-        rating,
-        profiles!freelancer_profiles_user_id_fkey(full_name),
-        service_tiers(price)
-      `
-      )
+      .select(FREELANCER_SELECT)
       .eq("is_vetted", true)
       .order("rating", { ascending: false })
       .limit(3);
+    if (category) q = q.ilike("category", category);
+    return q;
+  };
 
-    if (fallbackError) {
-      console.error("[concierge] fallback query error:", fallbackError.message);
+  // 1. Category + location
+  const locationTerm = matchData.where.split(",")[0]?.trim();
+  if (locationTerm) {
+    const { data, error } = await base().ilike("location", `%${locationTerm}%`);
+    if (error) console.error("[concierge] freelancer query error:", error.message);
+    if (data?.length) {
+      return { freelancers: mapFreelancers(data as FreelancerRow[]), categoryFallback: false };
     }
-
-    if (!fallback?.length) return [];
-
-    return mapFreelancers(fallback as FreelancerRow[]);
   }
 
-  return mapFreelancers(data as FreelancerRow[]);
+  // 2. Category only (any location)
+  const { data: inCategory, error: categoryError } = await base();
+  if (categoryError) {
+    console.error("[concierge] category query error:", categoryError.message);
+  }
+  if (inCategory?.length) {
+    return { freelancers: mapFreelancers(inCategory as FreelancerRow[]), categoryFallback: false };
+  }
+
+  // 3. Nobody in this category: unfiltered fallback, flagged
+  if (!category) {
+    return { freelancers: [], categoryFallback: false };
+  }
+  const { data: fallback, error: fallbackError } = await supabase
+    .from("freelancer_profiles")
+    .select(FREELANCER_SELECT)
+    .eq("is_vetted", true)
+    .order("rating", { ascending: false })
+    .limit(3);
+  if (fallbackError) {
+    console.error("[concierge] fallback query error:", fallbackError.message);
+  }
+  return {
+    freelancers: fallback?.length ? mapFreelancers(fallback as FreelancerRow[]) : [],
+    categoryFallback: !!fallback?.length,
+  };
 }
 
 export async function POST(request: Request) {
@@ -211,20 +215,25 @@ export async function POST(request: Request) {
 
     if (matchData) {
       let freelancers: MatchedFreelancer[] = [];
+      let categoryFallback = false;
+      const conversationText = messages.map((m) => m.content).join(" ");
 
-      if (freelancerId) {
-        const pinned = await fetchFreelancerById(freelancerId);
-        if (pinned) {
-          freelancers = [pinned];
-        } else {
-          freelancers = await fetchMatchedFreelancers(matchData, category);
-        }
+      const pinned = freelancerId ? await fetchFreelancerById(freelancerId) : null;
+      if (pinned) {
+        freelancers = [pinned];
       } else {
-        freelancers = await fetchMatchedFreelancers(matchData, category);
+        ({ freelancers, categoryFallback } = await fetchMatchedFreelancers(
+          matchData,
+          category,
+          conversationText
+        ));
       }
 
-      const message =
+      const baseMessage =
         stripMatchReadyBlock(rawText) || "I found a great match for you!";
+      const message = categoryFallback
+        ? baseMessage + " " + FALLBACK_NOTICE
+        : baseMessage;
 
       return NextResponse.json({
         message,

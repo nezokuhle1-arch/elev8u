@@ -508,28 +508,32 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
 
           {matchReady && freelancers.length > 0 && matchData && (
             <div className="rounded-xl border border-[#305CDE]/30 bg-[#E8EEFB]/80 p-4">
-              <h3 className="mb-3 font-semibold text-[#1A3FA0]">
+              <h3 className="mb-3 text-sm font-semibold text-[#305CDE]">
                 Matched professionals
               </h3>
-              <div className="space-y-3">
+              <div
+                className={`flex flex-col gap-3 ${
+                  freelancers.length > 2 ? "max-h-[400px] overflow-y-auto" : ""
+                }`}
+              >
                 {freelancers.map((f) => (
                   <div
                     key={f.id}
-                    className="relative rounded-xl border border-gray-100 bg-white p-3"
+                    className="relative rounded-2xl border border-gray-100 bg-white p-4 shadow-sm"
                   >
                     <div className="flex gap-3">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E8EEFB] text-sm font-semibold text-[#305CDE]">
+                      <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#E8EEFB] text-sm font-semibold text-[#305CDE]">
                         {getInitials(f.name)}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="font-medium text-zinc-900">{f.name}</p>
-                        <p className="text-sm text-[#305CDE]">{f.category}</p>
+                        <p className="text-sm font-medium text-gray-900">{f.name}</p>
+                        <p className="text-xs text-[#305CDE]">{f.category}</p>
                         <p className="text-xs text-gray-400">{f.location}</p>
-                        <div className="mt-1 flex items-center gap-1 text-sm text-[#305CDE]">
+                        <div className="mt-1 flex items-center gap-2 text-xs text-gray-500">
                           <Star className="h-3.5 w-3.5 fill-[#305CDE] text-[#305CDE]" />
                           {f.rating.toFixed(1)}
                           {f.priceMin != null && (
-                            <span className="ml-2 text-gray-500">
+                            <span>
                               R{f.priceMin}
                               {f.priceMax != null && f.priceMax !== f.priceMin
                                 ? ` – R${f.priceMax}`
@@ -544,7 +548,7 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
                       <button
                         type="button"
                         onClick={() => setSignupOverlayFreelancerId(f.id)}
-                        className="mt-3 w-full rounded-xl bg-[#305CDE] py-2.5 text-sm font-medium text-white hover:bg-[#1A3FA0]"
+                        className="mt-3 w-full rounded-xl bg-[#305CDE] py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#1A3FA0]"
                       >
                         Continue →
                       </button>
@@ -583,36 +587,35 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
                     )}
 
                     {showGuestButtons && signupOverlayFreelancerId === f.id && (
-                      <div className="absolute inset-0 z-20 flex flex-col items-center justify-center rounded-2xl bg-[#0A1628]/95 p-6 text-center backdrop-blur-sm">
-                        <span className="mb-3 text-4xl">🎉</span>
-                        <p className="mb-2 text-lg font-bold text-white">
+                      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-white/95 p-5 text-center backdrop-blur-sm">
+                        <span className="mb-2 text-3xl">🎉</span>
+                        <p className="mb-1 text-base font-bold text-gray-900">
                           Your match is ready!
                         </p>
-                        <p className="mb-6 text-sm text-white/60">
-                          Create your free Elev8U account to connect with{" "}
-                          {f.name} and get started.
+                        <p className="mb-4 text-xs leading-relaxed text-gray-500">
+                          Create your free account to connect with {f.name}
                         </p>
                         <button
                           type="button"
                           onClick={() => router.push("/signup")}
-                          className="w-full rounded-xl bg-[#305CDE] py-3 font-semibold text-white hover:bg-[#1A3FA0]"
+                          className="w-full rounded-xl bg-[#305CDE] py-2.5 text-sm font-semibold text-white hover:bg-[#1A3FA0]"
                         >
                           Create free account →
                         </button>
                         <button
                           type="button"
                           onClick={() => router.push("/login")}
-                          className="mt-3 cursor-pointer text-sm text-[#6B8EE8]"
+                          className="mt-2 cursor-pointer text-xs text-[#305CDE]"
                         >
                           Sign in instead
                         </button>
-                        <p className="mt-4 text-xs text-white/25">
-                          Free to join · No credit card required
+                        <p className="mt-3 text-xs text-gray-300">
+                          Free · No credit card required
                         </p>
                         <button
                           type="button"
                           onClick={() => setSignupOverlayFreelancerId(null)}
-                          className="mt-3 text-xs text-white/40 hover:text-white/60"
+                          className="mt-2 text-xs text-gray-400 hover:text-gray-600"
                         >
                           Close
                         </button>
