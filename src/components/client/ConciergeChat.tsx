@@ -513,15 +513,15 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
               </h3>
               <div
                 className={`flex flex-col gap-3 ${
-                  freelancers.length > 2 ? "max-h-[400px] overflow-y-auto" : ""
+                  freelancers.length > 2 ? "max-h-[420px] overflow-y-auto" : ""
                 }`}
               >
                 {freelancers.map((f) => (
                   <div
                     key={f.id}
-                    className="relative rounded-2xl border border-gray-100 bg-white p-4 shadow-sm"
+                    className="relative min-h-[140px] shrink-0 overflow-hidden rounded-2xl border border-gray-100 bg-white p-4 shadow-sm"
                   >
-                    <div className="flex gap-3">
+                    <div className="flex items-start gap-3">
                       <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#E8EEFB] text-sm font-semibold text-[#305CDE]">
                         {getInitials(f.name)}
                       </div>
@@ -587,18 +587,25 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
                     )}
 
                     {showGuestButtons && signupOverlayFreelancerId === f.id && (
-                      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-white/95 p-5 text-center backdrop-blur-sm">
-                        <span className="mb-2 text-3xl">🎉</span>
-                        <p className="mb-1 text-base font-bold text-gray-900">
-                          Your match is ready!
+                      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center overflow-y-auto rounded-2xl bg-white/98 p-4 text-center backdrop-blur-sm">
+                        <button
+                          type="button"
+                          onClick={() => setSignupOverlayFreelancerId(null)}
+                          aria-label="Close"
+                          className="absolute right-3 top-2 text-lg leading-none text-gray-400 hover:text-gray-600"
+                        >
+                          ×
+                        </button>
+                        <p className="mb-1 text-sm font-bold text-gray-900">
+                          🎉 Your match is ready!
                         </p>
-                        <p className="mb-4 text-xs leading-relaxed text-gray-500">
+                        <p className="mb-3 text-xs leading-snug text-gray-500">
                           Create your free account to connect with {f.name}
                         </p>
                         <button
                           type="button"
                           onClick={() => router.push("/signup")}
-                          className="w-full rounded-xl bg-[#305CDE] py-2.5 text-sm font-semibold text-white hover:bg-[#1A3FA0]"
+                          className="w-full rounded-xl bg-[#305CDE] py-2 text-sm font-semibold text-white hover:bg-[#1A3FA0]"
                         >
                           Create free account →
                         </button>
@@ -608,16 +615,6 @@ export function ConciergeChat({ isGuestMode = false }: ConciergeChatProps) {
                           className="mt-2 cursor-pointer text-xs text-[#305CDE]"
                         >
                           Sign in instead
-                        </button>
-                        <p className="mt-3 text-xs text-gray-300">
-                          Free · No credit card required
-                        </p>
-                        <button
-                          type="button"
-                          onClick={() => setSignupOverlayFreelancerId(null)}
-                          className="mt-2 text-xs text-gray-400 hover:text-gray-600"
-                        >
-                          Close
                         </button>
                       </div>
                     )}
